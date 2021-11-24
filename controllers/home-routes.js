@@ -89,4 +89,26 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+// get all posts for homepage/:category
+router.get('/:category', (req, res) => {
+    console.log('==========Loading Homepage============');
+    Category.findAll({
+            where: {
+                name: req.params.category
+            }
+        })
+        .then(dbPostData => {
+            const categories = dbPostData.map(post => post.get({ plain: true }));
+
+            res.render('homepage', {
+                categories,
+                session: req.session
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
 module.exports = router;

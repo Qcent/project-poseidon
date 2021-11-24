@@ -43,7 +43,17 @@
             </div>
         </section>
     </header>
+
     <hr>
+    <section class="category-list">
+        <ul>
+            {{#each categories as |cat|}}
+            <li><a class="catLink" href="/{{cat.name}}">{{cat.name}}</a></li>
+            {{/each}}
+        </ul>
+    </section>
+    <hr>
+
     <main>
         {{{ body }}}
     </main>

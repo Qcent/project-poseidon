@@ -1,3 +1,5 @@
+const { Category } = require('../models');
+
 module.exports = {
 
     format_date: date => {
@@ -20,9 +22,5 @@ module.exports = {
 
     ifEquals: (arg1, arg2) => {
         return arg1 == arg2;
-    },
-
-    ifTruncated: (length) => {
-        if (parseInt(length) > 225) return true;
     }
 }
