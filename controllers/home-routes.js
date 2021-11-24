@@ -32,7 +32,10 @@ router.get('/', (req, res) => {
         });
 });
 
-
+//create a New post
+router.get('/newPost', (req, res) => {
+    res.render('new-post', { session: req.session });
+});
 
 //get specific post by id
 router.get('/post/:id', (req, res) => {

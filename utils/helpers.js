@@ -10,7 +10,7 @@ module.exports = {
         if (Difference_In_Hours < 1) return `${Difference_In_Minutes.toFixed(0)}min ago`;
         if (Difference_In_Hours < 48) return `${Difference_In_Hours.toFixed(0)}hours ago`;
 
-        return `posted ${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(date).getFullYear()}`;
+        return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(date).getFullYear()}`;
     },
 
     format_plural: (word, num) => {

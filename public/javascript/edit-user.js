@@ -7,21 +7,24 @@ async function editFormHandler(event) {
 
     const username = document.querySelector('#username-edit').value.trim();
     const email = document.querySelector('#email-edit').value.trim();
+    const private = document.querySelector('#private-edit').checked || false;
     const password = document.querySelector('#password-edit').value.trim();
     const confirm = document.querySelector('#password-edit2').value.trim();
-    const user_bio = document.querySelector('#bio-edit').value.trim();
+    const about = document.querySelector('#about-edit').value.trim();
 
     let updates;
 
     password !== '' ? updates = JSON.stringify({
         username,
         email,
-        user_bio,
+        private,
+        about,
         password
     }) : updates = JSON.stringify({
         username,
         email,
-        user_bio
+        private,
+        about
     })
 
 
@@ -35,7 +38,7 @@ async function editFormHandler(event) {
         });
 
         if (response.ok) {
-            document.location.replace('/dashboard');
+            document.location.replace('/');
         } else {
             alert(response.statusText);
         }
