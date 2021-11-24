@@ -21,7 +21,9 @@ const sess = {
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({
-        db: sequelize
+        db: sequelize,
+        checkExpirationInterval: 10 * 60 * 1000, // The interval at which to cleanup expired sessions in milliseconds. // 10 Minutes
+        expiration: 30 * 60 * 1000 // The maximum age (in milliseconds) of a valid session. // 30 Minutes
     })
 };
 
@@ -37,5 +39,5 @@ app.use(routes);
 
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log('Now listening for API requests on port:' + PORT));
+    app.listen(PORT, () => console.log('Now listening for requests on port:' + PORT));
 });
