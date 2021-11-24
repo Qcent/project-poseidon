@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Message, User } = require('../../models');
+const { Message } = require('../../models');
 
 // GET /api/messages
 router.get('/', (req, res) => {
@@ -18,6 +18,21 @@ router.post('/', (req, res) => {
             sender_id: req.body.sender_id,
             post_id: req.body.post_id,
             content: req.body.content
+        })
+        .then(dbMsgData => res.json(dbMsgData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+// PUT /api/messages/:id
+router.put('/:id', (req, res) => {
+    Message.update({
+            content: req.body.content,
+        }, {
+            where: {
+                id: req.params.id
+            }
         })
         .then(dbMsgData => res.json(dbMsgData))
         .catch(err => {
