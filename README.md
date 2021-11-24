@@ -1,2 +1,2 @@
-# project-poseidon
-Collaborative Project 2
+# blog-site
+A fully functional Blog. SignUp / Post / Comment and More!
