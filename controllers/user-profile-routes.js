@@ -3,7 +3,6 @@ const sequelize = require('../config/connection');
 const { User } = require('../models');
 //const withAuth = require('../utils/auth');
 
-
 //get specific user by id
 router.get('/:id', (req, res) => {
     User.findOne({

@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { User } = require('../models');
+const { User, Category } = require('../models');
 
 // get all posts for homepage
 router.get('/', (req, res) => {
-    console.log('======================');
+    console.log('==========Loading Homepage============');
     /*  Post.findAll({
               attributes: [
                   'id',
@@ -17,12 +17,12 @@ router.get('/', (req, res) => {
                   attributes: ['username']
               }]
           })*/
-    User.findAll({})
+    Category.findAll({})
         .then(dbPostData => {
-            const posts = dbPostData.map(post => post.get({ plain: true }));
+            const categories = dbPostData.map(post => post.get({ plain: true }));
 
             res.render('homepage', {
-                posts,
+                categories,
                 session: req.session
             });
         })

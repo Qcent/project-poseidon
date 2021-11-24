@@ -1,7 +1,16 @@
+<section class="category-list">
+    {{#each categories as |cat|}}
+    <a class="catLink" href="/{{cat.name}}">{{cat.name}}</a>
+    {{/each}}
+</section>
 <section class="post-list">
+    {{#if posts.length}}
     {{#each posts as |post|}}
 
     {{> post-info post }}
 
     {{/each}}
+    {{else}}
+    <h3>No Posts</h3>
+    {{/if}}
 </section>
