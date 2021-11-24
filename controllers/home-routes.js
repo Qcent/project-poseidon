@@ -75,7 +75,6 @@ router.get('/login', (req, res) => {
         res.redirect('/');
         return;
     }
-
     res.render('login');
 });
 
@@ -85,10 +84,6 @@ router.get('/signup', (req, res) => {
         return;
     }
     res.render('signup');
-});
-
-router.get('/', (req, res) => {
-    res.render('homepage');
 });
 
 module.exports = router;

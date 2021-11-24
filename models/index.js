@@ -1,5 +1,6 @@
 const User = require('./User');
 //const Post = require('./Post');
+const Message = require('./Message');
 
 /*
 
@@ -14,4 +15,4 @@ Post.belongsTo(User, {
 
 */
 
-module.exports = { User };
+module.exports = { User, Message };
