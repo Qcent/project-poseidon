@@ -1,5 +1,5 @@
 const router = require('express').Router();
-//const { User, Post } = require('../../models');
+const { User } = require('../../models');
 
 //const withAuth = require('../../utils/auth');
 
@@ -109,7 +109,7 @@ router.post('/login', (req, res) => {
 router.put('/:id', (req, res) => {
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     User.update(req.body, {
-            individualHooks: true,
+            //individualHooks: true,  // returns the salted hash of the password if uncommented
             where: {
                 id: req.params.id
             }
