@@ -10,43 +10,43 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <header>
-            <section id="navTitle">
-                <nav>
-                    <a href="/">Home</a>
-                    {{#if session.loggedIn}}
-                    <a href="/dashboard">Dashboard</a>
-                    <a href='#' id="logout" class="btn-no-style">Logout</a>
-                    {{else}}
-                    <a href="/login">Login</a>
-                    {{/if}}
-                </nav>
-                <h1>
-                    <a class='title' href="/">Poseidon's Trunk</a>
-                </h1>
+    <header>
+        <section id="navTitle">
+            <nav>
+                <a href="/">Home</a>
                 {{#if session.loggedIn}}
-                Welcome {{session.username}}
+                <a href="/dashboard">Dashboard</a>
+                <a href='#' id="logout" class="btn-no-style">Logout</a>
+                {{else}}
+                <a href="/login">Login</a>
                 {{/if}}
-            </section>
-            <section>
-                <div id="myAccount">
-                    {{#if session.loggedIn}}
-                    <div id='myProfile'>
-                        <img src="https://www.svgrepo.com/show/5319/user.svg" />
-                        <a class="nochange" href="/user/{{session.user_id}}">My Profile</a>
-                    </div>
-                    {{/if}}
+            </nav>
+            <h1>
+                <a class='title' href="/">Poseidon's Trunk</a>
+            </h1>
+            {{#if session.loggedIn}}
+            Welcome {{session.username}}
+            {{/if}}
+        </section>
+        <section>
+            <div id="myAccount">
+                {{#if session.loggedIn}}
+                <div id='myProfile'>
+                    <img src="https://www.svgrepo.com/show/5319/user.svg" style="width:4rem;" />
+                    <a class="nochange" href="/user/{{session.user_id}}">My Profile</a>
                 </div>
-            </section>
-        </header>
-        <main>
-            {{{ body }}}
-        </main>
-        <footer>
-            Thank You {{session.username}}!
-        </footer>
-    </div>
+                {{/if}}
+            </div>
+        </section>
+    </header>
+    <hr>
+    <main>
+        {{{ body }}}
+    </main>
+    <footer>
+        <hr>
+        Thank You {{session.username}}!
+    </footer>
     {{#if session.loggedIn}}
     <script src="/javascript/logout.js"></script>
 
