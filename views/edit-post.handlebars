@@ -1,0 +1,24 @@
+<a href="/dashboard"> &larr; Back to dashboard</a>
+
+<article class='edit-post-container'>
+    <section class="post-body">
+        <h2 class="title">Edit Post</h2>
+        <form class="edit-post-form">
+            <div>
+                <label for="post-title">Title</label>
+                <input name="post-title" type="text" value="{{post.title}}" />
+            </div>
+            <div>
+                <label for="post-content">Content</label>
+                <textarea id="post-content" name="post-content">{{post.post_content}}</textarea>
+            </div>
+            <div class="form-btn-container">
+                <button type="submit" class='form-btn'>Save post</button>
+                <button type="button" class="form-btn delete-post-btn">Delete post</button>
+            </div>
+        </form>
+    </section>
+</article>
+
+<script src="/javascript/edit-post.js"></script>
+<script src="/javascript/delete-post.js"></script>

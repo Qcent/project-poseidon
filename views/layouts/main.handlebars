@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poseidon's Trunk</title>
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <section id="navTitle">
+                <nav>
+                    <a href="/">Home</a>
+                    {{#if session.loggedIn}}
+                    <a href="/dashboard">Dashboard</a>
+                    <a href='#' id="logout" class="btn-no-style">Logout</a>
+                    {{else}}
+                    <a href="/login">Login</a>
+                    {{/if}}
+                </nav>
+                <h1>
+                    <a class='title' href="/">Poseidon's Trunk</a>
+                </h1>
+                {{#if session.loggedIn}}
+                Welcome {{session.username}}
+                {{/if}}
+            </section>
+            <section>
+                <div id="myAccount">
+                    {{#if session.loggedIn}}
+                    <div id='myProfile'>
+                        <img src="https://www.svgrepo.com/show/5319/user.svg" />
+                        <a class="nochange" href="/user/{{session.user_id}}">My Profile</a>
+                    </div>
+                    {{/if}}
+                </div>
+            </section>
+        </header>
+        <main>
+            {{{ body }}}
+        </main>
+        <footer>
+            Thank You {{session.username}}!
+        </footer>
+    </div>
+    {{#if session.loggedIn}}
+    <script src="/javascript/logout.js"></script>
+
+    {{/if}}
+</body>
+
+</html>
