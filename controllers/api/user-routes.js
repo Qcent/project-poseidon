@@ -7,7 +7,7 @@ const { User } = require('../../models');
 router.get('/', (req, res) => {
     // Access our User model and run .findAll() method)
     User.findAll({
-            attributes: { exclude: ['password'] }
+            attributes: { exclude: ['password', 'email'] }
         })
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 // GET /api/users/1
 router.get('/:id', (req, res) => {
     User.findOne({
-            attributes: { exclude: ['password'] },
+            attributes: { exclude: ['password', 'email'] },
             where: {
                 id: req.params.id
             },
@@ -54,7 +54,8 @@ router.post('/', (req, res) => {
                 req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
 
-                res.json(dbUserData);
+                //return the login and not the user data with hashed password
+                res.json(req.session);
             })
         })
         .catch(err => {
