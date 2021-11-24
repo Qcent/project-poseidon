@@ -31,6 +31,8 @@ router.get('/', (req, res) => {
         });
 });
 
+*/
+
 //get specific post by id
 router.get('/post/:id', (req, res) => {
     Post.findOne({
@@ -83,7 +85,7 @@ router.get('/signup', (req, res) => {
     }
     res.render('signup');
 });
-*/
+
 router.get('/', (req, res) => {
     res.render('homepage');
 });
