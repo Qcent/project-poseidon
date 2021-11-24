@@ -5,6 +5,12 @@
 
     {{/each}}
 </section>
+
+<form method="post" enctype="multipart/form-data">
+  <input type="file" name="image" />
+  <input type='submit' />
+</form>
+
 <script>let pageView = '';</script>
 <script src="/javascript/sortby.js"></script>
 {{#if session.loggedIn}}
