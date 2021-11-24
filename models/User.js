@@ -43,6 +43,11 @@ User.init({
         type: DataTypes.STRING,
         allowNull: true,
     },
+    private: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+    },
     // define a password column
     password: {
         type: DataTypes.STRING,
