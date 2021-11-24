@@ -1,40 +1,38 @@
 const router = require('express').Router();
-const { Message } = require('../../models');
+const { Category } = require('../../models');
 
-// GET /api/messages
+// GET /api/categories
 router.get('/', (req, res) => {
-    // Access our Message model and run .findAll() method)
-    Message.findAll({})
-        .then(dbMsgData => res.json(dbMsgData))
+    // Access our Category model and run .findAll() method)
+    Category.findAll({})
+        .then(dbCatagoryData => res.json(dbCatagoryData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
 });
 
-// POST /api/messages
+// POST /api/categories
 router.post('/', (req, res) => {
-    Message.create({
-            sender_id: req.body.sender_id,
-            post_id: req.body.post_id,
-            content: req.body.content
+    Category.create({
+            name: req.body.name
         })
-        .then(dbMsgData => res.json(dbMsgData))
+        .then(dbCatagoryData => res.json(dbCatagoryData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
 });
-// PUT /api/messages/:id
+// PUT /api/Categorys/:id
 router.put('/:id', (req, res) => {
-    Message.update({
-            content: req.body.content,
+    Category.update({
+            name: req.body.name,
         }, {
             where: {
                 id: req.params.id
             }
         })
-        .then(dbMsgData => res.json(dbMsgData))
+        .then(dbCatagoryData => res.json(dbCatagoryData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
