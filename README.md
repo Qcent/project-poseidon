@@ -1,2 +1,2 @@
-# blog-site
-A fully functional Blog. SignUp / Post / Comment and More!
+# Project-Poseidon
+Sign up then buy/sell or trade goods and services with the rest of the community!
