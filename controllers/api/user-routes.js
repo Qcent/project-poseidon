@@ -2,7 +2,7 @@ const router = require('express').Router();
 //const { User, Post } = require('../../models');
 
 //const withAuth = require('../../utils/auth');
-/*
+
 // GET /api/users
 router.get('/', (req, res) => {
     // Access our User model and run .findAll() method)
@@ -23,10 +23,10 @@ router.get('/:id', (req, res) => {
             where: {
                 id: req.params.id
             },
-            include: [{
-                model: Post,
-                attributes: ['id', 'title', 'created_at']
-            }]
+            /*      include: [{
+                      model: Post,
+                      attributes: ['id', 'title', 'created_at']
+                  }]*/
         })
         .then(dbUserData => {
             if (!dbUserData) {
@@ -146,5 +146,5 @@ router.delete('/:id', (req, res) => {
             res.status(500).json(err);
         });
 });
-*/
+
 module.exports = router;
