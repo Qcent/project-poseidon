@@ -17,12 +17,12 @@ router.get('/', (req, res) => {
                   attributes: ['username']
               }]
           })*/
-    Category.findAll({})
+    User.findAll({})
         .then(dbPostData => {
-            const categories = dbPostData.map(post => post.get({ plain: true }));
+            const users = dbPostData.map(post => post.get({ plain: true }));
 
             res.render('homepage', {
-                categories,
+                users,
                 session: req.session
             });
         })
