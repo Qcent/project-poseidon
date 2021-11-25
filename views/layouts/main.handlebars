@@ -43,8 +43,19 @@
                 </li>
                 <hr>
                 <li>
+                    <a href="/newPost" class="nav-link text-white">
+                        Post New Listing
+                    </a>
+                </li>
+                <hr>
+                <li>
                     <a href="#" class="nav-link text-white">
-                        Misc Item
+                        Buy and Sell
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        Services
                     </a>
                 </li>
             </ul>
@@ -54,11 +65,12 @@
                     {{/if}}class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                     id="dropdownUser1" {{#if session.loggedIn}}data-bs-toggle="dropdown" {{/if}} aria-expanded="false">
                     <img src="https://www.svgrepo.com/show/5319/user.svg" alt="" width="32" height="32"
-                        class="rounded-circle me-2">
+                        class="rounded-circle me-2 fancy-button">
                     <strong>{{#if session.loggedIn}}{{session.username}}{{else}}Sign In</a>{{/if}}</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                     <li><a class="dropdown-item" href="/newPost">Post New Listing</a></li>
+                    <li><a class="dropdown-item" href="/myMessages">Messages</a></li>
                     <li><a class="dropdown-item" href="/user/{{session.user_id}}">Profile/Settings</a></li>
                     <li>
                         <hr class="dropdown-divider">
