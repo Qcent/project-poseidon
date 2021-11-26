@@ -17,39 +17,39 @@ const storage = multer.diskStorage({
     },
 });
 
-const upload = multer({storage: storage});
+const upload = multer({ storage: storage });
 
 router.get('/', (req, res) => {
     Post.findAll({
-        attributes: [
-            'id',
-            'title',
-            'content',
-            'user_id',
-            'created_at'
-        ],
-        include: {
-            model: User,
-            attributes: ['username']
-        }
-    }).then(dbPostData => res.json(dbPostData))
-      .catch(err => {
-          console.log(err);
-          res.status(500).json(err);
-      })
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'user_id',
+                'created_at'
+            ],
+            include: {
+                model: User,
+                attributes: ['username']
+            }
+        }).then(dbPostData => res.json(dbPostData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
 });
 
 router.post('/', upload.single('image'), (req, res) => {
     Post.create({
-        title: req.body.title,
-        content: req.body.content,
-        user_id: req.body.user_id
-    })
-    .then(dbPostData => res.json(dbPostData))
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
+            title: req.body.title,
+            content: req.body.content,
+            user_id: req.body.user_id
+        })
+        .then(dbPostData => res.json(dbPostData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
     res.render('new-post');
 });
 

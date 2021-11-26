@@ -1,0 +1,49 @@
+body {
+    background-image: url(/images/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+header {
+    width: 100%;
+    height: 300px;
+    background-image: url('/images/medium_logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#welcomeUser {
+    align-self: flex-end;
+}
+
+nav {
+    align-self: flex-end
+}
+
+#searchBox {
+    align-self: flex-start;
+    width: 100%;
+    padding: 0 12.5%;
+}
+
+.bg-dark {
+    --bs-bg-opacity: .95;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))!important;
+}
+
+.fancy-button {
+    text-shadow: .2rem .2rem .1rem var(--dark-shadow);
+    background-image: linear-gradient(61deg, rgba(153, 221, 156, 1) 13%, rgba(236, 190, 184, 1) 36%, rgba(235, 233, 172, 1) 51%, rgba(203, 242, 154, 1) 69%, rgba(94, 152, 163, 1) 95%);
+    transition: 0.5s;
+    background-size: 200% auto;
+    display: block;
+}
+
+.fancy-button:hover {
+    background-position: right center;
+    text-decoration: none;
+}
