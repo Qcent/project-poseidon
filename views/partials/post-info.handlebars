@@ -1,21 +1,19 @@
-<article class="article">
-    <div class="post-container">
-        <div class="post-head"> by <a href='/user/{{user.id}}' class="nochange">{{user.username}}</a> {{format_date
-            created_at}} in {{category.name}}
-        </div>
-        {{#unless view}}
-        <a class='post-link' href="/post/{{id}}">
-            {{/unless}}
-            <section class="post-body">
-                <h2 class="title">
-                    {{title}}
-                </h2>
-                <p class="content">
-                    {{{content}}}
-                </p>
-            </section>
-            {{#unless view}}
-        </a>
-        {{/unless}}
+<div class="post-container">
+    <div class="post-head"> by <a href='/user/{{user.id}}' class="nochange">{{user.username}}</a> {{format_date
+        created_at}} in {{category.name}}
     </div>
-</article>
+    {{#unless view}}
+    <a class='post-link' href="/post/{{id}}">
+        {{/unless}}
+        <section class="post-body">
+            <h2 class="title">
+                {{title}}
+            </h2>
+            <p class="content">
+                {{{content}}}
+            </p>
+        </section>
+        {{#unless view}}
+    </a>
+    {{/unless}}
+</div>

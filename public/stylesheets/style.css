@@ -7,21 +7,44 @@ body {
 
 header {
     width: 100%;
-    height: 300px;
-    background-image: url('/images/medium_logo.png');
+    height: 28vh;
+    background-image: url('/images/skiny_logo.png');
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: 50%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 #welcomeUser {
     align-self: flex-end;
 }
 
+header * {
+    /* fixes flexbox glitch and keeps nav right justifiyed when no welcome message is displayed */
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
 nav {
-    align-self: flex-end
+    flex: 0 1 50%;
+    align-self: flex-end;
+    text-align: right;
+}
+
+nav .navlink {
+    position: relative;
+    bottom: .5rem;
+}
+
+#welcomeUser {
+    flex: 0 1 50%;
+    align-self: flex-end;
+    padding-left: 6rem;
+}
+
+#body {
+    overflow: auto;
 }
 
 #searchBox {
@@ -31,7 +54,12 @@ nav {
 }
 
 .bg-dark {
-    --bs-bg-opacity: .95;
+    --bs-bg-opacity: .97;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))!important;
+}
+
+.bg-lighter {
+    --bs-bg-opacity: .52;
     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))!important;
 }
 
@@ -46,4 +74,48 @@ nav {
 .fancy-button:hover {
     background-position: right center;
     text-decoration: none;
+}
+
+
+/* POST LIST */
+
+.post-container {
+    margin-right: 1rem;
+    margin-bottom: .2rem;
+    padding: .6rem 1.1rem .2rem;
+    border-radius: 1.2rem;
+    transition: all 1.8;
+    background-color: rgba(108, 142, 187, 0.3);
+}
+
+.post-container:hover .post-link {
+    color: rgb(57, 68, 214)
+}
+
+.post-container:hover {
+    background-color: rgba(203, 242, 154, .8)
+}
+
+.post-container:nth-child(3n+1):hover {
+    background-color: rgba(236, 190, 184, .9);
+}
+
+.post-container:nth-child(3n+2):hover {
+    background-color: rgba(94, 152, 163, .9)
+}
+
+.post-link {
+    color: snow;
+    text-decoration: none;
+}
+
+.post-body {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
+.post-body h2 {
+    flex: 1 0;
+    padding-left: 1rem;
 }
