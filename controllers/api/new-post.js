@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
     },
 });
 
-const upload = multer({storage: storage});
+const upload = multer({ storage: storage });
 
 router.get('/', (req, res) => {
     console.log('error1');
@@ -23,6 +23,8 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', upload.single('image'), (req, res) => {
+
+    console.log(req.file);
     res.render('new-post');
 });
 
