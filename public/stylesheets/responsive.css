@@ -38,6 +38,15 @@
      :root {
         font-size: 60%;
     }
+    header {
+        min-height: 105px;
+        max-height: 105px;
+        height: 105px;
+    }
+    nav {
+        position: relative;
+        top: 1rem;
+    }
 }
 
 @media screen and (max-width: 525px) {
