@@ -1,5 +1,5 @@
 {
-    "name": "Project-Poseidon",
+    "name": "project-poseidon",
     "version": "1.0.0",
     "description": "Sign up then buy/sell or trade goods and services with the rest of the community!",
     "main": "server.js",
