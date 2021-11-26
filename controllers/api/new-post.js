@@ -23,6 +23,16 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', upload.single('image'), (req, res) => {
+    Post.create({
+        title: req.body.title,
+        post_url: req.body.post_url,
+        user_id: req.session.user_id
+    })
+    .then(dbPostData => res.json(dbPostData))
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
     res.render('new-post');
 });
 
