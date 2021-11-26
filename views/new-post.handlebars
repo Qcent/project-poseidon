@@ -1,0 +1,20 @@
+<article class='new-post-container'>
+    <section class="post-body">
+        <h2 class="title">Create New Post</h2>
+        <form class="new-post-form">
+            <div>
+                <label for="post-title">Title</label>
+                <input name="post-title" type="text" value="{{post.title}}" />
+            </div>
+            <div>
+                <label for="post-content">Content</label>
+                <textarea id="post-content" name="post-content"></textarea>
+            </div>
+            <div class="form-btn-container">
+                <button type="submit" class='form-btn'>Create Post</button>
+            </div>
+        </form>
+    </section>
+</article>
+
+<script src="/javascript/add-post.js"></script>

@@ -1,27 +1,28 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-//const { Post, User } = require('../models');
-/*
+const { User, Category } = require('../models');
+
 // get all posts for homepage
 router.get('/', (req, res) => {
-    console.log('======================');
-    Post.findAll({
-            attributes: [
-                'id',
-                'post_content',
-                'title',
-                'created_at'
-            ],
-            include: [{
-                model: User,
-                attributes: ['username']
-            }]
-        })
+    console.log('==========Loading Homepage============');
+    /*  Post.findAll({
+              attributes: [
+                  'id',
+                  'post_content',
+                  'title',
+                  'created_at'
+              ],
+              include: [{
+                  model: User,
+                  attributes: ['username']
+              }]
+          })*/
+    Category.findAll({})
         .then(dbPostData => {
-            const posts = dbPostData.map(post => post.get({ plain: true }));
+            const categories = dbPostData.map(post => post.get({ plain: true }));
 
             res.render('homepage', {
-                posts,
+                categories,
                 session: req.session
             });
         })
@@ -29,6 +30,11 @@ router.get('/', (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
+});
+
+//create a New post
+router.get('/newPost', (req, res) => {
+    res.render('new-post', { session: req.session });
 });
 
 //get specific post by id
@@ -72,7 +78,6 @@ router.get('/login', (req, res) => {
         res.redirect('/');
         return;
     }
-
     res.render('login');
 });
 
@@ -83,9 +88,27 @@ router.get('/signup', (req, res) => {
     }
     res.render('signup');
 });
-*/
-router.get('/', (req, res) => {
-    res.render('homepage');
+
+// get all posts for homepage/:category
+router.get('/:category', (req, res) => {
+    console.log('==========Loading Homepage============');
+    Category.findAll({
+            where: {
+                name: req.params.category
+            }
+        })
+        .then(dbPostData => {
+            const categories = dbPostData.map(post => post.get({ plain: true }));
+
+            res.render('homepage', {
+                categories,
+                session: req.session
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 module.exports = router;

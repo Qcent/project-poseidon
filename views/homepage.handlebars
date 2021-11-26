@@ -1,12 +1,11 @@
 <section class="post-list">
+    {{#if posts.length}}
     {{#each posts as |post|}}
 
     {{> post-info post }}
 
     {{/each}}
+    {{else}}
+    <h3>No Posts</h3>
+    {{/if}}
 </section>
-<script>let pageView = '';</script>
-<script src="/javascript/sortby.js"></script>
-{{#if session.loggedIn}}
-<script src="/javascript/upvote.js"></script>
-{{/if}}

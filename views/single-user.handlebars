@@ -16,16 +16,22 @@
                     <input type="text" id="email-edit" value="{{user.email}}" />
                 </div>
                 <div>
+                    <label for="private-edit">private (hides email):</label>
+                    <input type="checkbox" id="private-edit" {{#if user.private}}checked{{/if}} />
+                </div>
+                <div>
                     <label for="user-joined">joined:</label>
                     <input type="text" id="user-joined" value="{{format_date user.created_at}}" readonly />
                 </div>
                 <div>
-                    <label for="bio-edit">bio:</label>
-                    <textarea id="bio-edit">{{user.user_bio}}</textarea>
+                    <label for="about-edit">about:</label>
+                    <textarea id="about-edit">{{user.about}}</textarea>
                 </div>
+                <hr>
+                <h3>Update Password</h3>
                 <div>
                     <label for="password-edit">password:</label>
-                    <input type="password" id="password-edit" placeholder="enter password; min 4 characters" />
+                    <input type="password" id="password-edit" placeholder="enter password; min 8 characters" />
                 </div>
                 <div>
                     <label for="password-edit2">confirm:</label>
@@ -53,17 +59,19 @@
                     <label for="username-edit">name:</label>
                     <input type="text" id="username-edit" value="{{user.username}}" readonly />
                 </div>
+                {{#unless user.private}}
                 <div>
                     <label for="email-edit">email:</label>
-                    <input type="password" id="email-edit" value="{{user.email}}" readonly />
+                    <input type="text" id="email-edit" value="{{user.email}}" readonly />
                 </div>
+                {{/unless}}
                 <div>
                     <label for="user-joined">joined:</label>
                     <input type="text" id="user-joined" value="{{format_date user.created_at}}" readonly />
                 </div>
                 <div>
-                    <label for="bio-edit">bio:</label>
-                    <textarea id="bio-edit" readonly>{{user.user_bio}}</textarea>
+                    <label for="about-edit">about:</label>
+                    <textarea id="about-edit" readonly>{{user.about}}</textarea>
                 </div>
             </div>
         </form>

@@ -1,13 +1,13 @@
 const router = require('express').Router();
-//const { User, Post } = require('../../models');
+const { User } = require('../../models');
 
 //const withAuth = require('../../utils/auth');
-/*
+
 // GET /api/users
 router.get('/', (req, res) => {
     // Access our User model and run .findAll() method)
     User.findAll({
-            attributes: { exclude: ['password'] }
+            attributes: { exclude: ['password', 'email'] }
         })
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
@@ -19,14 +19,14 @@ router.get('/', (req, res) => {
 // GET /api/users/1
 router.get('/:id', (req, res) => {
     User.findOne({
-            attributes: { exclude: ['password'] },
+            attributes: { exclude: ['password', 'email'] },
             where: {
                 id: req.params.id
             },
-            include: [{
-                model: Post,
-                attributes: ['id', 'title', 'created_at']
-            }]
+            /*      include: [{
+                      model: Post,
+                      attributes: ['id', 'title', 'created_at']
+                  }]*/
         })
         .then(dbUserData => {
             if (!dbUserData) {
@@ -54,7 +54,8 @@ router.post('/', (req, res) => {
                 req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
 
-                res.json(dbUserData);
+                //return the login and not the user data with hashed password
+                res.json(req.session);
             })
         })
         .catch(err => {
@@ -107,9 +108,11 @@ router.post('/login', (req, res) => {
 
 // PUT /api/users/1
 router.put('/:id', (req, res) => {
-    // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
+    console.log("=========== UPDATE USER =============");
+    console.log(req.body)
+        // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     User.update(req.body, {
-            individualHooks: true,
+            //individualHooks: true,  // returns the salted hash of the password if uncommented
             where: {
                 id: req.params.id
             }
@@ -146,5 +149,5 @@ router.delete('/:id', (req, res) => {
             res.status(500).json(err);
         });
 });
-*/
+
 module.exports = router;
