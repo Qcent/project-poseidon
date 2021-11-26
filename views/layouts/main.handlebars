@@ -6,65 +6,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poseidon's Trunk</title>
 
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/stylesheets/sidebars.css" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
-    <header>
-        <section id="navTitle">
-            <nav>
-                <a href="/">Home</a>
-                {{#if session.loggedIn}}
-                <a href="/dashboard">Dashboard</a>
-                <a href='#' id="logout" class="btn-no-style">Logout</a>
-                {{else}}
-                <a href="/login">Login</a>
-                {{/if}}
-            </nav>
-            <h1>
-                <a class='title' href="/">Poseidon's Trunk</a>
-            </h1>
-            {{#if session.loggedIn}}
-            Welcome {{session.username}}
-            {{/if}}
-        </section>
-        <section>
-            {{#if session.loggedIn}}
-            <div id='myLinks'>
-                <a class="nochange" href="/newPost">New Post</a>
-            </div>
-            <div id="myAccount">
-
-                <div id='myProfile'>
-                    <img src="https://www.svgrepo.com/show/5319/user.svg" style="width:4rem;" />
-                    <a class="nochange" href="/user/{{session.user_id}}">My Profile</a>
-                </div>
-                {{/if}}
-            </div>
-        </section>
-    </header>
-
-    <hr>
-    <section class="category-list">
-        <ul>
-            {{#each categories as |cat|}}
-            <li><a class="catLink" href="/{{cat.name}}">{{cat.name}}</a></li>
-            {{/each}}
-        </ul>
-    </section>
-    <hr>
 
     <main>
-        {{{ body }}}
+        <div id="sideBar" class="col-2 d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <img src="/images/text_logo.png" id="sideBarLogo" style="width:100%;">
+            </a>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        Categories
+                    </span>
+                </li>
+                <li>
+                    <section class="category-list">
+                        <ul>
+                            <li><a class="catLink" href="/Automotive">Automotive</a></li>
+                            <li><a class="catLink" href="/Clothing">Clothing</a></li>
+                            <li><a class="catLink" href="/Computers">Computers</a></li>
+                            <li><a class="catLink" href="/Electronics">Electronics</a></li>
+                            <li><a class="catLink" href="/Household">Household</a></li>
+                            <li><a class="catLink" href="/Jewelery">Jewelery</a></li>
+                            <li><a class="catLink" href="/Pets">Pets</a></li>
+                            <li><a class="catLink" href="/Sports">Sports</a></li>
+                            <li><a class="catLink" href="/Video Games">Video Games</a></li>
+                        </ul>
+                    </section>
+                </li>
+                <hr>
+                <li>
+                    <a href="/newPost" class="nav-link text-white">
+                        Post New Listing
+                    </a>
+                </li>
+                <hr>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        Buy and Sell
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        Services
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div {{#if session.loggedIn}}class="dropdown" {{/if}}>
+                <a {{#if session.loggedIn}}href="#" {{else}}href='/login'
+                    {{/if}}class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                    id="dropdownUser1" {{#if session.loggedIn}}data-bs-toggle="dropdown" {{/if}} aria-expanded="false">
+                    <img src="https://www.svgrepo.com/show/5319/user.svg" alt="" width="32" height="32"
+                        class="rounded-circle me-2 fancy-button">
+                    <strong>{{#if session.loggedIn}}{{session.username}}{{else}}Sign In</a>{{/if}}</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href="/newPost">Post New Listing</a></li>
+                    <li><a class="dropdown-item" href="/myMessages">Messages</a></li>
+                    <li><a class="dropdown-item" href="/user/{{session.user_id}}">Profile/Settings</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#" id="logout">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="side-bar-divider"></div>
+
+
+        <div id='mainPanel' class="d-flex flex-column col-10 flex-shrink-0 p-3 text-white bg-dark">
+            <header>
+                <section id='searchBox'>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text fancy-button">Search</span>
+                        <input type="text" class="form-control" placeholder="Search the trunk!"
+                            aria-label="search input">
+                    </div>
+                </section>
+                <section id='welcomeUser'>
+                    {{#if session.loggedIn}}
+                    Welcome {{session.username}}
+                    {{/if}}
+                </section>
+                <nav>
+                    <a href="/">Home</a>
+                    {{#if session.loggedIn}}
+                    <a href="/dashboard">Dashboard</a>
+                    <a href='#' id="logout" class="btn-no-style">Logout</a>
+                    {{else}}
+                    <a href="/login">Login</a>
+                    {{/if}}
+                </nav>
+            </header>
+
+            <hr>
+
+            <section>
+                {{{ body }}}
+            </section>
+
+            <footer>
+                <hr>
+                Thank You {{session.username}}!
+            </footer>
+        </div>
     </main>
-    <footer>
-        <hr>
-        Thank You {{session.username}}!
-    </footer>
+
     {{#if session.loggedIn}}
     <script src="/javascript/logout.js"></script>
-
     {{/if}}
+    <script src="/javascript/sidebars.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>

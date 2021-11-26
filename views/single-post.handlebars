@@ -1,12 +1,11 @@
 {{> post-info post}}
 
-{{> comments post.comments}}
+{{> messages post.messages}}
 
 {{#if session.loggedIn}}
-{{> comment-form}}
+{{> message-form}}
 {{/if}}
 
 {{#if session.loggedIn}}
-<script src="/javascript/comment.js"></script>
-<script src="/javascript/upvote.js"></script>
+<script src="/javascript/message.js"></script>
 {{/if}}

@@ -1,0 +1,15 @@
+<section>
+    <h2 class="section-title">Messages</h2>
+    <div class="Messages">
+        {{#each this}}
+        <section class="message">
+            <div class="meta">
+                <a href='/user/{{user.id}}'>{{user.username}}</a> {{format_date created_at}}
+            </div>
+            <div class="text">
+                {{message_text}}
+            </div>
+        </section>
+        {{/each}}
+    </div>
+</section>

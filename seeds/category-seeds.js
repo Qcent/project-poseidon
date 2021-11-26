@@ -4,7 +4,19 @@ const categoryData = [{
         name: 'Automotive'
     },
     {
+        name: 'Clothing'
+    },
+    {
+        name: 'Computers'
+    },
+    {
+        name: 'Electronics'
+    },
+    {
         name: 'Household'
+    },
+    {
+        name: 'Jewelery'
     },
     {
         name: 'Pets'
@@ -13,20 +25,8 @@ const categoryData = [{
         name: 'Sports'
     },
     {
-        name: 'Electronics'
-    },
-    {
-        name: 'Computers'
-    },
-    {
         name: 'Video Games'
     },
-    {
-        name: 'Clothing'
-    },
-    {
-        name: 'Jewelery'
-    }
 ];
 
 const seedCategories = () => Category.bulkCreate(categoryData);
