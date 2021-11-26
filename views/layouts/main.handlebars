@@ -11,40 +11,43 @@
 
     <link href="/stylesheets/sidebars.css" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/responsive.css">
 </head>
 
 <body>
 
     <main>
-        <div id="sideBar" class="col-2 d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
+        <div id="sideBar" class="col-2 d-flex flex-column flex-shrink-0 flex-nowrap text-white bg-lighter">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <img src="/images/text_logo.png" id="sideBarLogo" style="width:100%;">
+                <img src="/images/trident-stamp.png" id="sideBarLogo">
             </a>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
+            <ul class="nav nav-pills flex-column flex-nowrap mb-auto">
+                <li class="nav-item category-list">
+
                     <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         Categories
                     </span>
                 </li>
-                <li>
-                    <section class="category-list">
-                        <ul>
-                            <li><a class="catLink" href="/Automotive">Automotive</a></li>
-                            <li><a class="catLink" href="/Clothing">Clothing</a></li>
-                            <li><a class="catLink" href="/Computers">Computers</a></li>
-                            <li><a class="catLink" href="/Electronics">Electronics</a></li>
-                            <li><a class="catLink" href="/Household">Household</a></li>
-                            <li><a class="catLink" href="/Jewelery">Jewelery</a></li>
-                            <li><a class="catLink" href="/Pets">Pets</a></li>
-                            <li><a class="catLink" href="/Sports">Sports</a></li>
-                            <li><a class="catLink" href="/Video Games">Video Games</a></li>
-                        </ul>
-                    </section>
+                <li class="category-list">
+
+                    <ul>
+                        <li><a class="catLink" href="/Automotive">Automotive</a></li>
+                        <li><a class="catLink" href="/Clothing">Clothing</a></li>
+                        <li><a class="catLink" href="/Computers">Computers</a></li>
+                        <li><a class="catLink" href="/Electronics">Electronics</a></li>
+                        <li><a class="catLink" href="/Household">Household</a></li>
+                        <li><a class="catLink" href="/Jewelery">Jewelery</a></li>
+                        <li><a class="catLink" href="/Pets">Pets</a></li>
+                        <li><a class="catLink" href="/Sports">Sports</a></li>
+                        <li><a class="catLink" href="/Video Games">Video Games</a></li>
+                    </ul>
+
                 </li>
                 <hr>
                 <li>
                     <a href="/newPost" class="nav-link text-white">
-                        Post New Listing
+                        <img class='icon invert' src="https://www.svgrepo.com/show/156528/list.svg" /> Post New
+                        Listing
                     </a>
                 </li>
                 <hr>
@@ -60,24 +63,7 @@
                 </li>
             </ul>
             <hr>
-            <div {{#if session.loggedIn}}class="dropdown" {{/if}}>
-                <a {{#if session.loggedIn}}href="#" {{else}}href='/login'
-                    {{/if}}class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                    id="dropdownUser1" {{#if session.loggedIn}}data-bs-toggle="dropdown" {{/if}} aria-expanded="false">
-                    <img src="https://www.svgrepo.com/show/5319/user.svg" alt="" width="32" height="32"
-                        class="rounded-circle me-2 fancy-button">
-                    <strong>{{#if session.loggedIn}}{{session.username}}{{else}}Sign In</a>{{/if}}</strong>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="/newPost">Post New Listing</a></li>
-                    <li><a class="dropdown-item" href="/myMessages">Messages</a></li>
-                    <li><a class="dropdown-item" href="/user/{{session.user_id}}">Profile/Settings</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#" id="logout">Sign out</a></li>
-                </ul>
-            </div>
+            {{>profile-dropdown}}
         </div>
 
         <div class="side-bar-divider"></div>
@@ -88,8 +74,7 @@
                 <section id='searchBox'>
                     <div class="input-group mb-3">
                         <span class="input-group-text fancy-button">Search</span>
-                        <input type="text" class="form-control" placeholder="Search the trunk!"
-                            aria-label="search input">
+                        <input type="text" class="form-control" placeholder="{{searchMsg}}" aria-label="search input">
                     </div>
                 </section>
                 <section id='welcomeUser'>
@@ -98,25 +83,23 @@
                     {{/if}}
                 </section>
                 <nav>
-                    <a href="/">Home</a>
+                    <a class='navlink' href="/">Home</a>
                     {{#if session.loggedIn}}
-                    <a href="/dashboard">Dashboard</a>
-                    <a href='#' id="logout" class="btn-no-style">Logout</a>
-                    {{else}}
-                    <a href="/login">Login</a>
+                    <a class='navlink' href="/dashboard">Dashboard</a>
                     {{/if}}
+                    {{>profile-dropdown}}
                 </nav>
             </header>
 
             <hr>
 
-            <section>
+            <section id="body">
                 {{{ body }}}
             </section>
 
             <footer>
                 <hr>
-                Thank You {{session.username}}!
+                Team Poseidon &copy; 2021
             </footer>
         </div>
     </main>

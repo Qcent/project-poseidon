@@ -1,4 +1,14 @@
-const { Category } = require('../models');
+const Messages = [
+    "Search the Trunk!",
+    "What floats your boat?",
+    "What tickles your fancy?",
+    "What are you lookin' to hook?",
+    "What will you fish up?",
+    "What will you reel in?",
+    "Find your Fish!",
+    "Reel in a deal!",
+    "Cast your net!",
+]
 
 module.exports = {
 
@@ -22,5 +32,7 @@ module.exports = {
 
     ifEquals: (arg1, arg2) => {
         return arg1 == arg2;
-    }
+    },
+
+    searchMsg: () => Messages[Math.floor(Math.random() * Messages.length)]
 }

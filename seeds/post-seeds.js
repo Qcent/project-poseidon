@@ -31,8 +31,8 @@ const postData = [{
         category_id: 5
     },
     {
-        title: "Arken Stone",
-        content: "Precious Dwarven artifact! $12,000 no less!",
+        title: "Arkenstone",
+        content: "Priceless Dwarven artifact! $12,000 no less!",
         user_id: 1,
         category_id: 6
     },
@@ -54,8 +54,6 @@ const postData = [{
         user_id: 1,
         category_id: 9
     },
-
-
 
 ];
 

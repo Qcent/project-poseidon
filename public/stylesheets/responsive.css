@@ -1,0 +1,119 @@
+@media screen and (max-width: 1000px) {
+    header {
+        min-height: 150px;
+        max-height: 150px;
+        height: 150px;
+    }
+}
+
+@media screen and (max-width: 786px) {
+     :root {
+        font-size: 80%;
+    }
+    header {
+        min-height: 140px;
+        max-height: 140px;
+        height: 140px;
+    }
+    #sideBar hr {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 686px) {
+    #mainPanel {
+        width: 100%;
+        height: auto;
+    }
+    #sideBar,
+    .side-bar-divider {
+        display: none !important;
+    }
+}
+
+@media screen and (max-height: 825px) {
+     :root {
+        font-size: 75%;
+    }
+    header {
+        min-height: 145px;
+        max-height: 145px;
+        height: 145px;
+    }
+}
+
+@media screen and (max-height: 650px) {
+     :root {
+        font-size: 68%;
+    }
+    header {
+        min-height: 125px;
+        max-height: 125px;
+        height: 125px;
+    }
+    nav {
+        position: relative;
+        top: 1rem;
+    }
+}
+
+@media screen and (max-height: 525px) {
+     :root {
+        font-size: 60%;
+    }
+    header {
+        min-height: 105px;
+        max-height: 105px;
+        height: 105px;
+    }
+}
+
+@media screen and (max-width: 525px) {
+     :root {
+        font-size: 70%;
+    }
+    header {
+        min-height: 120px;
+        max-height: 120px;
+        height: 120px;
+    }
+    #searchBox {
+        padding: 0 8%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    header {
+        min-height: 108px;
+        max-height: 108px;
+        height: 108px;
+    }
+    #searchBox {
+        padding: 0 4%;
+    }
+    #welcomeUser {
+        flex: 0 1 30%;
+        padding-left: 4%;
+    }
+    .post-body {
+        flex-wrap: wrap;
+    }
+    .post-body .title {
+        flex: 1 0 100%;
+    }
+    .post-body .content {
+        padding-left: 1rem;
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    header {
+        min-height: 95px;
+        max-height: 95px;
+        height: 95px;
+    }
+    #welcomeUser {
+        display: none;
+    }
+}
