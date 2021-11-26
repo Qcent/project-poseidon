@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const routes = require('./controllers');
 const sequelize = require("./config/connection");
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -13,6 +14,14 @@ app.set('view engine', 'handlebars');
 
 // For uploading photos
 const multer = require("multer");
+fs.mkdir('uploads', err => {
+    if(err) {
+        fs.unlink('upload', err => {
+            console.log(err);
+        })
+    }
+});
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads');
@@ -25,12 +34,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-// We need this in the handlebars
-/* <form action="/profile" method="post" enctype="multipart/form-data">
-  <input type="file" name="image" />
-  <input type='submit' />
-</form> */
-
 app.get('/', (req, res) => {
     res.render('homepage.handlebars');
 });
@@ -41,10 +44,7 @@ app.post('/', upload.single('image'), (req, res) => {
 
 //const helpers = require('./utils/helpers');
 
-
-
 const session = require("express-session");
-const { diskStorage } = require("multer");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const sess = {
   secret: process.env.DB_SECRET,
