@@ -1,9 +1,9 @@
 const User = require('./User');
-//const Post = require('./Post');
+const Post = require('./Post');
 const Message = require('./Message');
 const Category = require('./Category');
 
-/*
+
 
 // create associations
 User.hasMany(Post, {
@@ -18,6 +18,6 @@ Post.belongsTo(Category, {
     foreignKey: 'category_id',
 });
 
-*/
 
-module.exports = { User, Message, Category };
+
+module.exports = { User, Message, Category, Post };
