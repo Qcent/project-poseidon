@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const fs = require('fs');
 const path = require('path');
+const Post = require('../../models/Post')
 
 // For uploading photos
 const multer = require("multer");
@@ -25,7 +26,7 @@ router.get('/', (req, res) => {
 router.post('/', upload.single('image'), (req, res) => {
     Post.create({
         title: req.body.title,
-        post_url: req.body.post_url,
+        content: req.body.content,
         user_id: req.session.user_id
     })
     .then(dbPostData => res.json(dbPostData))
