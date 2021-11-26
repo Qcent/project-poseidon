@@ -7,9 +7,17 @@
         <strong>{{#if session.loggedIn}}{{session.username}}{{else}}Sign In</a>{{/if}}</strong>
     </a>
     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-        <li><a class="dropdown-item" href="/newPost">Post New Listing</a></li>
-        <li><a class="dropdown-item" href="/myMessages">Messages</a></li>
-        <li><a class="dropdown-item" href="/user/{{session.user_id}}">Profile/Settings</a></li>
+        <li><a class="dropdown-item" href="/newPost"><img class='icon invert'
+                    src="https://www.svgrepo.com/show/156528/list.svg" /> Post New Listing</a></li>
+        <li><a class="dropdown-item" href="/myMessages">
+                {{#if session.newMessage}}
+                <img class='icon invert' src="https://www.svgrepo.com/show/304513/messages-alert.svg" />
+                {{else}}
+                <img class='icon invert' src="https://www.svgrepo.com/show/304507/messages.svg" />
+                {{/if}}
+                Messages</a></li>
+        <li><a class="dropdown-item" href="/user/{{session.user_id}}"><img class='icon invert'
+                    src="https://www.svgrepo.com/show/358177/setting.svg" /> Profile/Settings</a></li>
         <li>
             <hr class="dropdown-divider">
         </li>

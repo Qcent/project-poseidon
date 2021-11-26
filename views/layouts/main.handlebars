@@ -11,40 +11,43 @@
 
     <link href="/stylesheets/sidebars.css" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/responsive.css">
 </head>
 
 <body>
 
     <main>
-        <div id="sideBar" class="col-2 d-flex flex-column flex-shrink-0 flex-nowrap p-3 text-white bg-lighter">
+        <div id="sideBar" class="col-2 d-flex flex-column flex-shrink-0 flex-nowrap text-white bg-lighter">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <img src="/images/trident-stamp.png" id="sideBarLogo" style="width:100%;">
+                <img src="/images/trident-stamp.png" id="sideBarLogo">
             </a>
             <ul class="nav nav-pills flex-column flex-nowrap mb-auto">
-                <li class="nav-item">
+                <li class="nav-item category-list">
+
                     <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         Categories
                     </span>
                 </li>
-                <li>
-                    <section class="category-list">
-                        <ul>
-                            <li><a class="catLink" href="/Automotive">Automotive</a></li>
-                            <li><a class="catLink" href="/Clothing">Clothing</a></li>
-                            <li><a class="catLink" href="/Computers">Computers</a></li>
-                            <li><a class="catLink" href="/Electronics">Electronics</a></li>
-                            <li><a class="catLink" href="/Household">Household</a></li>
-                            <li><a class="catLink" href="/Jewelery">Jewelery</a></li>
-                            <li><a class="catLink" href="/Pets">Pets</a></li>
-                            <li><a class="catLink" href="/Sports">Sports</a></li>
-                            <li><a class="catLink" href="/Video Games">Video Games</a></li>
-                        </ul>
-                    </section>
+                <li class="category-list">
+
+                    <ul>
+                        <li><a class="catLink" href="/Automotive">Automotive</a></li>
+                        <li><a class="catLink" href="/Clothing">Clothing</a></li>
+                        <li><a class="catLink" href="/Computers">Computers</a></li>
+                        <li><a class="catLink" href="/Electronics">Electronics</a></li>
+                        <li><a class="catLink" href="/Household">Household</a></li>
+                        <li><a class="catLink" href="/Jewelery">Jewelery</a></li>
+                        <li><a class="catLink" href="/Pets">Pets</a></li>
+                        <li><a class="catLink" href="/Sports">Sports</a></li>
+                        <li><a class="catLink" href="/Video Games">Video Games</a></li>
+                    </ul>
+
                 </li>
                 <hr>
                 <li>
                     <a href="/newPost" class="nav-link text-white">
-                        Post New Listing
+                        <img class='icon invert' src="https://www.svgrepo.com/show/156528/list.svg" /> Post New
+                        Listing
                     </a>
                 </li>
                 <hr>
@@ -96,7 +99,7 @@
 
             <footer>
                 <hr>
-                Thank You {{session.username}}!
+                Team Poseidon &copy; 2021
             </footer>
         </div>
     </main>

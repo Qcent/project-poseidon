@@ -5,9 +5,14 @@ body {
     background-attachment: fixed;
 }
 
+footer {
+    text-align: center;
+}
+
 header {
     width: 100%;
-    height: 28vh;
+    height: 13.5vw;
+    min-height: 180px;
     background-image: url('/images/skiny_logo.png');
     background-repeat: no-repeat;
     background-size: contain;
@@ -18,7 +23,9 @@ header {
 }
 
 #welcomeUser {
+    flex: 0 1 50%;
     align-self: flex-end;
+    padding-left: 8%;
 }
 
 header * {
@@ -27,7 +34,7 @@ header * {
 }
 
 nav {
-    flex: 0 1 50%;
+    flex: 1 1 50%;
     align-self: flex-end;
     text-align: right;
 }
@@ -37,13 +44,8 @@ nav .navlink {
     bottom: .5rem;
 }
 
-#welcomeUser {
-    flex: 0 1 50%;
-    align-self: flex-end;
-    padding-left: 6rem;
-}
-
 #body {
+    flex: 1 1 100vh;
     overflow: auto;
 }
 
@@ -77,15 +79,56 @@ nav .navlink {
 }
 
 
+/* SIDE BAR STYLING */
+
+.icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: .3rem;
+    position: relative;
+    bottom: .12rem;
+}
+
+.invert {
+    -webkit-filter: invert(100%);
+    /* Safari/Chrome */
+    filter: invert(100%);
+}
+
+#sideBarLogo {
+    width: 100%;
+    padding: 1rem;
+}
+
+#sideBar .category-list {
+    padding-left: 1rem;
+    --bs-bg-opacity: .80;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))!important;
+}
+
+#sideBar .category-list:first-of-type {
+    padding-top: 1rem;
+}
+
+#sideBar .category-list:nth-of-type(2) {
+    padding-bottom: 1rem;
+}
+
+#sideBar .dropdown {
+    padding: 0 1rem 1rem;
+}
+
+
 /* POST LIST */
 
 .post-container {
     margin-right: 1rem;
-    margin-bottom: .2rem;
+    margin-bottom: 1.2rem;
     padding: .6rem 1.1rem .2rem;
     border-radius: 1.2rem;
     transition: all 1.8;
     background-color: rgba(108, 142, 187, 0.3);
+    box-shadow: 2px 2px 6px rgba(159, 179, 184, .7);
 }
 
 .post-container:hover .post-link {
@@ -109,13 +152,22 @@ nav .navlink {
     text-decoration: none;
 }
 
+.post-head h5 {
+    display: inline;
+}
+
 .post-body {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: baseline;
 }
 
-.post-body h2 {
-    flex: 1 0;
+.post-body .title {
+    flex: 1 0 30%;
     padding-left: 1rem;
+}
+
+.post-body .content {
+    flex: 1 1 auto;
+    text-align: right;
 }
