@@ -5,7 +5,15 @@
     {{> post-info post }}
 
     {{/each}}
-    {{else}}
-    <h3>No Posts</h3>
-    {{/if}}
 </section>
+
+<form method="post" enctype="multipart/form-data">
+  <input type="file" name="image" />
+  <input type='submit' />
+</form>
+
+<script>let pageView = '';</script>
+<script src="/javascript/sortby.js"></script>
+{{#if session.loggedIn}}
+<script src="/javascript/upvote.js"></script>
+{{/if}}
