@@ -55,8 +55,6 @@ const postData = [{
         category_id: 9
     },
 
-
-
 ];
 
 const seedPosts = () => Post.bulkCreate(postData);
