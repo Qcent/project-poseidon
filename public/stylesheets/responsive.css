@@ -21,9 +21,6 @@
 }
 
 @media screen and (max-width: 686px) {
-     :root {
-        /*font-size: 73%;*/
-    }
     #mainPanel {
         width: 100%;
         height: auto;
@@ -31,6 +28,32 @@
     #sideBar,
     .side-bar-divider {
         display: none !important;
+    }
+}
+
+@media screen and (max-height: 825px) {
+     :root {
+        font-size: 75%;
+    }
+    header {
+        min-height: 145px;
+        max-height: 145px;
+        height: 145px;
+    }
+}
+
+@media screen and (max-height: 650px) {
+     :root {
+        font-size: 68%;
+    }
+    header {
+        min-height: 125px;
+        max-height: 125px;
+        height: 125px;
+    }
+    nav {
+        position: relative;
+        top: 1rem;
     }
 }
 
@@ -42,10 +65,6 @@
         min-height: 105px;
         max-height: 105px;
         height: 105px;
-    }
-    nav {
-        position: relative;
-        top: 1rem;
     }
 }
 
