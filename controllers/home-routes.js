@@ -19,9 +19,14 @@ router.get("/", (req, res) => {
                 ['created_at', 'DESC']
             ],
             include: [{
-                model: User,
-                attributes: ['id', 'username']
-            }]
+                    model: User,
+                    attributes: ['id', 'username']
+                },
+                {
+                    model: Category,
+                    attributes: ["name"],
+                }
+            ]
         })
         .then(dbPostData => {
             const posts = dbPostData.map(post => post.get({ plain: true }));
@@ -58,9 +63,14 @@ router.get("/post/:id", (req, res) => {
                 id: req.params.id,
             },
             include: [{
-                model: User,
-                attributes: ['id', "username"],
-            }, ]
+                    model: User,
+                    attributes: ['id', "username"],
+                },
+                {
+                    model: Category,
+                    attributes: ["name"],
+                }
+            ]
         })
         .then((dbPostData) => {
             if (!dbPostData) {

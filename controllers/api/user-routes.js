@@ -112,7 +112,7 @@ router.put('/:id', (req, res) => {
     console.log(req.body)
         // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     User.update(req.body, {
-            //individualHooks: true,  // returns the salted hash of the password if uncommented
+            individualHooks: true, // returns the salted hash of the password if uncommented
             where: {
                 id: req.params.id
             }
@@ -122,7 +122,7 @@ router.put('/:id', (req, res) => {
                 res.status(404).json({ message: 'No user found with this id' });
                 return;
             }
-            res.json(dbUserData);
+            res.json({ message: "Success" });
         })
         .catch(err => {
             console.log(err);
