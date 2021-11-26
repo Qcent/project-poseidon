@@ -34,6 +34,12 @@
     }
 }
 
+@media screen and (max-height: 525px) {
+     :root {
+        font-size: 60%;
+    }
+}
+
 @media screen and (max-width: 525px) {
      :root {
         font-size: 70%;
