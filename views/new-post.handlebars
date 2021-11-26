@@ -2,9 +2,27 @@
   <section class="post-body">
     <h2 class="title">Create New Post</h2>
     <form class="new-post-form">
+      <input type="hidden" id="user-id" name="user-id" value="{{session.user_id}}" />
       <div>
         <label for="post-title">Title</label>
         <input name="post-title" type="text" value="{{post.title}}" />
+      </div>
+      <div>
+
+        <section id='category-list'>
+          <label for="post-category">Category</label>
+          <select id="post-category">
+            <option value="1">Automotive</option>
+            <option value="2">Household</option>
+            <option value="3">Pets</option>
+            <option value="4">Sports</option>
+            <option value="5">Electronics</option>
+            <option value="6">Computers</option>
+            <option value="7">Video Games</option>
+            <option value="8">Clothing</option>
+            <option value="9">Jewelery</option>
+          </select>
+        </section>
       </div>
       <div>
         <label for="post-content">Content</label>

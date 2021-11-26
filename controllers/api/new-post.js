@@ -26,6 +26,7 @@ router.get('/', (req, res) => {
                 'title',
                 'content',
                 'user_id',
+                'category_id',
                 'created_at'
             ],
             include: {
@@ -43,7 +44,8 @@ router.post('/', upload.single('image'), (req, res) => {
     Post.create({
             title: req.body.title,
             content: req.body.content,
-            user_id: req.body.user_id
+            user_id: req.body.user_id,
+            category_id: req.body.category_id
         })
         .then(dbPostData => res.json(dbPostData))
         .catch(err => {
