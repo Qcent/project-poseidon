@@ -1,19 +1,13 @@
 const router = require('express').Router();
 const fs = require('fs');
+const path = require('path');
 
 // For uploading photos
 const multer = require("multer");
-fs.mkdir('../uploads', err => {
-    if(err) {
-        fs.unlink('../upload', err => {
-            console.log(err);
-        })
-    }
-});
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads');
+        cb(null, 'public/images/userUploads');
     },
     filename: (req, file, cb) => {
         console.log(file);
@@ -24,11 +18,12 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 
 router.get('/', (req, res) => {
-    res.render('homepage.handlebars');
+    console.log('error1');
+    res.render('new-post');
 });
 
-router.post('/newPost', upload.single('image'), (req, res) => {
-    
+router.post('/', upload.single('image'), (req, res) => {
+    res.render('new-post');
 });
 
 module.exports = router;
