@@ -3,6 +3,8 @@
     <h2 class="section-title">Messages</h2>
     <div class="Messages">
         {{#each this}}
+        <h3>Conversation with {{user.id}}</h3>
+        {{#each this.messages}}
         <section class="message">
             <div class="meta">
                 <a href='/user/{{user.id}}'>{{user.username}}</a> {{format_date created_at}}
@@ -11,6 +13,18 @@
                 {{content}}
             </div>
             <div class='respond' data-val="{{user.id}}">Reply</div>
+        </section>
+        {{/each}}
+        <section class='reply-box'>
+            <form class="reply-form">
+    <div>
+        <h3>Respond:</h3>
+        <textarea id="message{{id}}-body" placeholder="Your Message Here"></textarea>
+    </div>
+    <div class='form-btn-container'>
+        <button class='reply-message-btn' data-form="{{id}}" >send message</button>
+    </div>
+</form>
         </section>
         {{/each}}
     </div>

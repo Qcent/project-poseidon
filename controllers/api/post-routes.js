@@ -1,25 +1,40 @@
 const sequelize = require('../../config/connection');
 const router = require('express').Router();
 
-const { Post, User, Message, Category } = require('../../models');
+const { Post, User, Message, Category,Message_Chain } = require('../../models');
 
 const withAuth = require('../../utils/auth');
 
 // GET all posts
 router.get('/', (req, res) => {
     Post.findAll({
-            attributes: [
-                'id',
-                'title',
-                'content',
-                'user_id',
-                'category_id',
-                'created_at'
-            ],
-            include: {
-                model: User,
-                attributes: ['username']
+        attributes: [
+            'id',
+            'title',
+            'content',
+            'user_id',
+            'category_id',
+            'created_at'
+        ],
+        include: [{
+            model: Category,
+            attributes: ['name']
+        },{
+            model: User,
+            attributes: ['username']
+        },
+            {
+                model: Message_Chain,
+                attributes: ['id', 'creator_id', 'post_id', 'receiver_id'],
+                include: {
+                    model: Message,
+                    attributes: ['sender_id', 'chain_id'],
+                    include: { model: User,
+                        attributes: ['id', 'username']
+                    }
+                }
             }
+        ]
         }).then(dbPostData => res.json(dbPostData))
         .catch(err => {
             console.log(err);
@@ -49,12 +64,19 @@ router.get('/:id', (req, res) => {
                 attributes: ['username']
             },
                 {
-                    model: Message,
-                    attributes: ['id', 'sender_id', 'post_id', 'content', 'created_at'],
-                    include: {
+                    model: Message_Chain,
+                    attributes: ['id', 'creator_id', 'post_id', 'receiver_id'],
+                    include: [{
+                        model: Message,
+                        attributes: ['sender_id', 'chain_id', 'created_at', 'content'],
+                        include: { model: User,
+                            attributes: ['id', 'username']
+                        }
+                    },
+                    {
                         model: User,
-                        attributes: ['id', 'username']
-                    }
+                        attributes: ['id', "username"],
+                    }]
                 }
             ]
         })

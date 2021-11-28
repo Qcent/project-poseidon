@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
-const { User, Category, Post, Message } = require("../models");
+const { User, Category, Post, Message_Chain, Message } = require("../models");
 
 // get all posts for homepage
 router.get("/", (req, res) => {
@@ -50,6 +50,7 @@ router.get("/newPost", (req, res) => {
 
 //get specific post by id
 router.get("/post/:id", (req, res) => {
+    console.log("==========Loading Single Post============");
     Post.findOne({
             attributes: [
                 'id',
@@ -70,14 +71,21 @@ router.get("/post/:id", (req, res) => {
                     model: Category,
                     attributes: ["name"],
                 },
-                    {
+                {
+                    model: Message_Chain,
+                    attributes: ['id', 'creator_id', 'post_id', 'receiver_id'],
+                    include: [{
                         model: Message,
-                        attributes: ['id', 'sender_id', 'post_id', 'content', 'created_at'],
-                        include: {
-                            model: User,
+                        attributes: ['sender_id', 'chain_id', 'created_at', 'content'],
+                        include: { model: User,
                             attributes: ['id', 'username']
                         }
-                    }
+                    },
+                    {
+                        model: User,
+                        attributes: ['id', "username"],
+                    }]
+                }
                 ]
         })
         .then((dbPostData) => {
@@ -134,6 +142,7 @@ router.get("/edit/:id", (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
+        return
 });
 
 router.get("/login", (req, res) => {
@@ -155,7 +164,7 @@ router.get("/signup", (req, res) => {
 
 // get all posts for homepage/:category
 router.get("/:category", (req, res) => {
-    console.log("==========Loading Homepage============");
+    console.log("==========Loading Category============");
     Category.findAll({
             where: {
                 name: req.params.category,
