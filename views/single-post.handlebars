@@ -1,9 +1,17 @@
-{{> post-info post}}
+<section class='single-post-containter'>
+{{> post-view post}}
 
+{{#unless (ifEquals session.user_id post.user_id)}}
+{{> message-form post}}
+{{else}}
+<div>
+    <a href='/edit/{{id}}'> edit post </a>
+</div>
+{{/unless}}
+</section>
+
+{{#if (ifEquals session.user_id post.user_id)}}
 {{> messages post.messages}}
-
-{{#if session.loggedIn}}
-{{> message-form}}
 {{/if}}
 
 {{#if session.loggedIn}}

@@ -1,3 +1,36 @@
+/* Global Stuff */
+.bg-dark {
+    --bs-bg-opacity: .90;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))!important;
+}
+
+.bg-lighter {
+    --bs-bg-opacity: .52;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))!important;
+}
+
+.fancy-button {
+    text-shadow: .2rem .2rem .1rem var(--dark-shadow);
+    background-image: linear-gradient(61deg, rgba(153, 221, 156, 1) 13%, rgba(236, 190, 184, 1) 36%, rgba(235, 233, 172, 1) 51%, rgba(203, 242, 154, 1) 69%, rgba(94, 152, 163, 1) 95%);
+    transition: 0.5s;
+    background-size: 200% auto;
+    display: block;
+}
+
+.fancy-button:hover {
+    background-position: right center;
+    text-decoration: none;
+}
+
+.form-btn-container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+textarea{
+    resize: none;
+}
+/*END OF GLOBAL*/
 body {
     background-image: url(/images/background.jpg);
     background-size: cover;
@@ -11,8 +44,7 @@ footer {
 
 header {
     width: 100%;
-    height: 13.5vw;
-    min-height: 180px;
+    min-height: 200px;
     background-image: url('/images/skiny_logo.png');
     background-repeat: no-repeat;
     background-size: contain;
@@ -55,28 +87,6 @@ nav .navlink {
     padding: 0 12.5%;
 }
 
-.bg-dark {
-    --bs-bg-opacity: .97;
-    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))!important;
-}
-
-.bg-lighter {
-    --bs-bg-opacity: .52;
-    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))!important;
-}
-
-.fancy-button {
-    text-shadow: .2rem .2rem .1rem var(--dark-shadow);
-    background-image: linear-gradient(61deg, rgba(153, 221, 156, 1) 13%, rgba(236, 190, 184, 1) 36%, rgba(235, 233, 172, 1) 51%, rgba(203, 242, 154, 1) 69%, rgba(94, 152, 163, 1) 95%);
-    transition: 0.5s;
-    background-size: 200% auto;
-    display: block;
-}
-
-.fancy-button:hover {
-    background-position: right center;
-    text-decoration: none;
-}
 
 
 /* SIDE BAR STYLING */
@@ -170,4 +180,43 @@ nav .navlink {
 .post-body .content {
     flex: 1 1 auto;
     text-align: right;
+}
+
+/* Single Post */ 
+
+.message-form textarea{
+ width:100%;
+}
+
+.single-post-containter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.3rem;
+    justify-content: space-between;
+}
+.single-post-containter .post-container {
+    flex: 1 0 40rem;
+    background-color:rgba(235, 233, 172, 1);
+    color: rgb(57, 68, 214);
+}
+.single-post-containter .post-container:hover {
+    background-color:rgba(235, 233, 172, 1);
+}
+.single-post-containter .message-form {
+    flex: 1 1 20rem;
+
+    color: rgb(57, 68, 214);
+        padding: .6rem 1.1rem .2rem;
+        border-radius: 1.2rem;
+        transition: all 1.8;
+        background-color: rgba(203, 242, 154, 1);
+        box-shadow: 2px 2px 6px rgba(159, 179, 184, .7);
+}
+
+.single-post-containter .post-body {
+flex-direction: column;
+}
+.single-post-containter .post-body .content {
+    padding-left: 1rem;
+    text-align: left;
 }

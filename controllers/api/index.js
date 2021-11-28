@@ -7,7 +7,7 @@ const categoryRoutes = require('./category-routes.js');
 const newPostRoutes = require('./new-post')
 
 router.use('/users', userRoutes);
-//router.use('/newPosts', postRoutes);
+router.use('/posts', postRoutes);
 router.use('/messages', messageRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/newPost', newPostRoutes);

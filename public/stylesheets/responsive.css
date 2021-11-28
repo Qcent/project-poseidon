@@ -1,3 +1,47 @@
+@media screen and (max-height: 825px) {
+    :root {
+       font-size: 75%;
+   }
+   header {
+       min-height: 145px;
+       max-height: 145px;
+       height: 145px;
+   }
+}
+
+@media screen and (max-height: 650px) {
+    :root {
+       font-size: 68%;
+   }
+   header {
+       min-height: 125px;
+       max-height: 125px;
+       height: 125px;
+   }
+   nav {
+       position: relative;
+       top: 1rem;
+   }
+}
+
+@media screen and (max-height: 525px) {
+    :root {
+       font-size: 60%;
+   }
+   header {
+       min-height: 105px;
+       max-height: 105px;
+       height: 105px;
+   }
+}
+@media screen and (max-width: 1300px) {
+    header {
+        min-height: 180px;
+        max-height: 180px;
+        height: 180px;
+    }
+}
+
 @media screen and (max-width: 1000px) {
     header {
         min-height: 150px;
@@ -31,42 +75,7 @@
     }
 }
 
-@media screen and (max-height: 825px) {
-     :root {
-        font-size: 75%;
-    }
-    header {
-        min-height: 145px;
-        max-height: 145px;
-        height: 145px;
-    }
-}
 
-@media screen and (max-height: 650px) {
-     :root {
-        font-size: 68%;
-    }
-    header {
-        min-height: 125px;
-        max-height: 125px;
-        height: 125px;
-    }
-    nav {
-        position: relative;
-        top: 1rem;
-    }
-}
-
-@media screen and (max-height: 525px) {
-     :root {
-        font-size: 60%;
-    }
-    header {
-        min-height: 105px;
-        max-height: 105px;
-        height: 105px;
-    }
-}
 
 @media screen and (max-width: 525px) {
      :root {

@@ -77,12 +77,50 @@ router.get("/post/:id", (req, res) => {
                 res.status(404).json({ message: "No post found with this id" });
                 return;
             }
-
             // serialize the data
             const post = dbPostData.get({ plain: true });
-
             // pass data to template
             res.render("single-post", { post, session: req.session });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+//get specific post by id for editing
+router.get("/edit/:id", (req, res) => {
+    Post.findOne({
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'user_id',
+                'category_id',
+                'created_at'
+            ],
+            where: {
+                id: req.params.id,
+            },
+            include: [{
+                    model: User,
+                    attributes: ['id', "username"],
+                },
+                {
+                    model: Category,
+                    attributes: ["name"],
+                }
+            ]
+        })
+        .then((dbPostData) => {
+            if (!dbPostData) {
+                res.status(404).json({ message: "No post found with this id" });
+                return;
+            }
+            // serialize the data
+            const post = dbPostData.get({ plain: true });
+            // pass data to template
+            res.render("edit-post", { post, session: req.session });
         })
         .catch((err) => {
             console.log(err);
