@@ -14,8 +14,9 @@ router.get('/', (req, res) => {
 
 // POST /api/messages
 router.post('/', (req, res) => {
+    console.log("============= NEW MESSAGE:");
     Message.create({
-            sender_id: req.body.sender_id,
+            sender_id: req.body.sender_id || req.session.user_id,
             post_id: req.body.post_id,
             content: req.body.content
         })

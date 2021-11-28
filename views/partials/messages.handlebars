@@ -1,4 +1,5 @@
 <section>
+    {{ this.content }}
     <h2 class="section-title">Messages</h2>
     <div class="Messages">
         {{#each this}}
@@ -7,8 +8,9 @@
                 <a href='/user/{{user.id}}'>{{user.username}}</a> {{format_date created_at}}
             </div>
             <div class="text">
-                {{message_text}}
+                {{content}}
             </div>
+            <div class='respond' data-val="{{user.id}}">Reply</div>
         </section>
         {{/each}}
     </div>

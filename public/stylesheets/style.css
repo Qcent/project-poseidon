@@ -220,3 +220,16 @@ flex-direction: column;
     padding-left: 1rem;
     text-align: left;
 }
+
+.Messages .message .text,
+.Messages .message .respond{
+    display: inline-block;
+}
+.Messages .message .respond{
+    cursor: pointer;
+    width: 8rem;
+    margin-left: 1.3rem;
+    background-color: seagreen;
+    text-align: center;
+    vertical-align: center;
+}

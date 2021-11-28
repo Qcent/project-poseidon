@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
-const { User, Category, Post } = require("../models");
+const { User, Category, Post, Message } = require("../models");
 
 // get all posts for homepage
 router.get("/", (req, res) => {
@@ -69,8 +69,16 @@ router.get("/post/:id", (req, res) => {
                 {
                     model: Category,
                     attributes: ["name"],
-                }
-            ]
+                },
+                    {
+                        model: Message,
+                        attributes: ['id', 'sender_id', 'post_id', 'content', 'created_at'],
+                        include: {
+                            model: User,
+                            attributes: ['id', 'username']
+                        }
+                    }
+                ]
         })
         .then((dbPostData) => {
             if (!dbPostData) {

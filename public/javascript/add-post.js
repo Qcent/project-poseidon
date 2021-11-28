@@ -6,7 +6,6 @@ async function newFormHandler(event) {
     const user_id = document.querySelector('input[name="user-id"]').value;
     const category_id = document.querySelector('#post-category').value;
 
-    alert(category_id)
     const response = await fetch(`/api/newPost`, {
         method: 'POST',
         body: JSON.stringify({

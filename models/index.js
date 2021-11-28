@@ -18,6 +18,19 @@ Post.belongsTo(Category, {
     foreignKey: 'category_id',
 });
 
+Post.hasMany(Message, {
+    foreignKey: 'post_id'
+});
+Message.belongsTo(Post, {
+    foreignKey: 'post_id',
+});
+Message.belongsTo(User, {
+    foreignKey: 'sender_id',
+});
+
+User.hasMany(Message, {
+    foreignKey: 'sender_id'
+});
 
 
 module.exports = { User, Message, Category, Post };

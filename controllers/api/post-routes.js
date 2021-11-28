@@ -1,40 +1,30 @@
 const sequelize = require('../../config/connection');
 const router = require('express').Router();
 
-const { Post, User } = require('../../models');
+const { Post, User, Message, Category } = require('../../models');
 
 const withAuth = require('../../utils/auth');
 
-// get all posts
+// GET all posts
 router.get('/', (req, res) => {
-    console.log('======================');
     Post.findAll({
-            // Query configuration
-            attributes: ['id', 'post_url', 'title', 'created_at', [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']],
-            order: [
-                ['created_at', 'DESC']
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'user_id',
+                'category_id',
+                'created_at'
             ],
-            include: [
-                // include the Comment model here:
-                {
-                    model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
-                },
-                {
-                    model: User,
-                    attributes: ['username']
-                }
-            ]
-        })
-        .then(dbPostData => res.json(dbPostData))
+            include: {
+                model: User,
+                attributes: ['username']
+            }
+        }).then(dbPostData => res.json(dbPostData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
-        });
+        })
 });
 
 //get one post
@@ -43,19 +33,28 @@ router.get('/:id', (req, res) => {
             where: {
                 id: req.params.id
             },
-            attributes: ['id', 'post_url', 'title', 'created_at', [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']],
-            include: [
-                // include the Comment model here:
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'user_id',
+                'category_id',
+                'created_at'
+            ],
+            include: [{
+                model: Category,
+                attributes: ['name']
+            },{
+                model: User,
+                attributes: ['username']
+            },
                 {
-                    model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                    model: Message,
+                    attributes: ['id', 'sender_id', 'post_id', 'content', 'created_at'],
                     include: {
                         model: User,
-                        attributes: ['username']
+                        attributes: ['id', 'username']
                     }
-                }, {
-                    model: User,
-                    attributes: ['username']
                 }
             ]
         })
