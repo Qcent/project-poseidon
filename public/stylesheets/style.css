@@ -92,8 +92,8 @@ nav .navlink {
 /* SIDE BAR STYLING */
 
 .icon {
-    width: 1rem;
-    height: 1rem;
+    width: 1.4rem;
+    height: 1.4rem;
     margin-right: .3rem;
     position: relative;
     bottom: .12rem;
@@ -109,21 +109,44 @@ nav .navlink {
     width: 100%;
     padding: 1rem;
 }
-
+#newPost-sideBar{
+    margin: -1rem 0;
+    padding: 1rem 0;
+    font-size: 1.4rem;
+}
+#newPost-sideBar a{
+    color: rgb(37, 150, 52);
+    text-decoration: none;
+    font-weight: bold;
+}
 #sideBar .category-list {
     padding-left: 1rem;
     --bs-bg-opacity: .80;
     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))!important;
 }
 
-#sideBar .category-list:first-of-type {
+#sideBar .category-list:nth-of-type(2) {
     padding-top: 1rem;
 }
 
-#sideBar .category-list:nth-of-type(2) {
+#sideBar .category-list:nth-of-type(3) {
     padding-bottom: 1rem;
 }
-
+#sideBar .category-list ul{
+    list-style-type: none;
+    padding-left: 0;
+}
+#sideBar .category-list a{
+    padding-left: 2rem;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: rgb(227, 228, 213);
+}
+#sideBar .category-list a:hover{
+   background-color: rgba(248, 243, 233, .4);
+   color: rgb(0, 0, 0);
+}
 #sideBar .dropdown {
     padding: 0 1rem 1rem;
 }
@@ -225,7 +248,7 @@ flex-direction: column;
 .Messages .message .respond{
     display: inline-block;
 }
-.Messages .message .respond{
+.Messages .respond{
     cursor: pointer;
     width: 8rem;
     margin-left: 1.3rem;
@@ -235,5 +258,5 @@ flex-direction: column;
 }
 
 .Messages .reply-box{
-    display: block;
+    display: none;
 }

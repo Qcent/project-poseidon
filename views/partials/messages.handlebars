@@ -1,21 +1,22 @@
 <section>
-    {{ this.content }}
     <h2 class="section-title">Messages</h2>
     <div class="Messages">
-        {{#each this}}
-        <h3>Conversation with {{user.id}}</h3>
+        {{#each this.message_chains}}
+        <h3>Conversation with {{user.username}}</h3>
         {{#each this.messages}}
+        {{message_chain.creator_id}}
         <section class="message">
             <div class="meta">
-                <a href='/user/{{user.id}}'>{{user.username}}</a> {{format_date created_at}}
+                <a href='/user/{{user.id}}'>{{user.username}}</a> 
+                {{format_date created_at}} {{creator.user_id}}
             </div>
             <div class="text">
                 {{content}}
             </div>
-            <div class='respond' data-val="{{user.id}}">Reply</div>
         </section>
         {{/each}}
-        <section class='reply-box'>
+ <div class='respond' data-val="{{id}}">Reply</div>
+        <section class='reply-box' id="reply-box{{id}}">
             <form class="reply-form">
     <div>
         <h3>Respond:</h3>
@@ -26,6 +27,7 @@
     </div>
 </form>
         </section>
+
         {{/each}}
     </div>
 </section>

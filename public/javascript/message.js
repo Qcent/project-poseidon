@@ -26,12 +26,7 @@ async function msgFormHandler(event) {
 
 async function replyFormHandler(event) {
     event.preventDefault();
-
-   
     const chain_id = event.target.getAttribute("data-form");
-    const post_id = window.location.toString().split('/')[
-        window.location.toString().split('/').length - 1
-    ];
     const content = document.querySelector('textarea[id="message'+chain_id+'-body"]').value;
     
     const response = await fetch(`/api/messages`, {
@@ -53,7 +48,8 @@ async function replyFormHandler(event) {
 }
 
 const showReplyForm = (event) =>{
-    alert("CODE ME")
+    const chain_id = event.target.getAttribute("data-val");
+    document.getElementById("reply-box"+chain_id).style.display = document.getElementById("reply-box"+chain_id).style.display == 'block' ? 'none' : 'block';
 }
 
 if(document.querySelector('.message-form'))
