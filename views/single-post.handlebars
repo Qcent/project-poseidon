@@ -4,7 +4,7 @@
 {{#unless (ifEquals session.user_id post.user_id)}}
 {{> message-form post}}
 {{else}}
-<div>
+<div class='edit-div'>
     <a href='/edit/{{post.id}}'> edit post </a>
 </div>
 {{/unless}}

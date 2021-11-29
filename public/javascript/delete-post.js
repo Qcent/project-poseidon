@@ -1,7 +1,7 @@
 async function deleteFormHandler(event) {
     event.preventDefault();
 
-    const post_id = window.location.toString().split('/')[
+    const post_id = event.target.getAttribute("data-val") || window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
 

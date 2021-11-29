@@ -225,6 +225,7 @@ nav .navlink {
 .single-post-containter .post-container:hover {
     background-color:rgba(235, 233, 172, 1);
 }
+
 .single-post-containter .message-form {
     flex: 1 1 20rem;
 
@@ -243,6 +244,21 @@ flex-direction: column;
     padding-left: 1rem;
     text-align: left;
 }
+.single-post-containter .edit-div
+{
+    flex: 1 1 8rem;
+
+    padding: .6rem 1.1rem .2rem;
+    border-radius: 1.2rem;
+    transition: all 1.8;
+    background-color: rgb(242, 154, 154);
+    box-shadow: 2px 2px 6px rgba(159, 179, 184, .7);
+}
+.single-post-containter .edit-div a{
+    color: indigo;
+    text-decoration: none;
+}
+
 
 .Messages .message .text,
 .Messages .message .respond{
@@ -259,4 +275,8 @@ flex-direction: column;
 
 .Messages .reply-box{
     display: none;
+    width: 50%;
+}
+.Messages .reply-box textarea{
+    width: 100%;
 }
