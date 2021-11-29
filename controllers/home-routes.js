@@ -162,6 +162,7 @@ router.get("/signup", (req, res) => {
     res.render("signup");
 });
 
+
 // get all posts for homepage/:category
 router.get("/:category", (req, res) => {
     console.log("==========Loading Category============");
