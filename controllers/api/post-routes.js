@@ -9,7 +9,7 @@ router.get('/dashboard', (req, res) => {
     Post.findAll({
             attributes: ['id', 'title', 'content', 'user_id', 'created_at'],
             where: {
-                user_id: '1'
+                user_id: '2'
             },
             include: [{
                     model: Category,
@@ -49,10 +49,11 @@ router.get('/dashboard', (req, res) => {
 
             // Get any DM messages
             Message_Chain.findAll({
+                    attributes: ['id', 'creator_id', 'receiver_id', 'post_id', [sequelize.literal('(SELECT username FROM user WHERE receiver_id = user.id )'), 'receiver_name'], ],
                     where: {
                         [Op.or]: [
-                            { creator_id: 1 },
-                            { receiver_id: 1 }
+                            { creator_id: 2 },
+                            { receiver_id: 2 }
                         ]
                     },
                     include: [{
@@ -66,6 +67,13 @@ router.get('/dashboard', (req, res) => {
                         {
                             model: User,
                             attributes: ['id', "username"],
+                        },
+                        {
+                            model: Post,
+                            include: {
+                                model: User,
+                                attributes: ['id', 'username']
+                            }
                         }
                     ]
                 })

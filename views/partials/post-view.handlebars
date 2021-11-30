@@ -1,13 +1,13 @@
 <div class="post-container">
-    <div class="post-head"> by <a href='/user/{{user.id}}' class="nochange">{{user.username}}</a> {{format_date
+    <div class="post-head"> by <a href='/user/{{user.id}}' class="headLink">{{user.username}}</a> {{format_date
         created_at}} in <h5>{{category.name}}</h5>
     </div>
-        <section class="post-body">
-            <h2 class="title">
-                {{title}}
-            </h2>
-            <p class="content">
-                {{{content}}}
-            </p>
-        </section>
+    <section class="post-body">
+        <h2 class="title">
+            {{title}}
+        </h2>
+        <p class="content">
+            {{{content}}}
+        </p>
+    </section>
 </div>

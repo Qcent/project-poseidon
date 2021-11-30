@@ -1,3 +1,28 @@
+async function dMsgFormHandler(event) {
+    event.preventDefault();
+
+    const receiver_id = window.location.toString().split('/')[
+        window.location.toString().split('/').length - 1
+    ];
+    const content = document.querySelector('textarea[name="message-body"]').value;
+
+    const response = await fetch(`/api/messages/new/0`, {
+        method: 'post',
+        body: JSON.stringify({
+            content,
+            receiver_id
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (response.ok) {
+        document.location.replace('/user/dashboard');
+    } else {
+        alert(response.statusText);
+    }
+}
 async function msgFormHandler(event) {
     event.preventDefault();
 
@@ -44,7 +69,8 @@ async function replyFormHandler(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/post/' + post_id);
+        if (post_id == 'dashboard') document.location.replace('/' + post_id);
+        else document.location.replace('/post/' + post_id);
     } else {
         alert(response.statusText);
     }
@@ -57,6 +83,9 @@ const showReplyForm = (event) => {
 
 if (document.querySelector('.message-form'))
     document.querySelector('.message-form').addEventListener('submit', msgFormHandler);
+
+if (document.querySelector('.dmessage-form'))
+    document.querySelector('.dmessage-form').addEventListener('submit', dMsgFormHandler);
 
 Array.from(document.getElementsByClassName("respond")).forEach(function(element) {
     element.addEventListener('click', showReplyForm);

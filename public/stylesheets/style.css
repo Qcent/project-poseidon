@@ -77,7 +77,7 @@ nav {
 
 nav .navlink {
     position: relative;
-    bottom: .6rem;
+    bottom: 1rem;
     padding-right: 1rem;
     font-weight: bold;
 }
@@ -91,6 +91,16 @@ nav .navlink {
     align-self: flex-start;
     width: 100%;
     padding: 0 12.5%;
+}
+
+.dashboard-title {
+    font-style: italic;
+    border-bottom: 2px solid rgb(188, 154, 242);
+}
+
+.section-title {
+    font-style: italic;
+    border-bottom: 2px solid rgba(203, 242, 154, 1);
 }
 
 
@@ -197,6 +207,11 @@ nav .navlink {
     text-decoration: none;
 }
 
+.post-head .headLink {
+    text-decoration: none;
+    color: rgb(37, 150, 52);
+}
+
 .post-head h5 {
     display: inline;
 }
@@ -296,11 +311,13 @@ nav .navlink {
     background-color: seagreen;
     text-align: center;
     vertical-align: center;
+    margin-bottom: 1rem;
 }
 
 .Messages .reply-box {
     display: none;
     width: 50%;
+    margin-bottom: 1rem;
 }
 
 .Messages .reply-box textarea {
