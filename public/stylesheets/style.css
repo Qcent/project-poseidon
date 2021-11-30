@@ -194,9 +194,12 @@ nav .navlink {
 }
 
 #sideBar .category-list {
-    padding-left: 1.2vw;
     --bs-bg-opacity: .80;
     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))!important;
+}
+
+#sideBar .category-list span {
+    padding-left: 1.2rem;
 }
 
 #sideBar .category-list:nth-of-type(2) {
@@ -215,7 +218,7 @@ nav .navlink {
 }
 
 #sideBar .category-list a {
-    padding-left: 1vw;
+    padding-left: 2vw;
     display: block;
     width: 100%;
     text-decoration: none;
