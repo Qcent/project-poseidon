@@ -33,6 +33,16 @@ router.get('/dashboard', (req, res) => {
                         {
                             model: User,
                             attributes: ['id', "username"],
+                        },
+                        {
+                            model: Post,
+                            attributes: [
+                                ['user_id', 'op']
+                            ],
+                            include: {
+                                model: User,
+                                attributes: ['username']
+                            }
                         }
                     ]
                 }

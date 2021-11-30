@@ -127,6 +127,33 @@ router.get("/edit/:id", (req, res) => {
                 {
                     model: Category,
                     attributes: ["name"],
+                },
+                {
+                    model: Message_Chain,
+                    attributes: ['id', 'creator_id', 'post_id', 'receiver_id'],
+                    include: [{
+                            model: Message,
+                            attributes: ['sender_id', 'chain_id', 'created_at', 'content'],
+                            include: {
+                                model: User,
+                                attributes: ['id', 'username']
+                            }
+                        },
+                        {
+                            model: User,
+                            attributes: ['id', "username"],
+                        },
+                        {
+                            model: Post,
+                            attributes: [
+                                ['user_id', 'op']
+                            ],
+                            include: {
+                                model: User,
+                                attributes: ['username']
+                            }
+                        }
+                    ]
                 }
             ]
         })
@@ -137,6 +164,8 @@ router.get("/edit/:id", (req, res) => {
             }
             // serialize the data
             const post = dbPostData.get({ plain: true });
+            // add logged in user id to the message chain for determining ownership for edits
+            post.message_chains.forEach(msgChain => msgChain.loggedUser = req.session.user_id);
             // pass data to template
             res.render("edit-post", { post, session: req.session });
         })

@@ -5,6 +5,12 @@
             {{#unless receiver_name}}
             {{post.user.username}} about <a href='/post/{{post.id}}'>{{post.title}}</a>
             {{/unless}}
+
+            {{#if (ifEquals loggedUser creator_id) }}
+            {{#if receiver_id}}
+            <a href="#" class='delete-convo' data-val='{{id}}'>Remove this Conversation</a>
+            {{/if}}
+            {{/if}}
         </h4>
         {{#each this.messages}}
 

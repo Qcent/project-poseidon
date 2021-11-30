@@ -23,6 +23,21 @@ router.get('/chain', (req, res) => {
         });
 });
 
+// DELETE /api/messages/chain
+router.delete('/chain', (req, res) => {
+    // Access our Message model and run .findAll() method)
+    Message_Chain.destroy({
+            where: {
+                id: req.body.chain_id
+            }
+        })
+        .then(dbMsgData => res.json(dbMsgData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
 // POST /api/messages/new/:id create a new message chain from post :id
 router.post('/new/:id', (req, res) => {
     let data = {

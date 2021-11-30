@@ -76,6 +76,29 @@ async function replyFormHandler(event) {
     }
 }
 
+const delConvoHandler = async(event) => {
+    const chain_id = event.target.getAttribute("data-val");
+    const post_id = window.location.toString().split('/')[
+        window.location.toString().split('/').length - 1
+    ];
+    const response = await fetch(`/api/messages/chain`, {
+        method: 'delete',
+        body: JSON.stringify({
+            chain_id
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (response.ok) {
+        if (post_id == 'dashboard') document.location.replace('/user/' + post_id);
+        else document.location.replace('/post/' + post_id);
+    } else {
+        alert(response.statusText);
+    }
+}
+
 const showReplyForm = (event) => {
     const chain_id = event.target.getAttribute("data-val");
     document.getElementById("reply-box" + chain_id).style.display = document.getElementById("reply-box" + chain_id).style.display == 'block' ? 'none' : 'block';
@@ -93,4 +116,8 @@ Array.from(document.getElementsByClassName("respond")).forEach(function(element)
 
 Array.from(document.getElementsByClassName('reply-message-btn')).forEach(function(element) {
     element.addEventListener('click', replyFormHandler);
+});
+
+Array.from(document.getElementsByClassName('delete-convo')).forEach(function(element) {
+    element.addEventListener('click', delConvoHandler);
 });

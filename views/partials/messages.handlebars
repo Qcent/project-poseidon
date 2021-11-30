@@ -3,7 +3,12 @@
     <div class="Messages">
         {{#if this.message_chains.length}}
         {{#each this.message_chains}}
-        <h3>Conversation with {{user.username}}</h3>
+        <h3>Conversation with {{user.username}}
+            {{#if (ifEquals loggedUser post.op) }}
+            <a href="#" class='delete-convo' data-val='{{id}}'>Remove this Conversation</a>
+            {{/if}}
+        </h3>
+
         {{#each this.messages}}
         {{message_chain.creator_id}}
         <section class="message">

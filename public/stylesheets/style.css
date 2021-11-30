@@ -346,3 +346,15 @@ nav .navlink {
 .Messages .reply-box textarea {
     width: 100%;
 }
+
+.convo-options {
+    margin-top: -.5rem;
+}
+
+.delete-convo {
+    text-decoration: none;
+    background-color: rgba(231, 50, 50, 0.4);
+    padding: .2rem 1.2rem;
+    margin-left: 1.5rem;
+    font-size: 1rem;
+}

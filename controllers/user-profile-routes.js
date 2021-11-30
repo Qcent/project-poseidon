@@ -82,8 +82,9 @@ router.get('/dashboard', (req, res) => {
                     if (dbMsgData) {
                         // serialize the data
                         DMs = dbMsgData.map(post => post.get({ plain: true }));
+                        // add logged in user id to the message chain for determining ownership for edits
+                        DMs.forEach(msgChain => msgChain.loggedUser = req.session.user_id);
                     }
-
                     // pass data to template
                     res.render('dashboard', { posts, DMs, session: req.session });
                 })
