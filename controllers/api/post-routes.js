@@ -1,40 +1,130 @@
 const sequelize = require('../../config/connection');
 const router = require('express').Router();
+const { Op } = require("sequelize");
+const { Post, User, Message, Category, Message_Chain } = require('../../models');
 
-//const { Post, User } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-//const withAuth = require('../../utils/auth');
-/*
-// get all posts
-router.get('/', (req, res) => {
-    console.log('======================');
+router.get('/dashboard', (req, res) => {
     Post.findAll({
-            // Query configuration
-            attributes: ['id', 'post_url', 'title', 'created_at', [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']],
-            order: [
-                ['created_at', 'DESC']
-            ],
-            include: [
-                // include the Comment model here:
-                {
-                    model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
+            attributes: ['id', 'title', 'content', 'user_id', 'created_at'],
+            where: {
+                user_id: '1'
+            },
+            include: [{
+                    model: Category,
+                    attributes: ["name"],
                 },
                 {
                     model: User,
-                    attributes: ['username']
+                    attributes: ['id', "username"],
+                },
+                {
+                    model: Message_Chain,
+                    attributes: ['id', 'creator_id', 'post_id'],
+                    include: [{
+                            model: Message,
+                            attributes: ['chain_id', 'sender_id', 'created_at', 'content'],
+                            include: {
+                                model: User,
+                                attributes: ['id', 'username']
+                            }
+                        },
+                        {
+                            model: User,
+                            attributes: ['id', "username"],
+                        }
+                    ]
                 }
             ]
+
         })
-        .then(dbPostData => res.json(dbPostData))
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            // serialize the data
+            const posts = dbUserData.map(post => post.get({ plain: true }));
+
+            // Get any DM messages
+            Message_Chain.findAll({
+                    where: {
+                        [Op.or]: [
+                            { creator_id: 1 },
+                            { receiver_id: 1 }
+                        ]
+                    },
+                    include: [{
+                            model: Message,
+                            attributes: ['chain_id', 'sender_id', 'created_at', 'content'],
+                            include: {
+                                model: User,
+                                attributes: ['id', 'username']
+                            }
+                        },
+                        {
+                            model: User,
+                            attributes: ['id', "username"],
+                        }
+                    ]
+                })
+                .then(dbMsgData => {
+                    let DMs = '';
+                    if (dbMsgData) {
+                        // serialize the data
+                        DMs = dbMsgData.map(post => post.get({ plain: true }));
+                    }
+
+                    // pass data to template
+                    //res.render('dashboard', { posts, DMs, session: req.session });
+                    res.json({ posts, DMs, session: req.session })
+                })
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
+});
+
+
+
+// GET all posts
+router.get('/', (req, res) => {
+    Post.findAll({
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'user_id',
+                'category_id',
+                'created_at'
+            ],
+            include: [{
+                    model: Category,
+                    attributes: ['name']
+                }, {
+                    model: User,
+                    attributes: ['username']
+                },
+                {
+                    model: Message_Chain,
+                    attributes: ['id', 'creator_id', 'post_id', 'receiver_id'],
+                    include: {
+                        model: Message,
+                        attributes: ['sender_id', 'chain_id'],
+                        include: {
+                            model: User,
+                            attributes: ['id', 'username']
+                        }
+                    }
+                }
+            ]
+        }).then(dbPostData => res.json(dbPostData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
 });
 
 //get one post
@@ -43,19 +133,37 @@ router.get('/:id', (req, res) => {
             where: {
                 id: req.params.id
             },
-            attributes: ['id', 'post_url', 'title', 'created_at', [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']],
-            include: [
-                // include the Comment model here:
-                {
-                    model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'user_id',
+                'category_id',
+                'created_at'
+            ],
+            include: [{
+                    model: Category,
+                    attributes: ['name']
                 }, {
                     model: User,
                     attributes: ['username']
+                },
+                {
+                    model: Message_Chain,
+                    attributes: ['id', 'creator_id', 'post_id', 'receiver_id'],
+                    include: [{
+                            model: Message,
+                            attributes: ['sender_id', 'chain_id', 'created_at', 'content'],
+                            include: {
+                                model: User,
+                                attributes: ['id', 'username']
+                            }
+                        },
+                        {
+                            model: User,
+                            attributes: ['id', "username"],
+                        }
+                    ]
                 }
             ]
         })
@@ -72,6 +180,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
+/* Handled by new-post Route
 //post a new post
 router.post('/', (req, res) => {
     Post.create({
@@ -86,27 +195,13 @@ router.post('/', (req, res) => {
         });
 
 });
+*/
 
-// PUT /api/posts/upvote
-router.put('/upvote', (req, res) => {
-    // make sure the session exists first
-    if (req.session) {
-        // pass session id along with all destructured properties on req.body
-        Post.upvote({...req.body, user_id: req.session.user_id }, { Vote, Comment, User })
-            .then(updatedVoteData => res.json(updatedVoteData))
-            .catch(err => {
-                console.log(err);
-                res.status(500).json(err);
-            });
-    }
-});
-
-
-// update a post title
+// update a post 
 router.put('/:id', (req, res) => {
     Post.update({
             title: req.body.title,
-            post_url: req.body.post_url
+            content: req.body.content
         }, {
             where: {
                 id: req.params.id
@@ -145,5 +240,4 @@ router.delete('/:id', (req, res) => {
         });
 });
 
-*/
 module.exports = router;

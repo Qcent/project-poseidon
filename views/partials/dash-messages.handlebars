@@ -1,8 +1,8 @@
 <section>
-    <h2 class="section-title">Messages</h2>
+    <h3 class="section-title">Messages - {{this.message_chains.length}}</h3>
     <div class="Messages">
         {{#each this.message_chains}}
-        <h3>Conversation with {{user.username}}</h3>
+        <h4>Conversation with {{user.username}}</h4>
         {{#each this.messages}}
         {{message_chain.creator_id}}
         <section class="message">

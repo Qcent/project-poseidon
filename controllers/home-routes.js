@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
-const { User, Category, Post } = require("../models");
+const { User, Category, Post, Message_Chain, Message } = require("../models");
 
 // get all posts for homepage
 router.get("/", (req, res) => {
@@ -50,6 +50,65 @@ router.get("/newPost", (req, res) => {
 
 //get specific post by id
 router.get("/post/:id", (req, res) => {
+    console.log("==========Loading Single Post============");
+    Post.findOne({
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'user_id',
+                'category_id',
+                'created_at'
+            ],
+            where: {
+                id: req.params.id,
+            },
+            include: [{
+                    model: User,
+                    attributes: ['id', "username"],
+                },
+                {
+                    model: Category,
+                    attributes: ["name"],
+                },
+                {
+                    model: Message_Chain,
+                    attributes: ['id', 'creator_id', 'post_id', 'receiver_id'],
+                    include: [{
+                            model: Message,
+                            attributes: ['sender_id', 'chain_id', 'created_at', 'content'],
+                            include: {
+                                model: User,
+                                attributes: ['id', 'username']
+                            }
+                        },
+                        {
+                            model: User,
+                            attributes: ['id', "username"],
+                        }
+                    ]
+                }
+            ]
+        })
+        .then((dbPostData) => {
+            if (!dbPostData) {
+                res.status(404).json({ message: "No post found with this id" });
+                return;
+            }
+            // serialize the data
+            const post = dbPostData.get({ plain: true });
+            console.log(post);
+            // pass data to template
+            res.render("single-post", { post, session: req.session });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+//get specific post by id for editing
+router.get("/edit/:id", (req, res) => {
     Post.findOne({
             attributes: [
                 'id',
@@ -77,17 +136,16 @@ router.get("/post/:id", (req, res) => {
                 res.status(404).json({ message: "No post found with this id" });
                 return;
             }
-
             // serialize the data
             const post = dbPostData.get({ plain: true });
-
             // pass data to template
-            res.render("single-post", { post, session: req.session });
+            res.render("edit-post", { post, session: req.session });
         })
         .catch((err) => {
             console.log(err);
             res.status(500).json(err);
         });
+    return
 });
 
 router.get("/login", (req, res) => {
@@ -107,9 +165,10 @@ router.get("/signup", (req, res) => {
     res.render("signup");
 });
 
+
 // get all posts for homepage/:category
 router.get("/:category", (req, res) => {
-    console.log("==========Loading Homepage============");
+    console.log("==========Loading Category============");
     Category.findAll({
             where: {
                 name: req.params.category,

@@ -1,0 +1,48 @@
+<h1>DASHBOARD</h1>
+<section class="newPost-dashboard">
+    <h2>
+        Create New Post
+    </h2>
+    <div class="form-btn-container">
+        <a href="/newPost/">
+            <button class="form-btn">Start New Post</button>
+        </a>
+    </div>
+</section>
+<hr>
+<section class="posts-dashboard">
+    <h2>Active Posts - {{posts.length}}</h2>
+    {{#if posts.length}}
+    {{#each posts as |post|}}
+    <section class='single-post-containter'>
+
+        {{> post-view post}}
+
+        <div class='edit-div'>
+            <a href='/edit/{{post.id}}'> Edit </a>
+
+        </div>
+    </section>
+    {{> dash-messages post}}
+    {{/each}}
+
+    {{else}}
+    <h2>No Posts</h2>
+    {{/if}}
+</section>
+
+<hr>
+<section class="directMessage-dashboard">
+    <h2>Direct Messages - {{DMs.length}}</h2>
+    {{#if DMs.length}}
+    {{#each DMs as |convo|}}
+    <section class='convo-containter'>
+        {{> messages convo}}
+    </section>
+    {{/each}}
+    {{else}}
+    <h2>No DMs</h2>
+    {{/if}}
+</section>
+
+<script src="/javascript/message.js"></script>

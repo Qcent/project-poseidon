@@ -2,10 +2,10 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 // create our Message model
-class Message extends Model {}
+class Message_Chain extends Model {}
 
 // define table columns and configuration
-Message.init({
+Message_Chain.init({
     // define an id column
     id: {
         // use the special Sequelize DataTypes object provide what type of data it is
@@ -17,21 +17,19 @@ Message.init({
         // turn on auto increment
         autoIncrement: true
     },
-    // define a sender column
-    sender_id: {
+    // define a creator column
+    creator_id: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    // define a chain column
-    chain_id: {
+    // define a receiver column
+    receiver_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
     },
-    // define content column
-    content: {
-        type: DataTypes.TEXT,
-        allowNull: false
-    }
+    // chains must be attached to a post or a reciever
+    post_id: {
+        type: DataTypes.INTEGER,
+    },
 
 }, {
     // TABLE CONFIGURATION OPTIONS GO HERE (https://sequelize.org/v5/manual/models-definition.html#configuration))
@@ -44,8 +42,8 @@ Message.init({
     // use underscores instead of camel-casing (i.e. `comment_text` and not `commentText`)
     underscored: true,
     // make it so our model name stays lowercase in the database
-    modelName: 'message'
+    modelName: 'message_chain'
 
 });
 
-module.exports = Message;
+module.exports = Message_Chain;
