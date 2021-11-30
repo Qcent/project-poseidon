@@ -48,11 +48,14 @@ footer {
 
 header {
     width: 100%;
-    min-height: 200px;
+    min-height: 140px;
+    height: 18vw;
+    max-height: 25rem;
+    margin-bottom: -1rem;
     background-image: url('/images/skiny_logo.png');
     background-repeat: no-repeat;
     background-size: contain;
-    background-position: 50%;
+    background-position-y: 1.6rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;

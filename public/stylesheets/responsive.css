@@ -1,52 +1,43 @@
 @media screen and (max-height: 825px) {
-    :root {
-       font-size: 75%;
-   }
-   header {
-       min-height: 145px;
-       max-height: 145px;
-       height: 145px;
-   }
+     :root {
+        font-size: 75%;
+    }
+    header {
+        background-position-x: 20.5%;
+    }
 }
 
 @media screen and (max-height: 650px) {
-    :root {
-       font-size: 68%;
-   }
-   header {
-       min-height: 125px;
-       max-height: 125px;
-       height: 125px;
-   }
-   nav {
-       position: relative;
-       top: 1rem;
-   }
+     :root {
+        font-size: 68%;
+    }
+    nav {
+        position: relative;
+        top: 1rem;
+    }
 }
 
 @media screen and (max-height: 525px) {
-    :root {
-       font-size: 60%;
-   }
-   header {
-       min-height: 105px;
-       max-height: 105px;
-       height: 105px;
-   }
+     :root {
+        font-size: 60%;
+    }
+    header {
+        height: 24rem;
+    }
 }
+
 @media screen and (max-width: 1300px) {
     header {
-        min-height: 180px;
-        max-height: 180px;
-        height: 180px;
+        min-height: 140px;
     }
 }
 
 @media screen and (max-width: 1000px) {
     header {
-        min-height: 150px;
-        max-height: 150px;
-        height: 150px;
+        background-position-y: 2.2rem;
+        min-height: 135px;
+        max-height: 135px;
+        height: 135px;
     }
 }
 
@@ -55,9 +46,10 @@
         font-size: 80%;
     }
     header {
-        min-height: 140px;
-        max-height: 140px;
-        height: 140px;
+        background-position-y: 2.2rem;
+        min-height: 120px;
+        max-height: 120px;
+        height: 120px;
     }
     #sideBar hr {
         display: none;
@@ -75,16 +67,14 @@
     }
 }
 
-
-
 @media screen and (max-width: 525px) {
      :root {
         font-size: 70%;
     }
     header {
-        min-height: 120px;
-        max-height: 120px;
-        height: 120px;
+        min-height: 108px;
+        max-height: 108px;
+        height: 108px;
     }
     #searchBox {
         padding: 0 8%;
@@ -93,9 +83,7 @@
 
 @media screen and (max-width: 425px) {
     header {
-        min-height: 108px;
-        max-height: 108px;
-        height: 108px;
+        background-position-y: 3rem;
     }
     #searchBox {
         padding: 0 4%;
