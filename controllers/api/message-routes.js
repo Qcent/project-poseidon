@@ -25,23 +25,33 @@ router.get('/chain', (req, res) => {
 
 // POST /api/messages/new/:id create a new message chain from post :id
 router.post('/new/:id', (req, res) => {
-    console.log("============= NEW CHAIN ==========:");
-    Message_Chain.create({
+    let data = {
         creator_id: req.body.sender_id || req.session.user_id,
-        post_id: req.params.id,
-    })
-    .then(msgChainData =>{
-        Message.create({
-            sender_id: msgChainData.creator_id,
-            chain_id: msgChainData.id,
-            content: req.body.content
+        post_id: req.params.id
+    };
+    if (req.body.receiver_id) {
+        data = {
+            creator_id: req.session.user_id,
+            receiver_id: req.body.receiver_id
+        }
+    }
+
+    console.log("============= NEW CHAIN ==========:");
+    Message_Chain.create(
+            data
+        )
+        .then(msgChainData => {
+            Message.create({
+                    sender_id: msgChainData.creator_id,
+                    chain_id: msgChainData.id,
+                    content: req.body.content
+                })
+                .then(dbMsgData => res.json(dbMsgData))
         })
-        .then(dbMsgData => res.json(dbMsgData))
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 // POST /api/messages
