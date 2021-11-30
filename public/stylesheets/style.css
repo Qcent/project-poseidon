@@ -214,15 +214,16 @@ nav .navlink {
 }
 
 #sideBar .category-list a {
-    padding-left: 2rem;
+    padding-left: 1vw;
     display: block;
     width: 100%;
     text-decoration: none;
     color: rgb(227, 228, 213);
+    transition: 0.5s;
 }
 
 #sideBar .category-list a:hover {
-    background-color: rgba(248, 243, 233, .4);
+    background-image: linear-gradient(61deg, rgba(153, 221, 156, 1) 13%, rgba(236, 190, 184, 1) 36%, rgba(235, 233, 172, 1) 51%, rgba(203, 242, 154, 1) 69%, rgba(94, 152, 163, 1) 95%);
     color: rgb(0, 0, 0);
 }
 
