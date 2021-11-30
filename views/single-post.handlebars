@@ -3,15 +3,7 @@
 
     {{#unless (ifEquals session.user_id post.user_id)}}
 
-    {{#each post.message_chains as |convo|}}
-
-    {{#unless (ifEquals ../session.user_id convo.creator_id)}}
     {{> message-form post}}
-    {{/unless}}
-
-    {{/each}}
-
-
 
     {{else}}
     <div class='edit-div'>
