@@ -18,7 +18,7 @@ async function msgFormHandler(event) {
     });
 
     if (response.ok) {
-       document.location.replace('/post/'+post_id);
+        document.location.replace('/post/' + post_id);
     } else {
         alert(response.statusText);
     }
@@ -26,9 +26,12 @@ async function msgFormHandler(event) {
 
 async function replyFormHandler(event) {
     event.preventDefault();
+    const post_id = window.location.toString().split('/')[
+        window.location.toString().split('/').length - 1
+    ];
     const chain_id = event.target.getAttribute("data-form");
-    const content = document.querySelector('textarea[id="message'+chain_id+'-body"]').value;
-    
+    const content = document.querySelector('textarea[id="message' + chain_id + '-body"]').value;
+
     const response = await fetch(`/api/messages`, {
         method: 'post',
         body: JSON.stringify({
@@ -41,19 +44,19 @@ async function replyFormHandler(event) {
     });
 
     if (response.ok) {
-      document.location.replace('/post/'+post_id);
+        document.location.replace('/post/' + post_id);
     } else {
         alert(response.statusText);
     }
 }
 
-const showReplyForm = (event) =>{
+const showReplyForm = (event) => {
     const chain_id = event.target.getAttribute("data-val");
-    document.getElementById("reply-box"+chain_id).style.display = document.getElementById("reply-box"+chain_id).style.display == 'block' ? 'none' : 'block';
+    document.getElementById("reply-box" + chain_id).style.display = document.getElementById("reply-box" + chain_id).style.display == 'block' ? 'none' : 'block';
 }
 
-if(document.querySelector('.message-form'))
-document.querySelector('.message-form').addEventListener('submit', msgFormHandler);
+if (document.querySelector('.message-form'))
+    document.querySelector('.message-form').addEventListener('submit', msgFormHandler);
 
 Array.from(document.getElementsByClassName("respond")).forEach(function(element) {
     element.addEventListener('click', showReplyForm);
