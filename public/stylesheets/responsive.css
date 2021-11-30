@@ -51,9 +51,6 @@
         max-height: 120px;
         height: 120px;
     }
-    #sideBar hr {
-        display: none;
-    }
 }
 
 @media screen and (max-width: 686px) {

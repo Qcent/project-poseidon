@@ -126,33 +126,47 @@ nav .navlink {
 
 #sideBarLogo {
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 2vw;
 }
 
 #newPost-sideBar {
     margin: -1rem 0;
     padding: 1rem 0;
-    font-size: 1.4rem;
+    font-size: 1.3vw;
+    border: .2rem solid rgba(236, 190, 184, .8);
+}
+
+#newPost-sideBar:hover {
+    border-color: rgba(104, 224, 134, 0.8);
+}
+
+#sideBar .icon {
+    width: 1.4vw;
+    height: 1.4vw;
 }
 
 #newPost-sideBar a {
+    padding: 0;
+    text-align: center;
     color: rgb(37, 150, 52);
     text-decoration: none;
     font-weight: bold;
 }
 
 #sideBar .category-list {
-    padding-left: 1rem;
+    padding-left: 1.2vw;
     --bs-bg-opacity: .80;
     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))!important;
 }
 
 #sideBar .category-list:nth-of-type(2) {
     padding-top: 1rem;
+    margin-top: -.8rem;
 }
 
 #sideBar .category-list:nth-of-type(3) {
     padding-bottom: 1rem;
+    margin-bottom: .5rem;
 }
 
 #sideBar .category-list ul {
