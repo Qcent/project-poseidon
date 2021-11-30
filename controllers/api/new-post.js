@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const fs = require('fs');
 const path = require('path');
-const { Post, User } = require('../../models');
-
+const { Post } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // For uploading photos
 const multer = require("multer");
@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/', [withAuth, upload.single('image')], (req, res) => {
     Post.create({
             title: req.body.title,
             content: req.body.content,

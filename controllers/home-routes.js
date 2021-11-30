@@ -2,13 +2,14 @@ const router = require("express").Router();
 const sequelize = require("../config/connection");
 const { Op } = require("sequelize");
 const { User, Category, Post, Message_Chain, Message } = require("../models");
-const { query } = require("express");
+const withAuth = require('../utils/auth');
 
 // get all posts for homepage
 router.get("/", (req, res) => {
-
+    //set up a query obj for searching the database
     let query = {}
     if (req.query.search) {
+        // if a search query exists search in titles OR content for matches
         query = {
             [Op.or]: [{
                     title: {
@@ -66,7 +67,7 @@ router.get("/", (req, res) => {
 });
 
 //create a New post
-router.get("/newPost", (req, res) => {
+router.get("/newPost", withAuth, (req, res) => {
     res.render("new-post", { session: req.session });
 });
 
@@ -130,7 +131,7 @@ router.get("/post/:id", (req, res) => {
 });
 
 //get specific post by id for editing
-router.get("/edit/:id", (req, res) => {
+router.get("/edit/:id", withAuth, (req, res) => {
     Post.findOne({
             attributes: [
                 'id',
@@ -214,7 +215,6 @@ router.get("/signup", (req, res) => {
     }
     res.render("signup");
 });
-
 
 // get all posts for homepage/:category
 router.get("/:category", (req, res) => {

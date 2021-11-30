@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Category } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // GET /api/categories
 router.get('/', (req, res) => {
@@ -13,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 // POST /api/categories
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     Category.create({
             name: req.body.name
         })
@@ -24,7 +25,7 @@ router.post('/', (req, res) => {
         });
 });
 // PUT /api/Categorys/:id
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Category.update({
             name: req.body.name,
         }, {
@@ -39,7 +40,7 @@ router.put('/:id', (req, res) => {
         });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     Category.destroy({
             where: {
                 id: req.params.id

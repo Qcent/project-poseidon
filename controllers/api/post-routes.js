@@ -5,7 +5,8 @@ const { Post, User, Message, Category, Message_Chain } = require('../../models')
 
 const withAuth = require('../../utils/auth');
 
-router.get('/dashboard', (req, res) => {
+/* only needed for API testing
+router.get('/dashboard',  (req, res) => {
     Post.findAll({
             attributes: ['id', 'title', 'content', 'user_id', 'created_at'],
             where: {
@@ -104,7 +105,7 @@ router.get('/dashboard', (req, res) => {
             res.status(500).json(err);
         });
 });
-
+*/
 
 
 // GET all posts
@@ -216,7 +217,7 @@ router.post('/', (req, res) => {
 */
 
 // update a post 
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Post.update({
             title: req.body.title,
             content: req.body.content
@@ -239,7 +240,7 @@ router.put('/:id', (req, res) => {
 });
 
 //delete a route
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     Post.destroy({
             where: {
                 id: req.params.id

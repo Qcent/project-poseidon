@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const { Message, Message_Chain } = require('../../models');
-
+const withAuth = require('../../utils/auth');
 
 // GET /api/messages
-router.get('/', (req, res) => {
+router.get('/', withAuth, (req, res) => {
     // Access our Message model and run .findAll() method)
     Message.findAll({})
         .then(dbMsgData => res.json(dbMsgData))
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         });
 });
 // GET /api/messages/chain
-router.get('/chain', (req, res) => {
+router.get('/chain', withAuth, (req, res) => {
     // Access our Message model and run .findAll() method)
     Message_Chain.findAll({})
         .then(dbMsgData => res.json(dbMsgData))
@@ -24,7 +24,7 @@ router.get('/chain', (req, res) => {
 });
 
 // DELETE /api/messages/chain
-router.delete('/chain', (req, res) => {
+router.delete('/chain', withAuth, (req, res) => {
     // Access our Message model and run .findAll() method)
     Message_Chain.destroy({
             where: {
@@ -39,7 +39,7 @@ router.delete('/chain', (req, res) => {
 });
 
 // POST /api/messages/new/:id create a new message chain from post :id
-router.post('/new/:id', (req, res) => {
+router.post('/new/:id', withAuth, (req, res) => {
     let data = {
         creator_id: req.body.sender_id || req.session.user_id,
         post_id: req.params.id
@@ -70,7 +70,7 @@ router.post('/new/:id', (req, res) => {
 });
 
 // POST /api/messages
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     console.log("============= NEW MESSAGE:");
     Message.create({
             sender_id: req.body.sender_id || req.session.user_id,
@@ -84,7 +84,7 @@ router.post('/', (req, res) => {
         });
 });
 // PUT /api/messages/:id
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Message.update({
             content: req.body.content,
         }, {

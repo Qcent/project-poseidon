@@ -2,10 +2,10 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Op } = require("sequelize");
 const { User, Post, Category, Message_Chain, Message } = require('../models');
-//const withAuth = require('../utils/auth');
+const withAuth = require('../utils/auth');
 
 //GET DB info for users dashboard
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', withAuth, (req, res) => {
     Post.findAll({
             attributes: ['id', 'title', 'content', 'user_id', 'created_at'],
             where: {
@@ -96,7 +96,7 @@ router.get('/dashboard', (req, res) => {
 });
 
 //get specific user by id
-router.get('/:id', (req, res) => {
+router.get('/:id', withAuth, (req, res) => {
     User.findOne({
             where: {
                 id: req.params.id
