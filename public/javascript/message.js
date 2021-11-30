@@ -69,7 +69,7 @@ async function replyFormHandler(event) {
     });
 
     if (response.ok) {
-        if (post_id == 'dashboard') document.location.replace('/' + post_id);
+        if (post_id == 'dashboard') document.location.replace('/user/' + post_id);
         else document.location.replace('/post/' + post_id);
     } else {
         alert(response.statusText);
