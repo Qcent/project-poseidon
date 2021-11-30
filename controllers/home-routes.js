@@ -1,11 +1,30 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
+const { Op } = require("sequelize");
 const { User, Category, Post, Message_Chain, Message } = require("../models");
+const { query } = require("express");
 
 // get all posts for homepage
 router.get("/", (req, res) => {
-    console.log("==========Loading Homepage============");
 
+    let query = {}
+    if (req.query.search) {
+        query = {
+            [Op.or]: [{
+                    title: {
+                        [Op.like]: `%${req.query.search}%`
+                    }
+                },
+                {
+                    content: {
+                        [Op.like]: `%${req.query.search}%`
+                    }
+                }
+            ]
+        }
+    }
+
+    console.log("==========Loading Homepage============");
     Post.findAll({
             attributes: [
                 'id',
@@ -15,6 +34,7 @@ router.get("/", (req, res) => {
                 'category_id',
                 'created_at'
             ],
+            where: query,
             order: [
                 ['created_at', 'DESC']
             ],
@@ -30,6 +50,9 @@ router.get("/", (req, res) => {
         })
         .then(dbPostData => {
             const posts = dbPostData.map(post => post.get({ plain: true }));
+
+            if (req.query.search) { req.session.searchStr = req.query.search; } else { req.session.searchStr = '*'; }
+            if (req.params.category) { req.session.searchCat = req.params.category; } else { req.session.searchCat = 'All'; }
 
             res.render('homepage', {
                 posts,
@@ -196,16 +219,58 @@ router.get("/signup", (req, res) => {
 // get all posts for homepage/:category
 router.get("/:category", (req, res) => {
     console.log("==========Loading Category============");
-    Category.findAll({
-            where: {
-                name: req.params.category,
-            },
+    let query = { '$category.name$': req.params.category }
+    if (req.query.search) {
+        query = {
+            [Op.and]: [
+                { '$category.name$': req.params.category },
+                {
+                    [Op.or]: [{
+                            title: {
+                                [Op.like]: `%${req.query.search}%`
+                            }
+                        },
+                        {
+                            content: {
+                                [Op.like]: `%${req.query.search}%`
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+    Post.findAll({
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'user_id',
+                'category_id',
+                'created_at'
+            ],
+            where: query,
+            order: [
+                ['created_at', 'DESC']
+            ],
+            include: [{
+                    model: User,
+                    attributes: ['id', 'username']
+                },
+                {
+                    model: Category,
+                    attributes: ["name"],
+                }
+            ]
         })
         .then((dbPostData) => {
-            const categories = dbPostData.map((post) => post.get({ plain: true }));
+            const posts = dbPostData.map((post) => post.get({ plain: true }));
+
+            if (req.query.search) { req.session.searchStr = req.query.search; } else { req.session.searchStr = '*'; }
+            if (req.params.category) { req.session.searchCat = req.params.category; } else { req.session.searchCat = 'All'; }
 
             res.render("homepage", {
-                categories,
+                posts,
                 session: req.session,
             });
         })
