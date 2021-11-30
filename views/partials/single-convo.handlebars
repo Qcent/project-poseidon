@@ -1,0 +1,28 @@
+<div class="Messages">
+
+    <h3>Conversation started by {{user.username}}</h3>
+    {{#each this.messages}}
+    <section class="message">
+        <div class="meta">
+            <a href='/user/{{user.id}}'>{{user.username}}</a>
+            {{format_date created_at}} {{creator.user_id}}
+        </div>
+        <div class="text">
+            {{content}}
+        </div>
+    </section>
+    {{/each}}
+    <div class='respond' data-val="{{id}}">Reply</div>
+    <section class='reply-box' id="reply-box{{id}}">
+        <form class="reply-form">
+            <div>
+                <h3>Respond:</h3>
+                <textarea id="message{{id}}-body" placeholder="Your Message Here"></textarea>
+            </div>
+            <div class='form-btn-container'>
+                <button class='reply-message-btn' data-form="{{id}}">send message</button>
+            </div>
+        </form>
+    </section>
+
+</div>

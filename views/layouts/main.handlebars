@@ -22,7 +22,7 @@
                 <img src="/images/trident-stamp.png" id="sideBarLogo">
             </a>
             <ul class="nav nav-pills flex-column flex-nowrap mb-auto">
-                 <hr>
+                <hr>
                 <li id="newPost-sideBar" class="fancy-button">
                     <a href="/newPost" class="nav-link">
                         <img class='icon' src="https://www.svgrepo.com/show/156528/list.svg" /> Post New
@@ -50,7 +50,7 @@
                     </ul>
 
                 </li>
-               
+
                 <li>
                     <a href="#" class="nav-link text-white">
                         Buy and Sell
@@ -83,9 +83,9 @@
                     {{/if}}
                 </section>
                 <nav>
-                    <a class='navlink' href="/">Home</a>
+                    <a class='navlink text-white text-decoration-none' href="/">Home</a>
                     {{#if session.loggedIn}}
-                    <a class='navlink' href="/user/dashboard">Dashboard</a>
+                    <a class='navlink text-white text-decoration-none' href="/user/dashboard">Dashboard</a>
                     {{/if}}
                     {{>profile-dropdown}}
                 </nav>

@@ -2,6 +2,8 @@ const seedCategories = require('./category-seeds');
 const seedUsers = require('./user-seeds');
 const seedPosts = require('./post-seeds');
 
+const updateTimestamps = require('./update-post-time');
+
 const sequelize = require('../config/connection');
 
 const seedAll = async() => {
@@ -16,6 +18,9 @@ const seedAll = async() => {
 
     await seedPosts();
     console.log('\n----- POSTS SEEDED -----\n');
+
+    //await updateTimestamps(1);
+    //console.log('\n----- POST MODDED -----\n');
 
     process.exit(0);
 };

@@ -75,18 +75,20 @@ router.get("/post/:id", (req, res) => {
                     model: Message_Chain,
                     attributes: ['id', 'creator_id', 'post_id', 'receiver_id'],
                     include: [{
-                        model: Message,
-                        attributes: ['sender_id', 'chain_id', 'created_at', 'content'],
-                        include: { model: User,
-                            attributes: ['id', 'username']
+                            model: Message,
+                            attributes: ['sender_id', 'chain_id', 'created_at', 'content'],
+                            include: {
+                                model: User,
+                                attributes: ['id', 'username']
+                            }
+                        },
+                        {
+                            model: User,
+                            attributes: ['id', "username"],
                         }
-                    },
-                    {
-                        model: User,
-                        attributes: ['id', "username"],
-                    }]
+                    ]
                 }
-                ]
+            ]
         })
         .then((dbPostData) => {
             if (!dbPostData) {
@@ -95,6 +97,7 @@ router.get("/post/:id", (req, res) => {
             }
             // serialize the data
             const post = dbPostData.get({ plain: true });
+            console.log(post);
             // pass data to template
             res.render("single-post", { post, session: req.session });
         })
@@ -142,7 +145,7 @@ router.get("/edit/:id", (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
-        return
+    return
 });
 
 router.get("/login", (req, res) => {

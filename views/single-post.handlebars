@@ -1,18 +1,43 @@
 <section class='single-post-containter'>
-{{> post-view post}}
+    {{> post-view post}}
 
-{{#unless (ifEquals session.user_id post.user_id)}}
-{{> message-form post}}
-{{else}}
-<div class='edit-div'>
-    <a href='/edit/{{post.id}}'> edit post </a>
-</div>
-{{/unless}}
+    {{#unless (ifEquals session.user_id post.user_id)}}
+
+    {{#each post.message_chains as |convo|}}
+
+    {{#unless (ifEquals ../session.user_id convo.creator_id)}}
+    {{> message-form post}}
+    {{/unless}}
+
+    {{/each}}
+
+
+
+    {{else}}
+    <div class='edit-div'>
+        <a href='/edit/{{post.id}}'>Edit</a>
+    </div>
+
+    {{/unless}}
 </section>
 
 {{#if (ifEquals session.user_id post.user_id)}}
+
 {{> messages post}}
+
+{{else}}
+
+{{#each post.message_chains as |convo|}}
+
+{{#if (ifEquals ../session.user_id convo.creator_id)}}
+{{> single-convo convo}}
 {{/if}}
+
+{{/each}}
+
+
+{{/if}}
+
 
 {{#if session.loggedIn}}
 <script src="/javascript/message.js"></script>
