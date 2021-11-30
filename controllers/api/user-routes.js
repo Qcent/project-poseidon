@@ -109,8 +109,7 @@ router.post('/login', (req, res) => {
 // PUT /api/users/1
 router.put('/:id', (req, res) => {
     console.log("=========== UPDATE USER =============");
-    console.log(req.body)
-        // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
+    // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     User.update(req.body, {
             individualHooks: true, // returns the salted hash of the password if uncommented
             where: {

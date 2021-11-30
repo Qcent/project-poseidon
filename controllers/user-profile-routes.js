@@ -82,7 +82,6 @@ router.get('/dashboard', (req, res) => {
                     if (dbMsgData) {
                         // serialize the data
                         DMs = dbMsgData.map(post => post.get({ plain: true }));
-                        console.log(DMs)
                     }
 
                     // pass data to template

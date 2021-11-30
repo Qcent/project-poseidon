@@ -31,7 +31,6 @@ router.get("/", (req, res) => {
         .then(dbPostData => {
             const posts = dbPostData.map(post => post.get({ plain: true }));
 
-            console.log(posts)
             res.render('homepage', {
                 posts,
                 session: req.session
@@ -97,7 +96,7 @@ router.get("/post/:id", (req, res) => {
             }
             // serialize the data
             const post = dbPostData.get({ plain: true });
-            console.log(post);
+
             // pass data to template
             res.render("single-post", { post, session: req.session });
         })
@@ -149,7 +148,6 @@ router.get("/edit/:id", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-    console.log(req.session);
     if (req.session.loggedIn) {
         res.redirect("/");
         return;

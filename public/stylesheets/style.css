@@ -72,12 +72,12 @@ header * {
 nav {
     flex: 1 1 50%;
     align-self: flex-end;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 nav .navlink {
-    position: relative;
-    bottom: 1rem;
     padding-right: 1rem;
     font-weight: bold;
 }
@@ -93,13 +93,14 @@ nav .navlink {
     padding: 0 12.5%;
 }
 
+.section-title,
 .dashboard-title {
     font-style: italic;
     border-bottom: 2px solid rgb(188, 154, 242);
+    margin-right: 1rem;
 }
 
 .section-title {
-    font-style: italic;
     border-bottom: 2px solid rgba(203, 242, 154, 1);
 }
 
@@ -212,6 +213,10 @@ nav .navlink {
     color: rgb(37, 150, 52);
 }
 
+.post-container:hover .post-head .headLink {
+    color: rgb(57, 68, 214)
+}
+
 .post-head h5 {
     display: inline;
 }
@@ -279,6 +284,7 @@ nav .navlink {
     flex: 0 1 8rem;
     padding: .6rem 1.1rem .2rem;
     margin-bottom: 1rem;
+    margin-right: 1rem;
     border-radius: 1.2rem;
     background-color: rgb(242, 154, 154);
     box-shadow: 2px 2px 6px rgba(159, 179, 184, .7);
