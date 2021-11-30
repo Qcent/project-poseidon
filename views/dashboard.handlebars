@@ -1,4 +1,6 @@
-<h1>DASHBOARD</h1>
+<section id="dash-head">
+    <h1>DASHBOARD :</h1> <a href='#posts-dashboard'> My Posts </a> <a href='#directMessage-dashboard'> My Messages </a>
+</section>
 <section class="newPost-dashboard">
     <h2 class="dashboard-title">
         Create New Post
@@ -10,6 +12,7 @@
     </div>
 </section>
 <hr>
+<a id="posts-dashboard"></a>
 <section class="posts-dashboard">
     <h2 class="dashboard-title">Active Posts : {{posts.length}}</h2>
     {{#if posts.length}}
@@ -32,6 +35,7 @@
 </section>
 
 <hr>
+<a id="directMessage-dashboard"></a>
 <section class="directMessage-dashboard">
     <h2 class="dashboard-title">Direct Message Conversations - {{DMs.length}}</h2>
     {{#if DMs.length}}

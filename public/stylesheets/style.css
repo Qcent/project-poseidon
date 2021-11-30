@@ -96,6 +96,9 @@ nav .navlink {
     padding: 0 12.5%;
 }
 
+
+/* DASHBOARD STYTLING */
+
 .section-title,
 .dashboard-title {
     font-style: italic;
@@ -105,6 +108,42 @@ nav .navlink {
 
 .section-title {
     border-bottom: 2px solid rgba(203, 242, 154, 1);
+}
+
+.posts-dashboard .dash-message {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.directMessage-dashboard .Messages,
+.directMessage-dashboard .Messages .message {
+    margin-left: 2%;
+}
+
+#dash-head {
+    padding-left: 10%;
+}
+
+#dash-head * {
+    display: inline-block;
+}
+
+#dash-head h1 {
+    margin-right: 2rem;
+}
+
+#dash-head a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: rgb(228, 94, 134);
+    padding: 0 1rem;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+}
+
+#dash-head a:hover {
+    border-left-color: rgb(211, 114, 97);
+    border-right-color: rgb(211, 114, 97);
 }
 
 
