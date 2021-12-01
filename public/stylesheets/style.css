@@ -122,17 +122,16 @@ nav .navlink {
 }
 
 .posts-dashboard .dash-message {
-    margin-left: 5%;
+    margin-left: 2%;
     margin-right: 5%;
 }
 
-.directMessage-dashboard .Messages,
 .directMessage-dashboard .Messages .message {
     margin-left: 2%;
 }
 
 #dash-head {
-    padding-left: 10%;
+    padding-left: 8.5%;
 }
 
 #dash-head * {
@@ -155,6 +154,35 @@ nav .navlink {
 #dash-head a:hover {
     border-left-color: rgb(211, 114, 97);
     border-right-color: rgb(211, 114, 97);
+}
+
+.dash-message .section-title {
+    width: fit-content;
+    background-color: rgba(153, 221, 156, .8);
+    padding: .2rem 1rem 0;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom: none;
+    margin-left: 2.3%;
+    margin-bottom: -.2rem;
+}
+
+.dash-message .Messages {
+    border-top: 2px solid rgba(203, 242, 154, 1);
+    background-color: rgba(153, 221, 156, .8);
+    padding: 0 1.2rem;
+    border-radius: .8rem;
+    margin-bottom: 1rem;
+}
+
+.directMessage-dashboard .Messages {
+    border-top: 2px solid rgba(213, 153, 221, 1);
+    background-color: rgba(213, 153, 221, .8);
+    padding: 0 1.2rem;
+    border-radius: .8rem;
+    margin-right: 2%;
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
 }
 
 
@@ -411,4 +439,5 @@ nav .navlink {
     padding: .2rem 1.2rem;
     margin-left: 1.5rem;
     font-size: 1rem;
+    border-radius: .5rem;
 }
