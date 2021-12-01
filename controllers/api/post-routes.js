@@ -152,7 +152,7 @@ router.get('/dashboard', async(req, res) => {
                     /* SET THE DMs[n].new = true if newPostMsg[n].chain_id == DMs[n].id */
                     posts.forEach(posty => {
                         newPostMsg.forEach(msg => {
-                            //  if (msg.post.id == posty.id) posty.new = true;
+                            if (msg.message_chain.post.id == posty.id) posty.new = true;
                         });
                     });
                     /* */

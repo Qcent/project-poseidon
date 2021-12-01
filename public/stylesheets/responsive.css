@@ -51,6 +51,9 @@
         max-height: 120px;
         height: 120px;
     }
+    .single-post-containter {
+        gap: 0;
+    }
 }
 
 @media screen and (max-width: 686px) {

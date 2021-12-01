@@ -1,12 +1,21 @@
 <section id="dash-head">
-    <h1>DASHBOARD :</h1> <a href='#posts-dashboard'> My Posts </a> <a href='#directMessage-dashboard'> My Messages
-
-        {{#if newMsg.length}}:
-        {{newMsg.length}} new
-        {{/if}}
-
+    <h1>DASHBOARD :</h1> <a href='#posts-dashboard'>
+        <div class='dash-nav'> My Posts
+            {{#if newResponse.length}}<div class='newmsg'>
+                {{ newResponse.length }} {{format_plural 'response' newResponse.length }}
+            </div>
+            {{/if}}
+        </div>
+    </a> <a href='#directMessage-dashboard' id='myMessages'>
+        <div class='dash-nav'> My Messages
+            {{#if newMsg.length}}<div class='newmsg'>
+                {{newMsg.length}} new
+            </div>
+            {{/if}}
+        </div>
     </a>
 </section>
+<hr>
 <section class="newPost-dashboard mr-3">
     <h2 class="font-italic d-inline">
         Create New Post :

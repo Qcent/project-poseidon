@@ -159,7 +159,7 @@ router.get('/dashboard', withAuth, (req, res) => {
                     /* */
 
                     /* SET THE Post[n].new = true if newMessages[n].chain_id == DMs[n].id */
-                    DMs.forEach(convo => {
+                    posts.forEach(convo => {
                         newMsg.forEach(msg => {
                             if (msg.chain_id == convo.id) convo.new = true;
                         });
