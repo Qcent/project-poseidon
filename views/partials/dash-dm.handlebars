@@ -1,7 +1,10 @@
 <section>
     <div class="Messages">
 
-        <h4>Conversation with {{receiver_name}}
+        <h4>Conversation with
+            {{#if (ifEquals creator_id loggedUser) }}
+            {{receiver_name}} {{else}} {{creator_name}}
+            {{/if}}
             {{#unless receiver_name}}
             {{post.user.username}} about <a href='/post/{{post.id}}'>{{post.title}}</a>
             {{/unless}}
