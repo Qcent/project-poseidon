@@ -5,8 +5,8 @@ const { Post, User, Message, Category, Message_Chain } = require('../../models')
 
 const withAuth = require('../../utils/auth');
 
-/* only needed for API testing
-router.get('/dashboard',  (req, res) => {
+/* only needed for API testing */
+router.get('/dashboard', (req, res) => {
     Post.findAll({
             attributes: ['id', 'title', 'content', 'user_id', 'created_at'],
             where: {
@@ -60,7 +60,9 @@ router.get('/dashboard',  (req, res) => {
 
             // Get any DM messages
             Message_Chain.findAll({
-                    attributes: ['id', 'creator_id', 'receiver_id', 'post_id', [sequelize.literal('(SELECT username FROM user WHERE receiver_id = user.id )'), 'receiver_name'], ],
+                    attributes: ['id', 'creator_id', 'receiver_id', 'post_id', [sequelize.literal('(SELECT username FROM user WHERE receiver_id = user.id )'), 'receiver_name'],
+                        [sequelize.literal('(SELECT COUNT(*) FROM message WHERE message.created_at > 1)'), 'newMessages'],
+                    ],
                     where: {
                         [Op.or]: [
                             { creator_id: 2 },
@@ -90,10 +92,13 @@ router.get('/dashboard',  (req, res) => {
                 })
                 .then(dbMsgData => {
                     let DMs = '';
+                    let newMessages = 0;
                     if (dbMsgData) {
                         // serialize the data
                         DMs = dbMsgData.map(post => post.get({ plain: true }));
+                        newMessages += DMs[0].newMessages
                     }
+                    req.session.newMessages = newMessages;
 
                     // pass data to template
                     //res.render('dashboard', { posts, DMs, session: req.session });
@@ -105,7 +110,7 @@ router.get('/dashboard',  (req, res) => {
             res.status(500).json(err);
         });
 });
-*/
+/* */
 
 
 // GET all posts

@@ -51,6 +51,7 @@ router.get('/dashboard', withAuth, (req, res) => {
             Message_Chain.findAll({
                     attributes: ['id', 'creator_id', 'receiver_id', 'post_id', [sequelize.literal('(SELECT username FROM user WHERE receiver_id = user.id )'), 'receiver_name'],
                         [sequelize.literal('(SELECT username FROM user WHERE creator_id = user.id )'), 'creator_name'],
+                        [sequelize.literal(`(SELECT COUNT(*) FROM message WHERE message.created_at > 1 AND (creator_id = ${req.session.user_id}))`), 'newMessages'],
                     ],
                     where: {
                         [Op.or]: [
