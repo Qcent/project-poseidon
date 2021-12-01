@@ -52,6 +52,7 @@ router.post('/', (req, res) => {
             req.session.save(() => {
                 req.session.user_id = dbUserData.id;
                 req.session.username = dbUserData.username;
+                req.session.last_msg_time = dbUserData.last_msg_time;
                 req.session.loggedIn = true;
 
                 //return the login and not the user data with hashed password
@@ -98,6 +99,7 @@ router.post('/login', (req, res) => {
             // declare session variables
             req.session.user_id = dbUserData.id;
             req.session.username = dbUserData.username;
+            req.session.last_msg_time = dbUserData.last_msg_time;
             req.session.loggedIn = true;
 
             res.json({ user: dbUserData, message: 'You are now logged in!' });

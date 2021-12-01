@@ -4,6 +4,56 @@ const { Op } = require("sequelize");
 const { User, Post, Category, Message_Chain, Message } = require('../models');
 const withAuth = require('../utils/auth');
 
+//* HELPER FUNCTIONS FOR GETTING NEW MESSAGES  */
+const findNewDMs = lastCheck =>
+    Message.findAll({
+        attributes: ['id', 'chain_id', 'created_at', 'content'],
+        where: {
+            [Op.and]: [
+                sequelize.where(sequelize.fn('date', sequelize.col('message.created_at')), '>', sequelize.fn('date', lastCheck)),
+                {
+                    [Op.or]: [
+                        { '$message_chain.creator_id$': req.session.user_id },
+                        { '$message_chain.receiver_id$': req.session.user_id }
+                    ]
+                }
+            ]
+        },
+        include: [{
+            model: Message_Chain,
+            attributes: ['id']
+        }],
+        order: [
+            ['created_at', 'DESC']
+        ]
+    }).then(newMsgData => newMsgData.map(msg => msg.get({ plain: true })))
+
+
+const findNewPostMsg = lastCheck =>
+    Message.findAll({
+        attributes: ['id', 'chain_id', 'created_at', 'content'],
+        where: {
+            [Op.and]: [
+                sequelize.where(sequelize.fn('date', sequelize.col('message.created_at')), '>', sequelize.fn('date', lastCheck)),
+                { '$message_chain.post.user_id$': req.session.user_id }
+            ]
+        },
+        include: [{
+            model: Message_Chain,
+            attributes: ['id'],
+            include: [{
+                model: Post,
+                attributes: ['id', 'user_id']
+            }],
+
+        }],
+        order: [
+            ['created_at', 'DESC']
+        ]
+    }).then(newMsgData => newMsgData.map(msg => msg.get({ plain: true })))
+    /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
+    //* HELPER FUNCTIONS FOR GETTING NEW MESSAGES  */
+
 //GET DB info for users dashboard
 router.get('/dashboard', withAuth, (req, res) => {
     Post.findAll({

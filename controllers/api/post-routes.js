@@ -5,8 +5,57 @@ const { Post, User, Message, Category, Message_Chain } = require('../../models')
 
 const withAuth = require('../../utils/auth');
 
+const findNewDMs = lastCheck =>
+    Message.findAll({
+        attributes: ['id', 'chain_id', 'created_at', 'content'],
+        where: {
+            [Op.and]: [
+                sequelize.where(sequelize.fn('date', sequelize.col('message.created_at')), '>', sequelize.fn('date', lastCheck)),
+                {
+                    [Op.or]: [
+                        { '$message_chain.creator_id$': 2 },
+                        { '$message_chain.receiver_id$': 2 }
+                    ]
+                }
+            ]
+        },
+        include: [{
+            model: Message_Chain,
+            attributes: ['id']
+        }],
+        order: [
+            ['created_at', 'DESC']
+        ]
+    }).then(newMsgData => newMsgData.map(msg => msg.get({ plain: true })))
+
+
+const findNewPostMsg = lastCheck =>
+    Message.findAll({
+        attributes: ['id', 'chain_id', 'created_at', 'content'],
+        where: {
+            [Op.and]: [
+                sequelize.where(sequelize.fn('date', sequelize.col('message.created_at')), '>', sequelize.fn('date', lastCheck)),
+                { '$message_chain.post.user_id$': 2 }
+            ]
+        },
+        include: [{
+            model: Message_Chain,
+            attributes: ['id'],
+            include: [{
+                model: Post,
+                attributes: ['id', 'user_id']
+            }],
+
+        }],
+        order: [
+            ['created_at', 'DESC']
+        ]
+    }).then(newMsgData => newMsgData.map(msg => msg.get({ plain: true })))
+
+
+
 /* only needed for API testing */
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', async(req, res) => {
     Post.findAll({
             attributes: ['id', 'title', 'content', 'user_id', 'created_at'],
             where: {
@@ -61,7 +110,7 @@ router.get('/dashboard', (req, res) => {
             // Get any DM messages
             Message_Chain.findAll({
                     attributes: ['id', 'creator_id', 'receiver_id', 'post_id', [sequelize.literal('(SELECT username FROM user WHERE receiver_id = user.id )'), 'receiver_name'],
-                        [sequelize.literal('(SELECT COUNT(*) FROM message WHERE message.created_at > 1)'), 'newMessages'],
+                        //[sequelize.literal('(SELECT COUNT(*) FROM message WHERE message.created_at > 1)'), 'newMessages'],
                     ],
                     where: {
                         [Op.or]: [
@@ -90,19 +139,21 @@ router.get('/dashboard', (req, res) => {
                         }
                     ]
                 })
-                .then(dbMsgData => {
+                .then(async dbMsgData => {
                     let DMs = '';
-                    let newMessages = 0;
+
                     if (dbMsgData) {
                         // serialize the data
                         DMs = dbMsgData.map(post => post.get({ plain: true }));
-                        newMessages += DMs[0].newMessages
                     }
-                    req.session.newMessages = newMessages;
+
+                    const newMessages = await findNewPostMsg(req.session.last_msg_time || "2017-11-01 16:00:49.349");
 
                     // pass data to template
                     //res.render('dashboard', { posts, DMs, session: req.session });
-                    res.json({ posts, DMs, session: req.session })
+                    res.json({ newMessages, session: req.session })
+
+
                 })
         })
         .catch(err => {
