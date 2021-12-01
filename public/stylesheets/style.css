@@ -441,3 +441,23 @@ nav .navlink {
     font-size: 1rem;
     border-radius: .5rem;
 }
+
+.new-msg-mark {
+    text-decoration: none;
+    background-color: rgb(231, 137, 50);
+    padding: .2rem 1.2rem;
+    float: right;
+    margin-top: .5rem;
+    margin-right: .5rem;
+    font-size: 1rem;
+    border-radius: .5rem;
+}
+
+.delete-convo {
+    text-decoration: none;
+    background-color: rgba(231, 50, 50, 0.4);
+    padding: .2rem 1.2rem;
+    margin-left: 1.5rem;
+    font-size: 1rem;
+    border-radius: .5rem;
+}

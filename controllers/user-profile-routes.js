@@ -5,7 +5,7 @@ const { User, Post, Category, Message_Chain, Message } = require('../models');
 const withAuth = require('../utils/auth');
 
 //* HELPER FUNCTIONS FOR GETTING NEW MESSAGES  */
-const findNewDMs = lastCheck =>
+const findNewDMs = (lastCheck, uid) =>
     Message.findAll({
         attributes: ['id', 'chain_id', 'created_at', 'content'],
         where: {
@@ -13,8 +13,8 @@ const findNewDMs = lastCheck =>
                 sequelize.where(sequelize.fn('date', sequelize.col('message.created_at')), '>', sequelize.fn('date', lastCheck)),
                 {
                     [Op.or]: [
-                        { '$message_chain.creator_id$': req.session.user_id },
-                        { '$message_chain.receiver_id$': req.session.user_id }
+                        { '$message_chain.creator_id$': uid },
+                        { '$message_chain.receiver_id$': uid }
                     ]
                 }
             ]
@@ -29,13 +29,13 @@ const findNewDMs = lastCheck =>
     }).then(newMsgData => newMsgData.map(msg => msg.get({ plain: true })))
 
 
-const findNewPostMsg = lastCheck =>
+const findNewPostMsg = (lastCheck, uid) =>
     Message.findAll({
         attributes: ['id', 'chain_id', 'created_at', 'content'],
         where: {
             [Op.and]: [
                 sequelize.where(sequelize.fn('date', sequelize.col('message.created_at')), '>', sequelize.fn('date', lastCheck)),
-                { '$message_chain.post.user_id$': req.session.user_id }
+                { '$message_chain.post.user_id$': uid }
             ]
         },
         include: [{
@@ -130,7 +130,7 @@ router.get('/dashboard', withAuth, (req, res) => {
                         }
                     ]
                 })
-                .then(dbMsgData => {
+                .then(async dbMsgData => {
                     let DMs = '';
                     if (dbMsgData) {
                         // serialize the data
@@ -138,8 +138,39 @@ router.get('/dashboard', withAuth, (req, res) => {
                         // add logged in user id to the message chain for determining ownership for edits
                         DMs.forEach(msgChain => msgChain.loggedUser = req.session.user_id);
                     }
+
+                    /************************* */
+                    /* TRY AND GET THE NEW DMs */
+                    /************************* */
+                    const newMsg = await findNewDMs(req.session.last_msg_time, req.session.user_id);
+                    const newPostMsg = await findNewPostMsg(req.session.last_msg_time, req.session.user_id);
+
+                    /*
+                    if (newMsg.length) req.session.newMessages = 1;
+                    else req.session.newMessages = 0;
+                    */
+
+                    /* SET THE DMs[n].new = true if newMessages[n].chain_id == DMs[n].id */
+                    DMs.forEach(convo => {
+                        newMsg.forEach(msg => {
+                            if (msg.chain_id == convo.id) convo.new = true;
+                        });
+                    });
+                    /* */
+
+                    /* SET THE Post[n].new = true if newMessages[n].chain_id == DMs[n].id */
+                    DMs.forEach(convo => {
+                        newMsg.forEach(msg => {
+                            if (msg.chain_id == convo.id) convo.new = true;
+                        });
+                    });
+                    /* */
+
+                    /*^^^^^^^^^^^^^^^^^^^^^^^^^*/
+
+
                     // pass data to template
-                    res.render('dashboard', { posts, DMs, session: req.session });
+                    res.render('dashboard', { posts, DMs, newMsg, session: req.session });
                 })
         })
         .catch(err => {

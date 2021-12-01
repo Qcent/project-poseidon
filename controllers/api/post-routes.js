@@ -147,11 +147,19 @@ router.get('/dashboard', async(req, res) => {
                         DMs = dbMsgData.map(post => post.get({ plain: true }));
                     }
 
-                    const newMessages = await findNewPostMsg(req.session.last_msg_time || "2017-11-01 16:00:49.349");
+                    const newPostMsg = await findNewPostMsg(req.session.last_msg_time || "2017-11-01 16:00:49.349");
+
+                    /* SET THE DMs[n].new = true if newPostMsg[n].chain_id == DMs[n].id */
+                    posts.forEach(posty => {
+                        newPostMsg.forEach(msg => {
+                            //  if (msg.post.id == posty.id) posty.new = true;
+                        });
+                    });
+                    /* */
 
                     // pass data to template
                     //res.render('dashboard', { posts, DMs, session: req.session });
-                    res.json({ newMessages, session: req.session })
+                    res.json({ posts, newPostMsg, session: req.session })
 
 
                 })
