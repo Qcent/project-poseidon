@@ -20,8 +20,7 @@ Post.belongsTo(Category, {
 });
 
 Post.hasMany(Message_Chain, {
-    foreignKey: 'post_id',
-    onDelete: 'cascade',
+    foreignKey: 'post_id'
 });
 
 
@@ -48,8 +47,7 @@ Message.belongsTo(Message_Chain, {
     foreignKey: 'chain_id'
 });
 Message_Chain.hasMany(Message, {
-    foreignKey: 'chain_id',
-    onDelete: 'cascade'
+    foreignKey: 'chain_id'
 });
 Message.belongsTo(User, {
     foreignKey: 'sender_id',

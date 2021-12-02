@@ -101,17 +101,18 @@ router.get('/dashboard', withAuth, (req, res) => {
             /* Add the last message time to req.session */
             console.log("*******************************");
             console.log("*******************************");
-
-
+            //if the user has any active posts the last_msg_time will be attached 
+            // otherwise we get nothing because I just hacked this feature in 
             if (posts.length && posts[0].hasOwnProperty('user')) {
                 console.log(posts[0].user.last_msg_time);
 
                 req.session.last_msg_time = posts[0].user.last_msg_time || "1999-11-11 16:11:36.069";
 
-            } else req.session.last_msg_time = "1999-11-11 16:11:36.069";
+            } else req.session.last_msg_time = Date.now();
             console.log(req.session.last_msg_time);
             console.log("*******************************");
             console.log("*******************************");
+            //this update just sets the last_msg_time to the current time stamp 
             User.update({
                     last_msg_time: Date.now()
                 }, {
@@ -123,12 +124,9 @@ router.get('/dashboard', withAuth, (req, res) => {
                         res.status(404).json({ message: 'No user found with this id' });
                         return;
                     }
-
                     console.log("*******************************");
                     console.log(dbUserData + " User Updated");
                     console.log("*******************************");
-
-
                 })
                 .catch(err => {
                     console.log(err);

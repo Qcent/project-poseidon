@@ -54,6 +54,12 @@
     .single-post-containter {
         gap: 0;
     }
+    .single-post-containter .post-container {
+        margin-bottom: .3rem;
+    }
+    .dash-message .section-title {
+        margin-top: -2.2rem;
+    }
 }
 
 @media screen and (max-width: 686px) {

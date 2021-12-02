@@ -31,6 +31,7 @@
         
         textarea {
             resize: none;
+            padding: .3rem;
         }
         /*END OF GLOBAL*/
         
@@ -126,6 +127,10 @@
             margin-right: 5%;
         }
         
+        .posts-dashboard hr {
+            margin: 1rem 2%;
+        }
+        
         .directMessage-dashboard .Messages .message {
             margin-left: 2%;
         }
@@ -165,12 +170,17 @@
             margin-bottom: -.2rem;
         }
         
+        .dash-message .section-title {
+            margin-top: -1rem;
+        }
+        
         .dash-message .Messages {
             border-top: 2px solid rgba(203, 242, 154, 1);
+            border-bottom: 2px solid rgba(203, 242, 154, 1);
             background-color: rgba(153, 221, 156, .8);
             padding: 0 1.2rem;
             border-radius: .8rem;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
         }
         
         .directMessage-dashboard .Messages {
@@ -388,7 +398,7 @@
         .single-post-containter {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.3rem;
+            gap: .3rem;
             justify-content: space-between;
         }
         
@@ -406,6 +416,7 @@
             flex: 1 1 20rem;
             color: rgb(57, 68, 214);
             padding: .6rem 1.1rem .2rem;
+            margin-bottom: 1rem;
             border-radius: 1.2rem;
             transition: all 1.8;
             background-color: rgba(203, 242, 154, 1);
@@ -470,4 +481,29 @@
         
         .Messages .reply-box textarea {
             width: 100%;
+        }
+        /* USER LOGIN / SIGNUP*/
+        
+        .login-container .content.user-login {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: stretch;
+            padding: 1.2rem;
+            width: 32rem;
+        }
+        
+        .login-container .content.user-login label {
+            width: 5rem;
+            text-align: right;
+        }
+        
+        .login-container .content.user-login input {
+            width: 18rem;
+        }
+        
+        .login-container .form-btn-container {
+            width: 24rem;
+            display: flex;
+            justify-content: right;
+            gap: 8rem;
         }

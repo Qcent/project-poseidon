@@ -24,9 +24,9 @@ https://project-team-poseidon.herokuapp.com/
 This project requires that Node.js be installed on the target machine and that the user has write access to a MySQL server.  
 1. Copy the repository files and then run `npm i` to install all required dependencies.  
 2. In the root directory, create and edit a `.env` file (see Fig.1 below) to reflect the login credentials required to access your MySQL server. 
-3. Open the `./config/connection.js` file in your favorite text editor and set the sequelize settings for `host`,`dialect`, and `port` as needed to connect to your SQL server.
+3. Open the `./config/connection.js` file in your favorite text editor and edit the settings for the `dialect`, and `port` as needed to connect to your SQL server.
 4. Login to your MySQL server and `CREATE DATABASE poseidons_trunk_db` then logout.  
-5. (optional) To seed the database with testing data type `npm run seed` 
+5. (optional) To seed the database with testing data, type `npm run seed` 
 
 ![Fig.1](./assets/screenshots/dotenv-config.png)
 Fig.1
