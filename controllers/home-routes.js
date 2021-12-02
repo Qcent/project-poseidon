@@ -132,6 +132,7 @@ router.get("/post/:id", (req, res) => {
 
 //get specific post by id for editing
 router.get("/edit/:id", withAuth, (req, res) => {
+    console.log("==============LOADING EDIT USER=================");
     Post.findOne({
             attributes: [
                 'id',
@@ -201,16 +202,18 @@ router.get("/edit/:id", withAuth, (req, res) => {
 });
 
 router.get("/login", (req, res) => {
+    console.log("==============LOADING LOGIN=================");
     if (req.session.loggedIn) {
-        res.redirect("/");
+        res.redirect("/user/dashboard");
         return;
     }
     res.render("login");
 });
 
 router.get("/signup", (req, res) => {
+    console.log("==============LOADING SIGNUP=================");
     if (req.session.loggedIn) {
-        res.redirect("/");
+        res.redirect("/user/dashboard");
         return;
     }
     res.render("signup");

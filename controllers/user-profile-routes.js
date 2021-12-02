@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Op, DatabaseError } = require("sequelize");
+const { Op } = require("sequelize");
 const { User, Post, Category, Message_Chain, Message } = require('../models');
 const withAuth = require('../utils/auth');
 
@@ -9,8 +9,11 @@ const findNewDMs = (lastCheck, uid) =>
     Message.findAll({
         attributes: ['id', 'chain_id', 'created_at', 'content'],
         where: {
-            [Op.and]: [
-                sequelize.where(sequelize.fn('date', sequelize.col('message.created_at')), '>', sequelize.fn('date', lastCheck)),
+            [Op.and]: [{
+                    created_at: {
+                        [Op.gt]: sequelize.fn('date', lastCheck)
+                    }
+                },
                 {
                     [Op.or]: [
                         { '$message_chain.creator_id$': uid },
@@ -112,19 +115,19 @@ router.get('/dashboard', withAuth, (req, res) => {
             //if the user has any active posts the last_msg_time will be attached 
             // otherwise we get nothing because I just hacked this feature in 
             if (posts.length && posts[0].hasOwnProperty('user')) {
-                console.log(posts[0].user.last_msg_time);
+                console.log('last ' + posts[0].user.last_msg_time);
 
                 req.session.last_msg_time = posts[0].user.last_msg_time || "1999-11-11 16:11:36.069";
 
             } else req.session.last_msg_time = formatTime(new Date(new Date().valueOf() - 24 * 60 * 60000)); // must be a different day for the date to not match
-            console.log(req.session.last_msg_time);
+            console.log("Now: " + formatTime(new Date()));
             //  new Date().toISOString()
             //new Date(new Date().getTime() - 10 * 60000);
             console.log("*******************************");
             console.log("*******************************");
             //this update just sets the last_msg_time to the current time stamp 
             User.update({
-                    last_msg_time: req.session.last_msg_time
+                    last_msg_time: formatTime(new Date(new Date().valueOf() - 24 * 60 * 60000))
                 }, {
                     where: {
                         id: req.session.user_id
@@ -195,11 +198,6 @@ router.get('/dashboard', withAuth, (req, res) => {
                     const newDMs = await findNewDMs(req.session.last_msg_time, req.session.user_id);
                     const newPostMsg = await findNewPostMsg(req.session.last_msg_time, req.session.user_id);
 
-                    /*
-                    if (newMsg.length) req.session.newMessages = 1;
-                    else req.session.newMessages = 0;
-                    */
-
                     /* SET THE DMs[n].new = true if newMessages[n].chain_id == DMs[n].id */
                     DMs.forEach(convo => {
                         newDMs.forEach(msg => {
@@ -236,6 +234,7 @@ router.get('/dashboard', withAuth, (req, res) => {
 
 //get specific user by id
 router.get('/:id', withAuth, (req, res) => {
+    console.log("==============GET SPECIFIC USER=================");
     User.findOne({
             where: {
                 id: req.params.id
