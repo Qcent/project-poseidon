@@ -19,6 +19,10 @@ Post.belongsTo(Category, {
     foreignKey: 'category_id',
 });
 
+// Category.hasMany(Post, {
+//     foreignKey: 'category_id'
+// })
+
 Post.hasMany(Message_Chain, {
     foreignKey: 'post_id',
     onDelete: 'cascade',

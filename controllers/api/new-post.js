@@ -31,18 +31,32 @@ const upload = multer({ storage: storage });
 //     //console.log(req.file.filename);
 //     res.render('new-post');
 // });
-
+var uploadedPhoto = [];
 router.post('/', [withAuth, upload.single('image')], (req, res) => {
-    console.log(req.file.filename);
+    console.log(typeof req.file);
+    
+    
+
+    if(typeof req.file === 'object') {
+        uploadedPhoto = [];
+        uploadedPhoto.push(req.file.path);
+    }
+
+    const newUpload = uploadedPhoto.toString();
+    console.log(newUpload);
 
     if(typeof req.body.title === 'string') {
         Post.create({
             title: req.body.title,
             content: req.body.content,
             user_id: req.session.user_id,
-            category_id: req.body.category_id
+            category_id: req.body.category_id,
+            uploaded_photo: newUpload
         })
-        .then(dbPostData => res.json(dbPostData))
+        .then(dbPostData => {
+            console.log(dbPostData);
+            res.json(dbPostData)
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -50,8 +64,6 @@ router.post('/', [withAuth, upload.single('image')], (req, res) => {
     } else {
         res.render('new-post');
     }
-
-    
 });
 
 module.exports = router; 
