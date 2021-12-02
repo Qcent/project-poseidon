@@ -1,5 +1,5 @@
 async function editFormHandler(event) {
-    event.preventDefault();
+    event.stopImmediatePropagation();
 
     const post_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
@@ -26,7 +26,7 @@ async function editFormHandler(event) {
     }
 }
 async function soldFormHandler(event) {
-    event.preventDefault();
+    event.stopImmediatePropagation();
 
     const post_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Op } = require("sequelize");
+const { Op, DatabaseError } = require("sequelize");
 const { User, Post, Category, Message_Chain, Message } = require('../models');
 const withAuth = require('../utils/auth');
 
@@ -53,6 +53,14 @@ const findNewPostMsg = (lastCheck, uid) =>
     }).then(newMsgData => newMsgData.map(msg => msg.get({ plain: true })))
     /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
     //* HELPER FUNCTIONS FOR GETTING NEW MESSAGES  */
+const formatTime = (date_string) => {
+        let date = (new Date(date_string).toISOString()).split('T')[0];
+        let hours = new Date(date_string).getHours(); // 22
+        let time = new Date(date_string).toLocaleTimeString().split(' ')[0].replace(/^.:/, hours + ':');
+        return date + ' ' + time;
+    }
+    /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
+    //* AND ONE FOR SETTING THE DATE LIKE MYSQL LIKES */
 
 //GET DB info for users dashboard
 router.get('/dashboard', withAuth, (req, res) => {
@@ -108,13 +116,15 @@ router.get('/dashboard', withAuth, (req, res) => {
 
                 req.session.last_msg_time = posts[0].user.last_msg_time || "1999-11-11 16:11:36.069";
 
-            } else req.session.last_msg_time = Date.now();
+            } else req.session.last_msg_time = formatTime(new Date(new Date().valueOf() - 24 * 60 * 60000)); // must be a different day for the date to not match
             console.log(req.session.last_msg_time);
+            //  new Date().toISOString()
+            //new Date(new Date().getTime() - 10 * 60000);
             console.log("*******************************");
             console.log("*******************************");
             //this update just sets the last_msg_time to the current time stamp 
             User.update({
-                    last_msg_time: Date.now()
+                    last_msg_time: req.session.last_msg_time
                 }, {
                     where: {
                         id: req.session.user_id
@@ -134,7 +144,7 @@ router.get('/dashboard', withAuth, (req, res) => {
 
                 });
 
-            module.exports = router;
+
             /* END OF ADD last_msg_time  */
 
             // Get any DM messages

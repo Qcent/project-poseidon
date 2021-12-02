@@ -1,5 +1,5 @@
 async function dMsgFormHandler(event) {
-    event.preventDefault();
+    event.stopImmediatePropagation();
 
     const receiver_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
@@ -24,7 +24,7 @@ async function dMsgFormHandler(event) {
     }
 }
 async function msgFormHandler(event) {
-    event.preventDefault();
+    event.stopImmediatePropagation();
 
     const post_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
@@ -50,7 +50,7 @@ async function msgFormHandler(event) {
 }
 
 async function replyFormHandler(event) {
-    event.preventDefault();
+    event.stopImmediatePropagation();
     const post_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
