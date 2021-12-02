@@ -1,20 +1,34 @@
 <section id="dash-head">
-    <h1>DASHBOARD :</h1> <a href='#posts-dashboard'> My Posts </a> <a href='#directMessage-dashboard'> My Messages </a>
+    <h1>DASHBOARD :</h1> <a href='#posts-dashboard'>
+        <div class='dash-nav'> My Posts
+            {{#if newMsg.newPostMsg.length}}<div class='newmsg'>
+                {{ newMsg.newPostMsg.length }} {{format_plural 'response' newMsg.newPostMsg.length }}
+            </div>
+            {{/if}}
+        </div>
+    </a> <a href='#directMessage-dashboard' id='myMessages'>
+        <div class='dash-nav'> My Messages
+            {{#if newMsg.newDMs.length}}<div class='newmsg'>
+                {{newMsg.newDMs.length}} new
+            </div>
+            {{/if}}
+        </div>
+    </a>
 </section>
-<section class="newPost-dashboard">
-    <h2 class="dashboard-title">
-        Create New Post
+<hr>
+<section class="newPost-dashboard mr-3">
+    <h2 class="d-inline">
+        Create New Post :
     </h2>
     <div class="form-btn-container">
-        <a href="/newPost/">
-            <button class="form-btn">Start New Post</button>
+        <a href="/newPost/" class='text-decoration-none'>
+            <button class="form-btn fancy-button py-2 ">Start New Post</button>
         </a>
     </div>
 </section>
-<hr>
 <a id="posts-dashboard"></a>
 <section class="posts-dashboard">
-    <h2 class="dashboard-title">Active Posts : {{posts.length}}</h2>
+    <h2 class="dashboard-title">{{posts.length}} Active {{format_plural 'Post' posts.length }} </h2>
     {{#if posts.length}}
     {{#each posts as |post|}}
     <section class='single-post-containter'>
@@ -27,6 +41,7 @@
         </div>
     </section>
     {{> dash-messages post}}
+    <hr>
     {{/each}}
 
     {{else}}
@@ -37,10 +52,10 @@
 <hr>
 <a id="directMessage-dashboard"></a>
 <section class="directMessage-dashboard">
-    <h2 class="dashboard-title">Direct Message Conversations - {{DMs.length}}</h2>
+    <h2 class="dashboard-title">{{DMs.length}} {{format_plural 'Conversation' DMs.length }} </h2>
     {{#if DMs.length}}
     {{#each DMs as |convo|}}
-    <section class='convo-containter'>
+    <section class='convo-containter' id='convo-{{convo.id}}'>
         {{> dash-dm convo}}
     </section>
     {{/each}}

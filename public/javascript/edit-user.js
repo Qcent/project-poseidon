@@ -1,5 +1,5 @@
 async function editFormHandler(event) {
-    event.preventDefault();
+    event.stopImmediatePropagation();
 
     const user_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
@@ -38,7 +38,7 @@ async function editFormHandler(event) {
         });
 
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace('/user/dashboard');
         } else {
             alert(response.statusText);
         }

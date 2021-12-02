@@ -1,7 +1,10 @@
 <section>
     <div class="Messages">
 
-        <h4>Conversation with {{receiver_name}}
+        <h4>Conversation with
+            {{#if (ifEquals creator_id loggedUser) }}
+            {{receiver_name}} {{else}} {{creator_name}}
+            {{/if}}
             {{#unless receiver_name}}
             {{post.user.username}} about <a href='/post/{{post.id}}'>{{post.title}}</a>
             {{/unless}}
@@ -10,6 +13,10 @@
             {{#if receiver_id}}
             <a href="#" class='delete-convo' data-val='{{id}}'>Remove this Conversation</a>
             {{/if}}
+            {{/if}}
+
+            {{#if new}}
+            <a href="#" class='new-msg-mark' data-val='{{id}}'>New Message</a>
             {{/if}}
         </h4>
         {{#each this.messages}}

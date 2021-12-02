@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 // POST /api/categories
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
     Category.create({
             name: req.body.name
         })

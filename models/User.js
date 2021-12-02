@@ -48,6 +48,10 @@ User.init({
         allowNull: false,
         defaultValue: true
     },
+    last_msg_time: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
     // define a password column
     password: {
         type: DataTypes.STRING,
@@ -62,12 +66,13 @@ User.init({
 
         // set up beforeCreate lifecycle "hook" functionality
         async beforeCreate(newUserData) {
-            newUserData.password = await bcrypt.hash(newUserData.password, 10);
+            newUserData.last_msg_time = Date.now(),
+                newUserData.password = await bcrypt.hash(newUserData.password, 10);
             return newUserData;
         },
         // set up beforeUpdate lifecycle "hook" functionality
         async beforeUpdate(updatedUserData) {
-            if (updatedUserData.password) {
+            if ((updatedUserData.changed()).includes("password")) {
                 updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
                 return updatedUserData;
             }
