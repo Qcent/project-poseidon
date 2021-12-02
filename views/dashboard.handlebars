@@ -17,7 +17,7 @@
 </section>
 <hr>
 <section class="newPost-dashboard mr-3">
-    <h2 class="font-italic d-inline">
+    <h2 class="d-inline">
         Create New Post :
     </h2>
     <div class="form-btn-container">
@@ -28,7 +28,7 @@
 </section>
 <a id="posts-dashboard"></a>
 <section class="posts-dashboard">
-    <h2 class="dashboard-title">{{posts.length}} Active Posts </h2>
+    <h2 class="dashboard-title">{{posts.length}} Active {{format_plural 'Post' posts.length }} </h2>
     {{#if posts.length}}
     {{#each posts as |post|}}
     <section class='single-post-containter'>
@@ -51,7 +51,7 @@
 <hr>
 <a id="directMessage-dashboard"></a>
 <section class="directMessage-dashboard">
-    <h2 class="dashboard-title">{{DMs.length}} Conversations </h2>
+    <h2 class="dashboard-title">{{DMs.length}} {{format_plural 'Conversation' DMs.length }} </h2>
     {{#if DMs.length}}
     {{#each DMs as |convo|}}
     <section class='convo-containter' id='convo-{{convo.id}}'>

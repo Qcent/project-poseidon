@@ -112,6 +112,10 @@
             margin-bottom: 1rem;
         }
         
+        .newPost-dashboard h2 {
+            font-style: italic;
+        }
+        
         .newPost-dashboard button {
             margin-left: 5rem;
             margin-bottom: 1rem;
