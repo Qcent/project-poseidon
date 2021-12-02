@@ -20,21 +20,23 @@ const storage = multer.diskStorage({
         cb(null, 'public/images/userUploads');
     },
     filename: (req, file, cb) => {
-        console.log(file);
+        //console.log(file);
         cb(null, Date.now() + path.extname(file.originalname));
     },
 });
 
 const upload = multer({ storage: storage });
 
-router.post('/upload', [withAuth, upload.single('image')], (req, res) => {
-    //console.log(req.file.filename);
-    res.render('new-post');
-});
+// router.post('/', [withAuth, upload.single('image')], (req, res) => {
+//     //console.log(req.file.filename);
+//     res.render('new-post');
+// });
 
-router.post('/', withAuth, (req, res) => {
-    //console.log(req.file.filename);
-    Post.create({
+router.post('/', [withAuth, upload.single('image')], (req, res) => {
+    console.log(req.file.filename);
+
+    if(typeof req.body.title === 'string') {
+        Post.create({
             title: req.body.title,
             content: req.body.content,
             user_id: req.session.user_id,
@@ -45,7 +47,11 @@ router.post('/', withAuth, (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
-    res.render('new-post');
+    } else {
+        res.render('new-post');
+    }
+
+    
 });
 
 module.exports = router; 

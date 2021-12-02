@@ -34,7 +34,11 @@ Post.init({
             model: 'category',
             key: 'id'
         }
-    }
+    },
+    // uploaded_photo: {
+    //         type: DataTypes.INTEGER,
+    // }
+    
 }, 
 {
     sequelize,
