@@ -1,15 +1,15 @@
 <section id="dash-head">
     <h1>DASHBOARD :</h1> <a href='#posts-dashboard'>
         <div class='dash-nav'> My Posts
-            {{#if newResponse.length}}<div class='newmsg'>
-                {{ newResponse.length }} {{format_plural 'response' newResponse.length }}
+            {{#if newMsg.newPostMsg.length}}<div class='newmsg'>
+                {{ newMsg.newPostMsg.length }} {{format_plural 'response' newMsg.newPostMsg.length }}
             </div>
             {{/if}}
         </div>
     </a> <a href='#directMessage-dashboard' id='myMessages'>
         <div class='dash-nav'> My Messages
-            {{#if newMsg.length}}<div class='newmsg'>
-                {{newMsg.length}} new
+            {{#if newMsg.newDMs.length}}<div class='newmsg'>
+                {{newMsg.newDMs.length}} new
             </div>
             {{/if}}
         </div>
@@ -28,7 +28,7 @@
 </section>
 <a id="posts-dashboard"></a>
 <section class="posts-dashboard">
-    <h2 class="dashboard-title">Active Posts : {{posts.length}}</h2>
+    <h2 class="dashboard-title">{{posts.length}} Active Posts </h2>
     {{#if posts.length}}
     {{#each posts as |post|}}
     <section class='single-post-containter'>
@@ -51,7 +51,7 @@
 <hr>
 <a id="directMessage-dashboard"></a>
 <section class="directMessage-dashboard">
-    <h2 class="dashboard-title">Direct Message Conversations - {{DMs.length}}</h2>
+    <h2 class="dashboard-title">{{DMs.length}} Conversations </h2>
     {{#if DMs.length}}
     {{#each DMs as |convo|}}
     <section class='convo-containter' id='convo-{{convo.id}}'>

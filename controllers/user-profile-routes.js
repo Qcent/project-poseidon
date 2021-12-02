@@ -56,6 +56,7 @@ const findNewPostMsg = (lastCheck, uid) =>
 
 //GET DB info for users dashboard
 router.get('/dashboard', withAuth, (req, res) => {
+    console.log("==============LOADING DASHBOARD=================");
     Post.findAll({
             attributes: ['id', 'title', 'content', 'user_id', 'created_at'],
             where: {
@@ -67,7 +68,7 @@ router.get('/dashboard', withAuth, (req, res) => {
                 },
                 {
                     model: User,
-                    attributes: ['id', "username"],
+                    attributes: ['id', "username", 'last_msg_time'],
                 },
                 {
                     model: Message_Chain,
@@ -96,6 +97,47 @@ router.get('/dashboard', withAuth, (req, res) => {
             }
             // serialize the data
             const posts = dbUserData.map(post => post.get({ plain: true }));
+
+            /* Add the last message time to req.session */
+            console.log("*******************************");
+            console.log("*******************************");
+
+
+            if (posts.length && posts[0].hasOwnProperty('user')) {
+                console.log(posts[0].user.last_msg_time);
+
+                req.session.last_msg_time = posts[0].user.last_msg_time || "1999-11-11 16:11:36.069";
+
+            } else req.session.last_msg_time = "1999-11-11 16:11:36.069";
+            console.log(req.session.last_msg_time);
+            console.log("*******************************");
+            console.log("*******************************");
+            User.update({
+                    last_msg_time: Date.now()
+                }, {
+                    where: {
+                        id: req.session.user_id
+                    }
+                }).then(dbUserData => {
+                    if (!dbUserData) {
+                        res.status(404).json({ message: 'No user found with this id' });
+                        return;
+                    }
+
+                    console.log("*******************************");
+                    console.log(dbUserData + " User Updated");
+                    console.log("*******************************");
+
+
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).json(err);
+
+                });
+
+            module.exports = router;
+            /* END OF ADD last_msg_time  */
 
             // Get any DM messages
             Message_Chain.findAll({
@@ -142,7 +184,7 @@ router.get('/dashboard', withAuth, (req, res) => {
                     /************************* */
                     /* TRY AND GET THE NEW DMs */
                     /************************* */
-                    const newMsg = await findNewDMs(req.session.last_msg_time, req.session.user_id);
+                    const newDMs = await findNewDMs(req.session.last_msg_time, req.session.user_id);
                     const newPostMsg = await findNewPostMsg(req.session.last_msg_time, req.session.user_id);
 
                     /*
@@ -152,7 +194,7 @@ router.get('/dashboard', withAuth, (req, res) => {
 
                     /* SET THE DMs[n].new = true if newMessages[n].chain_id == DMs[n].id */
                     DMs.forEach(convo => {
-                        newMsg.forEach(msg => {
+                        newDMs.forEach(msg => {
                             if (msg.chain_id == convo.id) convo.new = true;
                         });
                     });
@@ -160,17 +202,22 @@ router.get('/dashboard', withAuth, (req, res) => {
 
                     /* SET THE Post[n].new = true if newMessages[n].chain_id == DMs[n].id */
                     posts.forEach(convo => {
-                        newMsg.forEach(msg => {
+                        newPostMsg.forEach(msg => {
                             if (msg.chain_id == convo.id) convo.new = true;
                         });
                     });
                     /* */
-
+                    const newMsg = {
+                        newDMs,
+                        newPostMsg
+                    };
                     /*^^^^^^^^^^^^^^^^^^^^^^^^^*/
 
 
                     // pass data to template
                     res.render('dashboard', { posts, DMs, newMsg, session: req.session });
+
+                    //req.session.last_msg_time = Date.now();
                 })
         })
         .catch(err => {

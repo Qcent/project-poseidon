@@ -2,7 +2,11 @@
     <h3 class="section-title">Post Conversations - {{this.message_chains.length}}</h3>
     <div class="Messages">
         {{#each this.message_chains}}
-        <h4>Conversation with {{user.username}}</h4>
+        <h4>Conversation with {{user.username}}
+            {{#if ../new}}
+            <a href="#" class='new-msg-mark' data-val='{{id}}'>New Message</a>
+            {{/if}}
+        </h4>
         {{#each this.messages}}
         <section class="message">
             <div class="meta">

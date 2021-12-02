@@ -218,7 +218,12 @@ router.get("/signup", (req, res) => {
 
 // get all posts for homepage/:category
 router.get("/:category", (req, res) => {
+    // this is constantly being called and i believe is messing up some page loads occasionaly
+    if (req.params.category == 'favicon.ico') {
+        return;
+    }
     console.log("==========Loading Category============");
+    console.log(`========== ${req.params.category} ============`);
     let query = { '$category.name$': req.params.category }
     if (req.query.search) {
         query = {
