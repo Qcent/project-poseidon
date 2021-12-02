@@ -97,6 +97,12 @@
         }
         /* DASHBOARD STYTLING */
         
+        .toTopDash {
+            text-decoration: none;
+            font-size: .8rem;
+            margin: -1rem 0 -.5rem 90%;
+        }
+        
         .section-title,
         .dashboard-title {
             font-style: italic;
@@ -501,6 +507,10 @@
         .new-post-form input,
         .login-container .content.user-login input {
             width: 18rem;
+        }
+        
+        .user-info label {
+            width: 10rem !important;
         }
         
         .login-container .form-btn-container {
