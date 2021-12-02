@@ -11,7 +11,7 @@ const findNewDMs = (lastCheck, uid) =>
         where: {
             [Op.and]: [{
                     created_at: {
-                        [Op.gt]: sequelize.fn('date', lastCheck)
+                        [Op.gt]: sequelize.fn('time', lastCheck)
                     }
                 },
                 {

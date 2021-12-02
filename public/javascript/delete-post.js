@@ -1,5 +1,6 @@
 async function deleteFormHandler(event) {
     event.stopImmediatePropagation();
+    event.preventDefault();
 
     const post_id = event.target.getAttribute("data-val") || window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
@@ -13,7 +14,7 @@ async function deleteFormHandler(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/dashboard');
+        document.location.replace('/user/dashboard');
     } else {
         alert(response.statusText);
     }
