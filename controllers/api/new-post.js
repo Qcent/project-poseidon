@@ -33,9 +33,6 @@ const upload = multer({ storage: storage });
 // });
 var uploadedPhoto = [];
 router.post('/', [withAuth, upload.single('image')], (req, res) => {
-    console.log(typeof req.file);
-    
-    
 
     if(typeof req.file === 'object') {
         uploadedPhoto = [];
