@@ -82,7 +82,8 @@ router.get("/post/:id", (req, res) => {
                 'content',
                 'user_id',
                 'category_id',
-                'created_at'
+                'created_at',
+                'uploaded_photo'
             ],
             where: {
                 id: req.params.id,
@@ -141,7 +142,8 @@ router.get("/edit/:id", withAuth, (req, res) => {
                 'content',
                 'user_id',
                 'category_id',
-                'created_at'
+                'created_at',
+                'uploaded_photo'
             ],
             where: {
                 id: req.params.id,
@@ -256,7 +258,8 @@ router.get("/:category", (req, res) => {
                 'content',
                 'user_id',
                 'category_id',
-                'created_at'
+                'created_at',
+                'uploaded_photo'
             ],
             where: query,
             order: [
