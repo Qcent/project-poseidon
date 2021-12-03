@@ -1,5 +1,6 @@
 async function newFormHandler(event) {
     event.stopImmediatePropagation();
+    event.preventDefault();
 
 
     const title = document.querySelector('input[name="post-title"]').value;

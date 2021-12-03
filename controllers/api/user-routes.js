@@ -43,6 +43,7 @@ router.get('/:id', withAuth, (req, res) => {
 
 // POST /api/users
 router.post('/', (req, res) => {
+    console.log("************** CREATING NEW USER **************");
     User.create({
             username: req.body.username,
             email: req.body.email,
@@ -67,6 +68,7 @@ router.post('/', (req, res) => {
 
 // POST /api/users/logout
 router.post('/logout', (req, res) => {
+    console.log("************** LOGGING OUT **************");
     if (req.session.loggedIn) {
         req.session.destroy(() => {
             res.status(204).end();
@@ -78,6 +80,7 @@ router.post('/logout', (req, res) => {
 
 // POST /api/users/login
 router.post('/login', (req, res) => {
+    console.log("*************** LOGIN ATTEMPT ***************");
     User.findOne({
         where: {
             email: req.body.email
@@ -85,6 +88,7 @@ router.post('/login', (req, res) => {
     }).then(dbUserData => {
         if (!dbUserData) {
             res.status(400).json({ message: 'No user with that email address!' });
+            console.log("=========== !FAILURE! =============");
             return;
         }
 
@@ -92,6 +96,7 @@ router.post('/login', (req, res) => {
         const validPassword = dbUserData.checkPassword(req.body.password);
         if (!validPassword) {
             res.status(400).json({ message: 'Incorrect password!' });
+            console.log("=========== !FAILURE! =============");
             return;
         }
 
@@ -103,6 +108,7 @@ router.post('/login', (req, res) => {
             req.session.loggedIn = true;
 
             res.json({ user: dbUserData, message: 'You are now logged in!' });
+            console.log("=========== SUCCESS! =============");
         });
     });
 
@@ -133,6 +139,7 @@ router.put('/:id', withAuth, (req, res) => {
 
 // DELETE /api/users/1
 router.delete('/:id', withAuth, (req, res) => {
+    console.log("=========== DELETETING USER =============");
     User.destroy({
             where: {
                 id: req.params.id

@@ -1,5 +1,5 @@
 <article class="new-post-container">
-  <section class="post-body">
+  <section class="login-container">
     <h2 class="title">Create New Post</h2>
     <form class="new-post-form">
       <input type="hidden" id="user-id" name="user-id" value="{{session.user_id}}" />
@@ -37,9 +37,9 @@
       </div>
     </form>
     <form method="post" enctype="multipart/form-data" action='/api/newPost'>
-    <h4>Upload a Picture!</h4>
-    <p>Make sure to upload it before you "Create Post"!</p>
-    <p>You are only able to upload one photo.</p>
+      <h4>Upload a Picture!</h4>
+      <p>Make sure to upload it before you "Create Post"!</p>
+      <p>You are only able to upload one photo.</p>
       <input type="file" name="image" />
       <input type="submit" />
     </form>

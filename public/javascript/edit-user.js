@@ -1,5 +1,6 @@
 async function editFormHandler(event) {
     event.stopImmediatePropagation();
+    event.preventDefault();
 
     const user_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1

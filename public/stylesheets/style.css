@@ -492,11 +492,13 @@
             width: 32rem;
         }
         
+        .new-post-form label,
         .login-container .content.user-login label {
             width: 5rem;
             text-align: right;
         }
         
+        .new-post-form input,
         .login-container .content.user-login input {
             width: 18rem;
         }
