@@ -14,8 +14,7 @@ async function newFormHandler(event) {
             title,
             content,
             user_id,
-            category_id,
-            uploaded_photo
+            category_id
         }),
         headers: {
             'Content-Type': 'application/json'
