@@ -33,7 +33,8 @@ router.get("/", (req, res) => {
                 'content',
                 'user_id',
                 'category_id',
-                'created_at'
+                'created_at',
+                'uploaded_photo'
             ],
             where: query,
             order: [
