@@ -2,7 +2,8 @@
 ![MIT](https://img.shields.io/badge/Licence-MIT-orange) ![HTML](https://img.shields.io/badge/Tech-HTML-lightblue)  ![CSS](https://img.shields.io/badge/Tech-CSS-lightblue)  ![JavaScript](https://img.shields.io/badge/Tech-JavaScript-lightblue)  ![Node.js](https://img.shields.io/badge/Tech-Node.js-lightblue)  ![Express](https://img.shields.io/badge/Tech-Express-lightblue)  ![Sequelize](https://img.shields.io/badge/Tech-Sequelize-lightblue)  ![MySQL](https://img.shields.io/badge/Tech-MySQL-lightblue)  ![Handlebars](https://img.shields.io/badge/Tech-Handlebars-lightblue)  ![Express%20Sessions](https://img.shields.io/badge/Tech-Express%20Sessions-lightblue)  ![Connect%20Session%20Sequelise](https://img.shields.io/badge/Tech-Connect%20Session%20Sequelise-lightblue)  ![bcrypt](https://img.shields.io/badge/Tech-bcrypt-lightblue)  ![multer](https://img.shields.io/badge/Tech-multer-lightblue) 
 
 ## Description
-Create a User, login and post to your hearts content. This Express.js server hosts an API for database calls, as well as serving up a fully featured front end.  
+Simple Classified ads enhanced by the interaction of the world wide web. Share and connect with people near and far to trade items, provide services and share knowledge. 
+Motivation:  To create a space for people to exchange and seek out anything from goods & services to relationships and advice.
 
 Screenshot: \
 ![App Screenshot](./assets/screenshots/app-screenshot-1.png)
