@@ -95,7 +95,21 @@
             width: 100%;
             padding: 0 12.5%;
         }
+        
+        #sort-category-list {
+            width: 100%;
+            margin-bottom: .5rem;
+            display: none;
+            justify-content: right;
+            gap: .5rem;
+        }
         /* DASHBOARD STYTLING */
+        
+        .toTopDash {
+            text-decoration: none;
+            font-size: .8rem;
+            margin: -1rem 0 -.5rem 90%;
+        }
         
         .section-title,
         .dashboard-title {
@@ -501,6 +515,10 @@
         .new-post-form input,
         .login-container .content.user-login input {
             width: 18rem;
+        }
+        
+        .user-info label {
+            width: 10rem !important;
         }
         
         .login-container .form-btn-container {
