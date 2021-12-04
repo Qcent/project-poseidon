@@ -1,3 +1,25 @@
+<section id='sort-category-list'>
+    <label for="post-category">Category: </label>
+    <select id="sort-post-category">
+        <option value="0">All</option>
+        <option value="00" disabled>--------</option>
+        <option value="1">Automotive</option>
+        <option value="2">Clothing</option>
+        <option value="3">Computers</option>
+        <option value="4">Electronics</option>
+        <option value="5">Household</option>
+        <option value="6">Jewelery</option>
+        <option value="7">Pets</option>
+        <option value="8">Sports</option>
+        <option value="9">Video Games</option>
+        <option value="12">Misc</option>
+        <option value="00" disabled>--------</option>
+        <option value="10">Service</option>
+        <option value="11">Wanted</option>
+    </select>
+</section>
+
+
 <section class="post-list">
     {{#if posts.length}}
     {{#each posts as |post|}}

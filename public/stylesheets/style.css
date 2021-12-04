@@ -95,6 +95,14 @@
             width: 100%;
             padding: 0 12.5%;
         }
+        
+        #sort-category-list {
+            width: 100%;
+            margin-bottom: .5rem;
+            display: none;
+            justify-content: right;
+            gap: .5rem;
+        }
         /* DASHBOARD STYTLING */
         
         .toTopDash {

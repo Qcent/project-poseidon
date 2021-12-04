@@ -71,6 +71,9 @@
     .side-bar-divider {
         display: none !important;
     }
+    #sort-category-list {
+        display: flex;
+    }
 }
 
 @media screen and (max-width: 525px) {
