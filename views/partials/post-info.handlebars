@@ -4,6 +4,9 @@
     </div>
     <a class='post-link' href="/post/{{id}}">
         <section class="post-body">
+            {{#if uploaded_photo}}
+            <img src="../{{uploaded_photo}}" class='post-photo-thumb'>
+            {{/if}}
             <h2 class="title">
                 {{title}}
             </h2>

@@ -391,7 +391,7 @@
         .post-body {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: middle;
         }
         
         .post-body .title {
@@ -448,9 +448,16 @@
             float: left;
         }
         
+        .post-photo-thumb {
+            max-width: 4rem;
+            max-height: 5rem;
+            margin: .5rem;
+        }
+        
         .single-post-containter .post-body .content {
             padding-left: 1rem;
             text-align: left;
+            align-self: baseline;
         }
         
         .single-post-containter .edit-div {
