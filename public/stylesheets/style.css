@@ -444,7 +444,8 @@
         .post-photo-full {
             max-width: 12rem;
             max-height: 15rem;
-            border: 2px solid black;
+            margin-right: 1rem;
+            float: left;
         }
         
         .single-post-containter .post-body .content {

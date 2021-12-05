@@ -6,10 +6,10 @@
         <h2 class="title">
             {{title}}
         </h2>
-        {{#if uploaded_photo}}
-        <img src="../{{uploaded_photo}}" class='post-photo-full'>
-        {{/if}}
         <p class="content">
+            {{#if uploaded_photo}}
+            <img src="../{{uploaded_photo}}" class='post-photo-full'>
+            {{/if}}
             {{{content}}}
         </p>
     </section>
