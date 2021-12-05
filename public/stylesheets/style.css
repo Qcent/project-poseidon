@@ -514,17 +514,42 @@
         
         #avatarSelect input {
             opacity: 0;
-            width: 1px;
+            width: 0px;
+        }
+        
+        #select-avatar-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        #avatarSelect label {
+            text-align: left;
+            width: 64px !important;
         }
         
         #avatarSelect img {
-            float: right;
+            vertical-align: top;
         }
         
-        #avatarSelect img:hover,
-        #avatarSelect img:active {
+        #avatarSelect img:hover {
             cursor: pointer;
             background-image: linear-gradient(61deg, rgba(153, 221, 156, 1) 13%, rgba(236, 190, 184, 1) 36%, rgba(235, 233, 172, 1) 51%, rgba(203, 242, 154, 1) 69%, rgba(94, 152, 163, 1) 95%);
+        }
+        
+        .avatar-container {
+            display: inline-block;
+            width: 18rem;
+            height: 64px;
+            padding-left: 6.2rem;
+        }
+        
+        .fancy-avatar {
+            background-image: linear-gradient(61deg, rgba(153, 221, 156, 1) 13%, rgba(236, 190, 184, 1) 36%, rgba(235, 233, 172, 1) 51%, rgba(203, 242, 154, 1) 69%, rgba(94, 152, 163, 1) 95%);
+            background-size: 200% auto;
+            display: block;
         }
         
         .login-container .content.user-login {

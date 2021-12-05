@@ -60,10 +60,10 @@ avatarUpdateHandler = event => {
 
     Array.from(document.querySelectorAll('input[name="avatar"]')).forEach(function(element) {
         if (document.querySelector('label[for="' + element.id + '"] img').classList)
-            document.querySelector('label[for="' + element.id + '"] img').classList.remove("fancy-button");
+            document.querySelector('label[for="' + element.id + '"] img').classList.remove("fancy-avatar");
     });
 
-    document.querySelector('label[for="' + event.target.id + '"] img').classList.add("fancy-button");
+    document.querySelector('label[for="' + event.target.id + '"] img').classList.add("fancy-avatar");
 
 }
 
@@ -73,6 +73,6 @@ Array.from(document.querySelectorAll('input[name="avatar"]')).forEach(function(e
 const userAvatar = document.querySelector('#userAvatar').value;
 Array.from(document.querySelectorAll('#avatarSelect label')).forEach(function(element) {
     if (document.getElementById(element.getAttribute("for")).value == userAvatar) {
-        element.querySelector('img').classList.add("fancy-button");
+        element.querySelector('img').classList.add("fancy-avatar");
     }
 });

@@ -37,8 +37,6 @@ const upload = multer({ storage: storage });
 var uploadedPhoto = [];
 router.post('/', [withAuth, upload.single('image')], (req, res) => {
 
-    //console.log(req.file.path.replace(/^.==public\//, ''))
-
     if (typeof req.file === 'object') {
         console.log("OBJECT === TRUE");
         uploadedPhoto = [];
