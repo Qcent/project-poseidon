@@ -6,20 +6,17 @@ async function newFormHandler(event) {
     var xhr = new XMLHttpRequest(); // create XMLHttpRequest
     var data = new FormData(form); // create formData object
 
-
     xhr.onload = function() {
-        console.log(this.responseText); // whatever the server returns
-        if (ok) {
+        const response = JSON.parse(this.responseText);
+        if (response.ok) {
             document.location.replace('/user/dashboard');
         } else {
-            alert(response.statusText);
+            alert(response.errors[0].message);
         }
     }
 
     xhr.open("post", form.action); // open connection
     xhr.send(data); // send data
-
-    console.log(data);
 }
 
 document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);

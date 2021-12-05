@@ -4,49 +4,52 @@ const sequelize = require("../config/connection");
 class Post extends Model {}
 
 //Post hasMany Image
-Post.init(
-  {
+Post.init({
     id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
     },
     title: {
-      type: DataTypes.STRING,
-      allowNull: false,
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            len: [1]
+        }
     },
     content: {
-      type: DataTypes.TEXT,
-      allowNull: false,
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+            len: [1]
+        }
     },
     uploaded_photo: {
-      type: DataTypes.STRING,
+        type: DataTypes.STRING,
     },
     user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "user",
-        key: "id",
-      },
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: "user",
+            key: "id",
+        },
     },
     category_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "category",
-        key: "id",
-      },
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: "category",
+            key: "id",
+        },
     },
-  },
-  {
+}, {
     sequelize,
     timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: "post",
-  }
-);
+});
 
 module.exports = Post;

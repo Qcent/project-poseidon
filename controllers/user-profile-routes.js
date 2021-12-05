@@ -69,7 +69,7 @@ const formatTime = (date_string) => {
 router.get('/dashboard', withAuth, (req, res) => {
     console.log("==============LOADING DASHBOARD=================");
     Post.findAll({
-            attributes: ['id', 'title', 'content', 'user_id', 'created_at'],
+            attributes: ['id', 'title', 'content', 'user_id', 'uploaded_photo', 'created_at'],
             where: {
                 user_id: req.session.user_id
             },
