@@ -34,41 +34,46 @@ const upload = multer({ storage: storage });
 //     //console.log(req.file.filename);
 //     res.render('new-post');
 // });
-var uploadedPhoto = [];
-router.post('/', [withAuth, upload.single('image')], (req, res) => {
+
+router.post('/', [withAuth, upload.single('post-photo')], (req, res) => {
+    var uploadedPhoto = [];
+
+    console.log("**************** CREATING NEW POST ****************");
 
     if (typeof req.file === 'object') {
-        console.log("OBJECT === TRUE");
+        console.log("IMAGE OBJECT === TRUE");
         uploadedPhoto = [];
         // need to remove the public folder from the path
         uploadedPhoto.push(req.file.path.replace(/public\//, ''));
+    } else {
+        console.log("!!!!!!!!!!NO IMAGE!!!!!!!!!!");
+        console.log(req.body);
     }
 
     const newUpload = uploadedPhoto.toString();
-    console.log("=========================");
-    console.log("=========================");
-    console.log(newUpload);
-    console.log("=========================");
-
-    if (typeof req.body.title === 'string') {
-        Post.create({
-                title: req.body.title,
-                content: req.body.content,
-                user_id: req.session.user_id,
-                category_id: req.body.category_id,
-                uploaded_photo: newUpload
-            })
-            .then(dbPostData => {
-                console.log(dbPostData);
-                res.json(dbPostData)
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json(err);
-            });
-    } else {
-        res.render('new-post');
+    if (newUpload) {
+        console.log("============IMAGE============");
+        console.log("============PATH============");
+        console.log(newUpload);
+        console.log("=========================");
     }
+    console.log("**************** SENDING DATABASE REQUEST ****************");
+    Post.create({
+            title: req.body['post-title'],
+            content: req.body['post-content'],
+            user_id: req.session.user_id,
+            category_id: req.body['post-category'],
+            uploaded_photo: newUpload
+        })
+        .then(dbPostData => {
+            console.log(dbPostData.dataValues);
+            res.json({ ok: "true" })
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+
 });
 
 module.exports = router;

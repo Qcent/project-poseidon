@@ -1,7 +1,7 @@
 <article class="new-post-container">
   <section class="login-container">
     <h2 class="title">Create New Post</h2>
-    <form class="new-post-form">
+    <form class="new-post-form" id="new-post-form" enctype="multipart/form-data" action="../api/newPost">
       <input type="hidden" id="user-id" name="user-id" value="{{session.user_id}}" />
       <div>
         <label for="post-title">Title</label>
@@ -10,7 +10,7 @@
       <div>
         <section id='category-list'>
           <label for="post-category">Category</label>
-          <select id="post-category">
+          <select id="post-category" name="post-category" form="new-post-form">
             <option value="1">Automotive</option>
             <option value="2">Clothing</option>
             <option value="3">Computers</option>
@@ -31,16 +31,13 @@
         <label for="post-content">Content</label>
         <textarea id="post-content" name="post-content"></textarea>
       </div>
-      <div class="form-btn-container">
-        <button type="submit" class="form-btn">Create Post</button>
-      </div>
-    </form>
-    <form method="post" enctype="multipart/form-data" action='/api/newPost'>
       <h4>Upload a Picture!</h4>
-      <p>Make sure to upload it before you "Create Post"!</p>
-      <p>You are only able to upload one photo.</p>
-      <input type="file" name="image" />
-      <input type="submit" />
+      <input type='file' name="post-photo" id="uploaded_photo" />
+      <br><img id="uploadedImg" src="https://www.svgrepo.com/show/37289/image.svg" class='post-photo-full'>
+
+      <div class="form-btn-container">
+        <button type="submit" class="form-btn fancy-button">Create Post</button>
+      </div>
     </form>
   </section>
 </article>

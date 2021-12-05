@@ -570,6 +570,11 @@
             width: 18rem;
         }
         
+        #post-content {
+            width: 18rem;
+            height: 8rem;
+        }
+        
         .user-info label {
             width: 10rem !important;
         }

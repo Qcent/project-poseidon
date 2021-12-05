@@ -15,7 +15,7 @@ const sortByCategoryHandler = async(event) => {
             searchCategory = document.querySelector('#searchCategory').value.trim();
             if (searchCategory === 'All') searchCategory = '';
 
-        } else { console.log("no category"); }
+        } // else { console.log("no category"); }
         if (searchCategory != '') {
             let list = document.querySelector('#sort-post-category');
             //console.log(list.options)
