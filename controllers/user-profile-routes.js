@@ -239,14 +239,7 @@ router.get('/:id', withAuth, (req, res) => {
             where: {
                 id: req.params.id
             },
-            attributes: [
-                'id',
-                'username',
-                'about',
-                'private',
-                'email',
-                'created_at'
-            ]
+            attributes: { exclude: ['password'] },
         })
         .then(dbUserData => {
             if (!dbUserData) {

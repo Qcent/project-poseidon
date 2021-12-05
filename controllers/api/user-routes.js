@@ -105,6 +105,7 @@ router.post('/login', (req, res) => {
             req.session.user_id = dbUserData.id;
             req.session.username = dbUserData.username;
             req.session.last_msg_time = dbUserData.last_msg_time;
+            req.session.avatar = dbUserData.avatar || 'https://www.svgrepo.com/show/5319/user.svg';
             req.session.loggedIn = true;
 
             res.json({ user: dbUserData, message: 'You are now logged in!' });
@@ -129,7 +130,22 @@ router.put('/:id', withAuth, (req, res) => {
                 res.status(404).json({ message: 'No user found with this id' });
                 return;
             }
-            res.json({ message: "Success" });
+
+            console.log(req.body);
+
+
+            req.session.save(() => {
+                // update session variables
+                req.session.user_id = req.params.id;
+                req.session.username = req.body.username;
+                req.session.last_msg_time = req.session.last_msg_time;
+                req.session.avatar = req.body.avatar;
+
+                console.log("=========== SUCCESS! =============");
+                console.log(req.session.avatar);
+
+                res.json({ message: "Success" });
+            });
         })
         .catch(err => {
             console.log(err);

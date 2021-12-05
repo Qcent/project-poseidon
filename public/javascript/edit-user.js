@@ -12,6 +12,10 @@ async function editFormHandler(event) {
     const password = document.querySelector('#password-edit').value.trim();
     const confirm = document.querySelector('#password-edit2').value.trim();
     const about = document.querySelector('#about-edit').value.trim();
+    let avatar = '';
+    Array.from(document.querySelectorAll('input[name="avatar"]')).forEach(function(element) {
+        if (element.checked == true) avatar = element.value;
+    });
 
     let updates;
 
@@ -20,12 +24,14 @@ async function editFormHandler(event) {
         email,
         private,
         about,
+        avatar,
         password
     }) : updates = JSON.stringify({
         username,
         email,
         private,
-        about
+        about,
+        avatar
     })
 
 
@@ -49,3 +55,24 @@ async function editFormHandler(event) {
 }
 
 document.querySelector('.edit-form').addEventListener('submit', editFormHandler);
+
+avatarUpdateHandler = event => {
+
+    Array.from(document.querySelectorAll('input[name="avatar"]')).forEach(function(element) {
+        if (document.querySelector('label[for="' + element.id + '"] img').classList)
+            document.querySelector('label[for="' + element.id + '"] img').classList.remove("fancy-button");
+    });
+
+    document.querySelector('label[for="' + event.target.id + '"] img').classList.add("fancy-button");
+
+}
+
+Array.from(document.querySelectorAll('input[name="avatar"]')).forEach(function(element) {
+    element.addEventListener('click', avatarUpdateHandler);
+});
+const userAvatar = document.querySelector('#userAvatar').value;
+Array.from(document.querySelectorAll('#avatarSelect label')).forEach(function(element) {
+    if (document.getElementById(element.getAttribute("for")).value == userAvatar) {
+        element.querySelector('img').classList.add("fancy-button");
+    }
+});

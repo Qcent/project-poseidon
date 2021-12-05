@@ -7,36 +7,76 @@
                 Your Info
             </h2>
             <div class="content user-login user-info">
-                <div>
-                    <label for="username-edit">name:</label>
-                    <input type="text" id="username-edit" value="{{user.username}}" />
-                </div>
-                <div>
-                    <label for="email-edit">email:</label>
-                    <input type="text" id="email-edit" value="{{user.email}}" />
-                </div>
-                <div>
-                    <label for="private-edit">private (hides email):</label>
-                    <input type="checkbox" id="private-edit" {{#if user.private}}checked{{/if}} />
-                </div>
-                <div>
-                    <label for="user-joined">joined:</label>
-                    <input type="text" id="user-joined" value="{{format_date user.created_at}}" readonly />
-                </div>
-                <div>
-                    <label for="about-edit">about:</label>
-                    <textarea id="about-edit">{{user.about}}</textarea>
-                </div>
+                <section>
+                    <div>
+                        <label for="username-edit">name:</label>
+                        <input type="text" id="username-edit" value="{{user.username}}" />
+                    </div>
+                    <div>
+                        <label for="email-edit">email:</label>
+                        <input type="text" id="email-edit" value="{{user.email}}" />
+                    </div>
+                    <div>
+                        <label for="private-edit">private (hides email):</label>
+                        <input type="checkbox" id="private-edit" {{#if user.private}}checked{{/if}} />
+                    </div>
+                    <div>
+                        <label for="user-joined">joined:</label>
+                        <input type="text" id="user-joined" value="{{format_date user.created_at}}" readonly />
+                    </div>
+                    <div>
+                        <label for="about-edit">about:</label>
+                        <textarea id="about-edit">{{user.about}}</textarea>
+                    </div>
+                </section>
                 <hr>
-                <h3>Update Password</h3>
-                <div>
-                    <label for="password-edit">password:</label>
-                    <input type="password" id="password-edit" placeholder="enter password; min 8 characters" />
-                </div>
-                <div>
-                    <label for="password-edit2">confirm:</label>
-                    <input type="password" id="password-edit2" placeholder="enter password again" />
-                </div>
+                <section id="avatarSelect">
+                    <input type="hidden" id="userAvatar" value='{{user.avatar}}' />
+                    <h3>Update Avatar</h3>
+                    <div>
+                        <p>Please select your avatar:</p>
+                        <input type="radio" id="avatar1" name="avatar"
+                            value="https://www.svgrepo.com/show/5319/user.svg">
+                        <label for="avatar1"><img src="https://www.svgrepo.com/show/5319/user.svg" alt="" width="64"
+                                height="64" class="rounded-circle me-2"></label>
+
+                        <input type="radio" id="avatar2" name="avatar" value="../images/av-crab.png">
+                        <label for="avatar2"><img src="../images/av-crab.png" alt="" width="64" height="64"
+                                class="rounded-circle me-2"></label>
+
+                        <input type="radio" id="avatar3" name="avatar" value="../images/av-jell.png">
+                        <label for="avatar3"><img src="../images/av-jell.png" alt="" width="64" height="64"
+                                class="rounded-circle me-2"></label>
+
+                        <input type="radio" id="avatar4" name="avatar" value="../images/av-ray.png">
+                        <label for="avatar4"><img src="../images/av-ray.png" alt="" width="64" height="64"
+                                class="rounded-circle me-2"></label>
+
+                        <input type="radio" id="avatar5" name="avatar" value="../images/av-shark.png">
+                        <label for="avatar5"><img src="../images/av-shark.png" alt="" width="64" height="64"
+                                class="rounded-circle me-2"></label>
+
+                        <input type="radio" id="avatar6" name="avatar" value="../images/av-snail.png">
+                        <label for="avatar6"><img src="../images/av-snail.png" alt="" width="64" height="64"
+                                class="rounded-circle me-2"></label>
+
+                        <input type="radio" id="avatar7" name="avatar" value="../images/av-turt.png">
+                        <label for="avatar7"><img src="../images/av-turt.png" alt="" width="64" height="64"
+                                class="rounded-circle me-2"></label>
+                    </div>
+                </section>
+                <hr>
+                <section>
+                    <h3>Update Password</h3>
+                    <div>
+                        <label for="password-edit">password:</label>
+                        <input type="password" id="password-edit" placeholder="enter password; min 8 characters" />
+                    </div>
+                    <div>
+                        <label for="password-edit2">confirm:</label>
+                        <input type="password" id="password-edit2" placeholder="enter password again" />
+                    </div>
+                </section>
             </div>
             <div class="form-btn-container">
                 <button class='user-edit-btn form-btn' type="submit">Save Changes</button>

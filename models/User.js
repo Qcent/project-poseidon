@@ -52,6 +52,10 @@ User.init({
         type: DataTypes.STRING,
         allowNull: true,
     },
+    avatar: {
+        type: DataTypes.STRING,
+        defaultValue: 'https://www.svgrepo.com/show/5319/user.svg'
+    },
     // define a password column
     password: {
         type: DataTypes.STRING,
