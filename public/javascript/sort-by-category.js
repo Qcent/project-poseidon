@@ -16,14 +16,12 @@ const sortByCategoryHandler = async(event) => {
             if (searchCategory === 'All') searchCategory = '';
 
         } else { console.log("no category"); }
-        if (searchCategory) {
-            console.log("category: " + searchCategory);
+        if (searchCategory != '') {
             let list = document.querySelector('#sort-post-category');
             //console.log(list.options)
             Array.from(list.options).forEach((sel, idx) => {
                 if (sel.text == searchCategory) {
                     list.selectedIndex = idx;
-                    console.log(idx);
                 }
             });
         }

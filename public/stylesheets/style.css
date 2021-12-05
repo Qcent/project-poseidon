@@ -441,6 +441,12 @@
             flex-direction: column;
         }
         
+        .post-photo-full {
+            max-width: 12rem;
+            max-height: 15rem;
+            border: 2px solid black;
+        }
+        
         .single-post-containter .post-body .content {
             padding-left: 1rem;
             text-align: left;

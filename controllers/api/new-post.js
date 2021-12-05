@@ -37,13 +37,20 @@ const upload = multer({ storage: storage });
 var uploadedPhoto = [];
 router.post('/', [withAuth, upload.single('image')], (req, res) => {
 
+    //console.log(req.file.path.replace(/^.==public\//, ''))
+
     if (typeof req.file === 'object') {
+        console.log("OBJECT === TRUE");
         uploadedPhoto = [];
-        uploadedPhoto.push(req.file.path);
+        // need to remove the public folder from the path
+        uploadedPhoto.push(req.file.path.replace(/public\//, ''));
     }
 
     const newUpload = uploadedPhoto.toString();
+    console.log("=========================");
+    console.log("=========================");
     console.log(newUpload);
+    console.log("=========================");
 
     if (typeof req.body.title === 'string') {
         Post.create({
